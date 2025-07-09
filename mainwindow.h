@@ -1,5 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include"mainwindow.h"
 
 #include <QMainWindow>
 
@@ -21,8 +22,6 @@ private:
     Ui::MainWindow *ui;
 
 private slots:
-    void PushButtonAuth_clicked();
-    void PushButtonReg_clicked();
 
 };
 #endif // MAINWINDOW_H
