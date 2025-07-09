@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     QObject::connect(&winAR, &AuthRegWindow::authSuccess, [&]() {
         mainWindow.show();
-        winAR.close();  // закроет окно авторизации, но приложение не завершится
+        winAR.close();  
     });
 
 
