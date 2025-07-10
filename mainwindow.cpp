@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 #include "mainwindow.h"
 #include<ui_mainwindow.h>
 #include "./ui_mainwindow.h"
@@ -64,53 +62,3 @@ void MainWindow::openManagerStud()
         qDebug() << "Не удалось создать окно";
     }
 }
-
-
-=======
-#include "mainwindow.h"
-#include "./ui_mainwindow.h"
-#include "../include/Student.h"
-#include <QMessageBox>
-#include <QDebug>
-
-
-
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-
->>>>>>> 7acdfd58b9ccc84905bc36da7d0a7cba70d1e82e
-=======
-#include "mainwindow.h"
-#include "./ui_mainwindow.h"
-#include "../include/Student.h"
-#include <QMessageBox>
-#include <QDebug>
-
-
-
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-
->>>>>>> 7acdfd58b9ccc84905bc36da7d0a7cba70d1e82e
