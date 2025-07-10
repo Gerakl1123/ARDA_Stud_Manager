@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "mainwindow.h"
 #include"authregwindow.h"
 #include"windowsmanagerstudent.h"
@@ -25,3 +26,27 @@ int main(int argc, char *argv[])
     winAR.show();
     return a.exec();
 }
+=======
+#include "mainwindow.h"
+#include"authregwindow.h"
+
+#include <QApplication>
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+
+    AuthRegWindow winAR;
+    MainWindow mainWindow;
+
+
+    QObject::connect(&winAR, &AuthRegWindow::authSuccess, [&]() {
+        mainWindow.show();
+        winAR.close();  
+    });
+
+
+    winAR.show();
+
+    return a.exec();
+}
+>>>>>>> 7acdfd58b9ccc84905bc36da7d0a7cba70d1e82e
