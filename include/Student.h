@@ -102,7 +102,7 @@ public:
     void cast();
     void SortStudent();
     void uploadReadyFile(const std::string& file);
-    void uploadDataToFile(const std::string& file, const std::string& data);
+    bool uploadDataToFile(const std::string& file, const std::string& data);
     void SwapStudents(size_t index, size_t index2);
     void RezervSort();
     void PrintSortStud(const std::string& file);

@@ -1,25 +1,20 @@
 #include "mainwindow.h"
+#include<ui_mainwindow.h>
 #include "./ui_mainwindow.h"
 #include "../include/Student.h"
 #include <QMessageBox>
 #include <QDebug>
-
-Stud manag("Log.txt");
-
+#include<QIcon>
+#include "windowsmanagerstudent.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->lineEditPassword->setStyleSheet("color: black;");
+    //styleMainW();
 
-
-    ui->lineEditPassword->setEchoMode(QLineEdit::Password);
-
-    connect(ui->pushButtonAuth, &QPushButton::clicked, this, &MainWindow::PushButtonAuth_clicked);
-    connect(ui->pushButtonReg, &QPushButton::clicked, this, &MainWindow::PushButtonReg_clicked);
-
+    connect(ui->ButtonStudent,&QPushButton::clicked,this,&MainWindow::openManagerStud);
 }
 
 MainWindow::~MainWindow()
@@ -27,37 +22,44 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::PushButtonAuth_clicked() {
-    QString login = ui->lineEditLogin->text();
-    QString password = ui->lineEditPassword->text();
+void MainWindow::styleMainW()
 
-    std::string loginStr = login.toStdString();
-    std::string passwordStr = password.toStdString();
+{
 
+    this->setStyleSheet(R"(
+        QWidget {
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+                                        stop:0 #1e3c72, stop:1 #2a5298);
+        }
 
-    bool auth = manag.loginStudent(loginStr, passwordStr);
+        QPushButton {
+            background-color: #4fc3f7;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+    )");
 
-    if (auth) {
-        QMessageBox::information(this, "Вход", "Авторизация успешна!");
-    } else {
-        QMessageBox::warning(this, "Вход", "Неверный логин или пароль.");
-    }
 }
 
-void MainWindow::PushButtonReg_clicked() {
-    QString login = ui->lineEditLogin->text();
-    QString password = ui->lineEditPassword->text();
 
-    std::string loginStr = login.toStdString();
-    std::string passwordStr = password.toStdString();
+void MainWindow::openManagerStud()
+{
 
+    qDebug() << "openManagerStud() вызван";
+    window = std::make_unique<WindowsManagerStudent>(nullptr);
 
-    bool reg = manag.registerStudent(loginStr, passwordStr);
+    if (window) {
+        qDebug() << "Окно создано";
+        this->close();
+        window->show();
 
-    if (reg) {
-        QMessageBox::information(this, "Регистрация", "Успешно!");
     } else {
-        QMessageBox::warning(this, "Регистрация", "Не удалось зарегистрироваться.");
+        qDebug() << "Не удалось создать окно";
     }
 }
 

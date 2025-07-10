@@ -1,0 +1,20 @@
+# Qt Creator
+*.pro.user
+*.pro.user.*
+*.autosave
+
+# Build folders
+build-*/
+build/
+
+# Object files
+*.o
+*.obj
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Backup files
+*~

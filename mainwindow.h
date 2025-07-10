@@ -1,7 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include"mainwindow.h"
+#include <QPropertyAnimation>
 
 #include <QMainWindow>
+
+class WindowsManagerStudent;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,10 +23,12 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void styleMainW();
+    std::unique_ptr<WindowsManagerStudent> window;
+
 
 private slots:
-    void PushButtonAuth_clicked();
-    void PushButtonReg_clicked();
+    void openManagerStud();
 
 };
 #endif // MAINWINDOW_H

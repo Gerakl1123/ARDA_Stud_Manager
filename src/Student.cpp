@@ -141,12 +141,11 @@ void Stud::uploadInfoStud(const std::string& file)
 	ifile.close();
 }
 //Fix
-void Stud::uploadDataToFile(const std::string& file, const std::string& data)
+bool Stud::uploadDataToFile(const std::string& file, const std::string& data)
 {
 	std::ofstream ofile(file, std::ios::app);
 
-	while (data != "0")
-	{
+    if(!ofile.is_open()) { return false;};
 
 		std::istringstream iss(data);
 		std::string name = "";
@@ -156,7 +155,8 @@ void Stud::uploadDataToFile(const std::string& file, const std::string& data)
 		ofile << name << " " << std::to_string(ball) << "\n";
 		Logger->write("Student sucewfful " + name + std::to_string(ball));
 
-	}
+
+        return true;
 
 	ofile.close();
 }

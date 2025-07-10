@@ -10,70 +10,83 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="tabletTracking">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ARDA</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>140</y>
-      <width>221</width>
-      <height>155</height>
+      <x>120</x>
+      <y>170</y>
+      <width>551</width>
+      <height>181</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLabel" name="label">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="0">
+      <widget class="QPushButton" name="ButtoLessons">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 12px;
+}</string>
+       </property>
        <property name="text">
-        <string>Login teacher</string>
+        <string>Пары/Уроки</string>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLineEdit" name="lineEditLogin"/>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_2">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="ButtonStudent">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 12px;
+}</string>
+       </property>
        <property name="text">
-        <string>Password teacher</string>
+        <string>Менеджр Студентов</string>
+       </property>
+       <property name="default">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLineEdit" name="lineEditPassword"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButtonShowPassword">
+     <item row="3" column="0">
+      <widget class="QPushButton" name="ButtonContest">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 12px;
+}</string>
+       </property>
        <property name="text">
-        <string>Показать</string>
+        <string>Конкурсы</string>
        </property>
       </widget>
      </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="verticalLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>360</y>
-      <width>221</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QPushButton" name="pushButtonAuth">
-       <property name="text">
-        <string>Authorizatchion</string>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="ButtonFileManag">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 12px;
+}</string>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButtonReg">
        <property name="text">
-        <string>Regestration</string>
+        <string>Файловый Менеджр</string>
        </property>
       </widget>
      </item>
@@ -89,24 +102,6 @@
      <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuARDA">
-    <property name="title">
-     <string>ARDA</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuDevelopers">
-    <property name="title">
-     <string>Developers</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuGithub">
-    <property name="title">
-     <string>Github</string>
-    </property>
-   </widget>
-   <addaction name="menuARDA"/>
-   <addaction name="menuDevelopers"/>
-   <addaction name="menuGithub"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
