@@ -13,6 +13,7 @@
 
 class MainWindow;
 
+extern Stud manag;
 class WindowsManagerStudent : public QWidget
 {
     Q_OBJECT
@@ -23,16 +24,42 @@ public:
   private:
 
   //AddStud
-  std::unique_ptr<QPushButton> ButtonAddStudent;
-    std::unique_ptr<QLineEdit> lineFileToSaveData;
-      std::unique_ptr<QLineEdit> lineDataStudent;
+  QPushButton* ButtonAddStudent;
+    QLineEdit* lineFileToSaveData;
+      QLineEdit* lineDataStudent;
   //end Stud
-      std::unique_ptr<QPushButton> ButtonBackMenu;
+      QPushButton* ButtonBackMenu;
       std::unique_ptr<MainWindow> mainWin;
+      //SORT STUDENT
+      QPushButton* ButtonSortStud;
+      //SaveEdit
+      QPushButton* ButtonSaveEdit;
+      QLineEdit* lineFileToSave;
+    //findStudent
+      QPushButton* ButtonFindStudent;
+      QLineEdit* lineFiletoFind;
+      QLineEdit* lineNameFindStudent;
+      QLineEdit* lineBallFindStudent;
 
+    //DeleteStudentFromFile&&DeleteStudentFromVector
+      QPushButton* ButtonDeleteStudent;
+      QLineEdit* lineFileToDelete;
+      QLineEdit* linenNameToDelete;
+      QLineEdit* lineBallToDelete;
+
+//==========================
+
+      void Style();
+      void applyStyle();
+      void setupConnections();
 private slots:
       void addStudentTiFile();
     void backMainMenu();
+      void SortStud();
+    void FindStudent();
+    void SaveGlobalEdit();
+    void DeleteStudent();
+
 signals:
       void authSuccess();
 
