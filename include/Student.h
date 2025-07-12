@@ -1,7 +1,7 @@
 #pragma once
 #include"../include/Libs.h"
 #include"../include/Logger.h"
-
+#include<optional>
 class StudFileMngr;
 class Stud;
 class Lessons;
@@ -98,8 +98,7 @@ public:
     void clearProjects() {
         ContributionProject.reset();
     }
-    void uploadInfoStud(const std::string& file);
-    void cast();
+
     void SortStudent();
     void uploadReadyFile(const std::string& file);
     bool uploadDataToFile(const std::string& file, const std::string& data);
@@ -107,13 +106,15 @@ public:
     void RezervSort();
     void PrintSortStud(const std::string& file);
     bool DeleteStudent(size_t index);
-    void DeleteStudentFromFile(const std::string& filename, const std::string& targetName, double targetBall);
-    bool findStudent(const std::string& nameF, const std::string& name, const double& value);
+    bool DeleteStudentFromFile(const std::string&, const std::string&, std::optional<double> );
+    bool findStudent(const std::string&, const std::string&, std::optional<double>);
     bool registerStudent(std::string& login, std::string password);
     bool loginStudent(std::string& login, std::string password);
 
 
 private:
+    void uploadInfoStud(const std::string& file);
+    void cast();
     void hashPassword(std::string& password, int shift);
     void UnHashPassword(std::string& password, int shift);
     std::list<std::string> info_stud;
