@@ -4,3 +4,4 @@
 
 <img width="1019" height="766" alt="Снимок экрана 2025-07-11 004027" src="https://github.com/user-attachments/assets/45c949fc-6f57-47f5-ba08-f8edc10706a6" />
 <img width="300" height="310" alt="Снимок экрана 2025-07-11 004016" src="https://github.com/user-attachments/assets/811e0725-f94c-45cc-a182-48580027cff4" />
+<img width="1610" height="1025" alt="image" src="https://github.com/user-attachments/assets/805140f5-eff5-49e6-ada8-857c4f416108" />
