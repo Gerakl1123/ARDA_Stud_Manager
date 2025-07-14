@@ -8,6 +8,8 @@ bool Stud::findStudent(const std::string& nameF, const std::string& name, std::o
         return false;
     }
 
+
+
     Students.clear();
     std::ifstream ifile(nameF);
 
@@ -285,28 +287,37 @@ void Stud::RezervSort()
 
 }
 
-void Stud::PrintSortStud(const std::string& file)
+QString Stud::PrintSortStud(const std::string& file)
 {
 	std::ifstream ifile(file);
 	std::string line = "";
+    Stud::id = 0;
 	Key.clear();
+
 	while (std::getline(ifile, line))
 	{
 		std::istringstream iss(line);
 		Student s;
 		if (iss >> s.name >> s.ball)
 		{
-			Key[id++] = s;
+            Key[++id] = s;
 		}
 	}
+
+    std::ostringstream oss;
+
 	for (const auto& [k, stud] : Key)
-	{
-		std::cout << k << ") " << stud.name << " — "
-			<< std::fixed << std::setprecision(2) << stud.ball << "\n";
+    {
+        oss << k << ") " << stud.name << " - "
+            << std::fixed << std::setprecision(2) << stud.ball << "\n";
 
 	}
+
 	Logger->write("Output data to Student!");
-	ifile.close();
+
+    ifile.close();
+
+    return QString::fromStdString(oss.str());
 }
 
 bool Stud::DeleteStudent(size_t index)
