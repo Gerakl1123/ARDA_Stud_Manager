@@ -2,6 +2,8 @@
 #include"../include/Libs.h"
 #include"../include/Logger.h"
 #include<optional>
+#include<QString>
+
 class StudFileMngr;
 class Stud;
 class Lessons;
@@ -104,7 +106,7 @@ public:
     bool uploadDataToFile(const std::string& file, const std::string& data);
     void SwapStudents(size_t index, size_t index2);
     void RezervSort();
-    void PrintSortStud(const std::string& file);
+    QString PrintSortStud(const std::string& file);
     bool DeleteStudent(size_t index);
     bool DeleteStudentFromFile(const std::string&, const std::string&, std::optional<double> );
     bool findStudent(const std::string&, const std::string&, std::optional<double>);
