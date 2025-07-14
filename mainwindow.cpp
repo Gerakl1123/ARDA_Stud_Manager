@@ -5,7 +5,6 @@
 #include <QMessageBox>
 #include <QDebug>
 #include<QIcon>
-#include "windowsmanagerstudent.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     //styleMainW();
 
     connect(ui->ButtonStudent,&QPushButton::clicked,this,&MainWindow::openManagerStud);
+    connect(ui->ButtonContest,&QPushButton::clicked,this,&MainWindow::openContestWindow);
 }
 
 MainWindow::~MainWindow()
@@ -23,9 +23,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::styleMainW()
-
 {
-
     this->setStyleSheet(R"(
         QWidget {
             background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
@@ -42,6 +40,11 @@ void MainWindow::styleMainW()
             font-weight: bold;
             transition: all 0.2s ease;
         }
+
+        QPushButton:pressed {
+            background-color: #1e88e5;
+        }
+
     )");
 
 }
@@ -51,14 +54,34 @@ void MainWindow::openManagerStud()
 {
 
     qDebug() << "openManagerStud() вызван";
-    window = std::make_unique<WindowsManagerStudent>(nullptr);
+    windowStudent = std::make_unique<WindowsManagerStudent>(nullptr);
 
-    if (window) {
+    if (windowStudent) {
         qDebug() << "Окно создано";
         this->close();
-        window->show();
+        windowStudent->show();
 
     } else {
         qDebug() << "Не удалось создать окно";
     }
 }
+
+void MainWindow::openContestWindow()
+{
+    qDebug() << "openconest() вызван ";
+    windowContest = std::make_unique<ContestWindow>(nullptr);
+
+    if (windowContest) {
+        qDebug() << "Окно создано";
+        this->close();
+        windowContest->show();
+
+    }
+    else {
+        qDebug() << "Не удалось создать окно";
+    }
+
+
+}
+
+

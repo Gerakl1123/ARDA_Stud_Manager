@@ -9,11 +9,17 @@
 #include<QVBoxLayout>
 #include"../include/Student.h"
 #include<QMessageBox>
-
+#include<QTextEdit>
+#include "windowsmanagerstudent.h"
+#include "mainwindow.h"
+#include<QIcon>
+#include<QGroupBox>
+#include<QFile>
 
 class MainWindow;
 
 extern Stud manag;
+
 class WindowsManagerStudent : public QWidget
 {
     Q_OBJECT
@@ -46,7 +52,10 @@ public:
       QLineEdit* lineFileToDelete;
       QLineEdit* linenNameToDelete;
       QLineEdit* lineBallToDelete;
-
+      //printStud
+      QTextEdit* StudDisplayArea;
+      QLineEdit* lineFileToPrint;
+      QPushButton* ButtonShowContent;
 //==========================
 
       void Style();
@@ -59,6 +68,7 @@ private slots:
     void FindStudent();
     void SaveGlobalEdit();
     void DeleteStudent();
+    void ShowFileContent();
 
 signals:
       void authSuccess();

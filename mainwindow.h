@@ -2,8 +2,9 @@
 #define MAINWINDOW_H
 #include"mainwindow.h"
 #include <QPropertyAnimation>
-
 #include <QMainWindow>
+#include"contestwindow.h"
+#include "windowsmanagerstudent.h"
 
 class WindowsManagerStudent;
 
@@ -24,11 +25,12 @@ public:
 private:
     Ui::MainWindow *ui;
     void styleMainW();
-    std::unique_ptr<WindowsManagerStudent> window;
-
+    std::unique_ptr<WindowsManagerStudent> windowStudent;
+    std::unique_ptr<ContestWindow> windowContest;
 
 private slots:
     void openManagerStud();
+    void openContestWindow();
 
 };
 #endif // MAINWINDOW_H

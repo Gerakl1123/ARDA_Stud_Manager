@@ -31,11 +31,14 @@ windowsmanagerstudent.h
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
     qt_add_executable(Student_Manager_ARDA
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         authregwindow.h authregwindow.cpp
+        ContestWindow.ui
+        contestwindow.h contestwindow.cpp
 
 
     )
@@ -58,6 +61,7 @@ else()
 endif()
 
 target_link_libraries(Student_Manager_ARDA PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Student_Manager_ARDA PRIVATE Qt6::Widgets)
 target_link_libraries(Student_Manager_ARDA PRIVATE Qt6::Widgets)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
