@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogContest</class>
+ <widget class="QDialog" name="DialogContest">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"> QWidget {
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+                                    stop:0 #0D1B2A, stop:0.5 #1B3B5F, stop:1 #274C77);
+    }</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>440</y>
+     <width>621</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">  QPushButton {
+        background-color: #3A6EA5;
+        color: #E0E6F2;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+    QPushButton:hover {
+        background-color: #5591D3;
+    }
+    QPushButton:pressed {
+        background-color: #2C5588;
+    }</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Orientation::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEditContest">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>170</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>130</y>
+     <width>211</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">  QLabel {
+        color: #D1D9E6;
+        font-weight: 500;
+        font-size: 15px;
+    }</string>
+   </property>
+   <property name="text">
+    <string>Введите название Конкурса</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>220</y>
+     <width>531</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="2">
+     <widget class="QLineEdit" name="lineEditFileSave">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="labelFakyltet">
+      <property name="styleSheet">
+       <string notr="true">  QLabel {
+        color: #D1D9E6;
+        font-weight: 500;
+        font-size: 15px;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Факультет</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="labelFile">
+      <property name="styleSheet">
+       <string notr="true">  QLabel {
+        color: #D1D9E6;
+        font-weight: 500;
+        font-size: 15px;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Файл сохранения</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLineEdit" name="lineEditFakyltet">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLineEdit" name="lineEditBall">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="labelOnBudget">
+      <property name="styleSheet">
+       <string notr="true">  QLabel {
+        color: #D1D9E6;
+        font-weight: 500;
+        font-size: 15px;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Балл для которого можно попасть на бюджет</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="labelReadFile">
+      <property name="styleSheet">
+       <string notr="true">  QLabel {
+        color: #D1D9E6;
+        font-weight: 500;
+        font-size: 15px;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Файл считения</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QLineEdit" name="lineEditFile">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>DialogContest</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>DialogContest</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

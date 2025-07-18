@@ -134,7 +134,6 @@ void WindowsManagerStudent::DeleteStudent()
 void WindowsManagerStudent::ShowFileContent()
 {
 
-    StudDisplayArea->setPlainText("ТЕСТ!");  // если это не появится — проблема в UI
 
     QString file = lineFileToPrint->text().trimmed();
     qDebug() << "Показываю файл:" << file;

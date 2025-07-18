@@ -39,8 +39,6 @@ AuthRegWindow::AuthRegWindow(QWidget *parent)
 
 }
 
-
-
 void AuthRegWindow::onAuthClicked()
 {
     QString login = lineEditLogin->text();
@@ -76,7 +74,7 @@ void AuthRegWindow::onRegClicked()
         emit authSuccess();
 
     } else {
-        QMessageBox::warning(this, "Регистрация", "Не удалось зарегистрироваться.");
+        QMessageBox::warning(this, "Регистрация", "Не удалось зарегистрироваться. Или Логин уже занят");
     }
 }
 

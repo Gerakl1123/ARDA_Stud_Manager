@@ -25,8 +25,8 @@ set(PROJECT_SOURCES
     mainwindow.ui
     authregwindow.cpp
     authregwindow.h
-windowsmanagerstudent.cpp
-windowsmanagerstudent.h
+    windowsmanagerstudent.cpp
+    windowsmanagerstudent.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -37,9 +37,9 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         authregwindow.h authregwindow.cpp
-        ContestWindow.ui
-        contestwindow.h contestwindow.cpp
-
+        contestwindow.h contestwindow.cpp contestwindow.ui
+        dialogcontest.h dialogcontest.cpp dialogcontest.ui
+        resource.qrc
 
     )
 # Define target properties for Android with Qt 6 as:

@@ -26,7 +26,7 @@ private:
     Ui::MainWindow *ui;
     void styleMainW();
     std::unique_ptr<WindowsManagerStudent> windowStudent;
-    std::unique_ptr<ContestWindow> windowContest;
+    std::unique_ptr<contestwindow> windowContest;
 
 private slots:
     void openManagerStud();

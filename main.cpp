@@ -9,18 +9,19 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-AuthRegWindow winAR;
+//AuthRegWindow winAR;
 MainWindow mainWindow;
 //
+////
+//QObject::connect(&winAR, &AuthRegWindow::authSuccess, [&]() {
+//    mainWindow.show();
+//    winAR.close();
+//});
+////
+////
+//winAR.show();
 //
-QObject::connect(&winAR, &AuthRegWindow::authSuccess, [&]() {
-    mainWindow.show();
-    winAR.close();
-});
-//
-//
-winAR.show();
-
+mainWindow.show();
 
     return a.exec();
 }

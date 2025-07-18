@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     //styleMainW();
 
     connect(ui->ButtonStudent,&QPushButton::clicked,this,&MainWindow::openManagerStud);
@@ -24,12 +25,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::styleMainW()
 {
-    this->setStyleSheet(R"(
-        QWidget {
-            background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-                                        stop:0 #1e3c72, stop:1 #2a5298);
-        }
 
+    this->setStyleSheet(R"(
+    QWidget {
+    background-image: url(:/ico/s.png);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
         QPushButton {
             background-color: #4fc3f7;
             color: white;
@@ -38,7 +40,6 @@ void MainWindow::styleMainW()
             padding: 10px 20px;
             font-size: 16px;
             font-weight: bold;
-            transition: all 0.2s ease;
         }
 
         QPushButton:pressed {
@@ -69,7 +70,7 @@ void MainWindow::openManagerStud()
 void MainWindow::openContestWindow()
 {
     qDebug() << "openconest() вызван ";
-    windowContest = std::make_unique<ContestWindow>(nullptr);
+    windowContest = std::make_unique<contestwindow>(nullptr);
 
     if (windowContest) {
         qDebug() << "Окно создано";
