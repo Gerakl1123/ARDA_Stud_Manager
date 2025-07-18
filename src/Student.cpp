@@ -87,56 +87,71 @@ bool Stud::findStudent(const std::string& nameF, const std::string& name, std::o
 //}
 //
 
-// Блок Регестрации и авторизацийй + ХЕШ/DEHASH  fix 08.06.2025
+// Блок Регестрации и авторизацийй + ХЕШ/DEHASH  fix 08.06.2025  update 16.07.2025
 
-void Stud::hashPassword(std::string& password, int shift)
-{
-	std::string result = "";
-	for (char c : password) {
-		if (isalpha(c)) {
-			char base = islower(c) ? 'a' : 'A';
-			result += static_cast<char>((c - base + shift) % 26 + base);
-		}
-		else {
-			result += c;
-		}
-	}
-	password = result;
-
+void Stud::encryptLine(std::string& line) {
+    char key = 0x5A;
+    for (char& c : line)
+        c ^= key;
 }
 
-void Stud::UnHashPassword(std::string& password, int shift)
-{
-	hashPassword(password, 26 - shift % 26);
+void Stud::decryptLine(std::string& line) {
+    encryptLine(line);
 }
 
 bool Stud::registerStudent(std::string& login, std::string password)
 {
+    if (login.empty() || password.empty())
+    {
+        std::cerr << "Login or password is empty!\n";
+        Logger->write("Fail register account " + login);
+        return false;
+    }
+
+    std::ifstream logStud("data.txt");
+    if (!logStud.is_open())
+    {
+        std::cerr << "Error opening file for reading!\n";
+        return false;
+    }
+
+    std::string tempName, tempPass, tempLine;
+
+    while (std::getline(logStud, tempLine))
+    {
+        std::istringstream iss(tempLine);
+        iss >> tempName >> tempPass;
+        if (tempName == login)
+        {
+            Logger->write("register account already exists: " + login);
+            return false;
+        }
+    }
+
+    logStud.close();
+    //std::string fullLP = login + ":" + password;
+
+    encryptLine(password);
+
     std::ofstream regStud("data.txt", std::ios::app);
+    if (!regStud.is_open())
+    {
+        std::cerr << "Error opening file for writing!\n";
+        return false;
+    }
 
-	if (!regStud.is_open())
-	{
-		std::cerr << "Error not open file!\n";
-		return false;
-	}
-
-	if (login.empty() || password.empty())
-	{
-		std::cerr << "Error!\n";
-		Logger->write("Fail register account " + login);
-		return false;
-	}
-	hashPassword(password, 3);
-
-	regStud << login << " " << password << "\n";
-	Logger->write("register account " + login);
-	return true;
+    regStud << login << " " << password << "\n";
+    Logger->write("Registered account: " + login);
+    regStud.close();
+    return true;
 }
+
 
 bool Stud::loginStudent(std::string& login, std::string password)
 {
 	std::ifstream logStud("data.txt");
-	std::string fileUserName, filePassword;
+
+    std::string fileUserName, filePassword;
 
 	if (!logStud.is_open())
 	{
@@ -144,20 +159,22 @@ bool Stud::loginStudent(std::string& login, std::string password)
 		return false;
 	}
 
+
 	if (login.empty() || password.empty())
 	{
 		std::cerr << "Error!\n";
 		return false;
 	}
 
-
 	std::string temp = "";
+
 	while (std::getline(logStud, temp))
 	{
-		std::istringstream iss(temp);
+        std::istringstream iss(temp);
 
-		iss >> fileUserName >> filePassword;
-		UnHashPassword(filePassword, 3);
+        iss >> fileUserName >> filePassword;
+
+        decryptLine(filePassword);
 
 		if (login == fileUserName && password == filePassword)
 		{
@@ -338,12 +355,11 @@ bool Stud::DeleteStudentFromFile(const std::string& filename, const std::string&
 {
     std::ifstream ifile(filename);
     if (!ifile.is_open()) {
-        // Не удалось открыть файл
         return false;
     }
 
     std::string line;
-    std::vector<std::string> filter;       // Строки для сохранения (не удаленные)
+    std::vector<std::string> filter;
     std::vector<std::string> thisStudents; // Все прочитанные строки
 
     while (std::getline(ifile, line))
@@ -353,8 +369,7 @@ bool Stud::DeleteStudentFromFile(const std::string& filename, const std::string&
         double ball;
 
         if (!(iss >> name >> ball)) {
-            // Строка не соответствует формату
-            filter.push_back(line); // оставить как есть
+            filter.push_back(line);
             continue;
         }
 
@@ -365,7 +380,7 @@ bool Stud::DeleteStudentFromFile(const std::string& filename, const std::string&
         if (shouldDelete)
         {
             Logger->write("Deleted Student from file: " + name + (targetBall ? " " + std::to_string(*targetBall) : ""));
-            // Не добавляем эту строку в filter — она удаляется
+
             continue;
         }
 

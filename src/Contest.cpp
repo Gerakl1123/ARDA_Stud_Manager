@@ -1,6 +1,7 @@
+
 #include "../include/Contest.h"
 #include<algorithm>
-
+#include<vector>
 std::shared_ptr<std::vector<std::string>> BaseContest::contestVec = nullptr;
 
 std::shared_ptr<std::vector<std::string>> BaseContest::createContest()
@@ -32,7 +33,7 @@ std::string CurretContest::currentContest(const std::string& File)
 
     if (Contest != "certificate") {
         Logger->write("Contest '" + Contest + " <No logic>");
-        return"";
+        return "";
     }
 
     Logger->write("Processing certificate contest");
@@ -58,26 +59,39 @@ std::string CurretContest::currentContest(const std::string& File)
     return res->name;
 }
 
-std::vector<Student> CurretContest::ContestBudget(const double score, const std::string& File) 
+qint64 CurretContest::ContestBudget(double score, const std::string& File, const std::string& SaveFile,QString& Fakyltet)
 {
     std::vector<Student> StudentsOnBudget = std::vector<Student>();
-    
-    ofile = std::make_shared<std::ofstream>(File, std::ios::app);
+    CurretStudents = std::make_shared<std::vector<Student>>();
 
+    ofile = std::make_shared<std::ofstream>(SaveFile, std::ios::app);
+    std::ifstream ifile(File);
+
+    std::string temp,name;
+    double ball;
+    while(std::getline(ifile,temp))
+    {
+        std::istringstream iss(temp);
+        iss >> name>>ball;
+        CurretStudents->emplace_back(name,ball);
+    }
 
     std::copy_if(CurretStudents->begin(), CurretStudents->end(), std::back_inserter(StudentsOnBudget),
                  [score](const Student& s) {
                      return s.ball >= score;
-                 });
+    });
 
-    int count = static_cast<int>(StudentsOnBudget.size());
+    int countStudents = static_cast<qint64>(StudentsOnBudget.size());
+
+    *ofile << " !!! " << Fakyltet.toStdString()<<" !!! " <<"\n";
 
     for (const auto& c : StudentsOnBudget)
     {
+
         *ofile << c.name << " " << c.ball << "\n";
     }
     
     //ofile->close();
 
-    return StudentsOnBudget;
+    return countStudents;
 }
