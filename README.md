@@ -1,5 +1,5 @@
+<img width="780" height="775" alt="image" src="https://github.com/user-attachments/assets/5258ddab-9109-4f20-b7c3-0d9f61051b71" />
 
-<img width="624" height="619" alt="image" src="https://github.com/user-attachments/assets/e3d6a24d-ddff-4aa1-b2e4-b469e800cfb7" />
 
 
 # ARDA_Stud_Manager 🎓📁
