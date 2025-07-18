@@ -117,8 +117,8 @@ public:
 private:
     void uploadInfoStud(const std::string& file);
     void cast();
-    void hashPassword(std::string& password, int shift);
-    void UnHashPassword(std::string& password, int shift);
+    void encryptLine(std::string&);
+    void decryptLine(std::string&);
     std::list<std::string> info_stud;
     std::unordered_map<std::string, double> rezerv_info_stud;
     std::vector<Student> Students;
