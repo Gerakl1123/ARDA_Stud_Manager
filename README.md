@@ -60,3 +60,4 @@ make
 https://drive.google.com/drive/folders/1WpgGSEDzay4t1v7m9MojqH53PTLCiD0z?usp=drive_link
 
 
+завтра а именно 19 07 2025 в планах добавить автосохранение и дописать выбор конкурса
