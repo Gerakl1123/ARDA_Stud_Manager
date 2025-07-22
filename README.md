@@ -59,7 +59,6 @@ make
 Показ работоспособности методов пока не работает выбор конкурса 
 все видео в ARDA/demo video/
 
-[https://drive.google.com/drive/folders/1WpgGSEDzay4t1v7m9MojqH53PTLCiD0z?usp=drive_link](https://drive.google.com/drive/folders/1WpgGSEDzay4t1v7m9MojqH53PTLCiD0z?usp=sharing)
-
+https://drive.google.com/drive/folders/1WpgGSEDzay4t1v7m9MojqH53PTLCiD0z?usp=drive_link
 
 завтра а именно 19 07 2025 в планах добавить автосохранение и дописать выбор конкурса
