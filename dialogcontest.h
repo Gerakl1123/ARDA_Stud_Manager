@@ -5,7 +5,8 @@
 #include<QMessageBox>
 #include"include/Contest.h"
 #include"contestwindow.h"
-
+#include<QSettings>
+#include<QBoxLayout>
 enum DialogMode{
 
     ModeAttestat,
@@ -29,12 +30,12 @@ public:
 private:
     Ui::DialogContest *ui;
     DialogMode currentMode;
-
+    void SerelizationDeserelization();
 public:
     QString getInputText();
     void ok_Button_Click();
     qint64 OnBudget();
-
+    QString onContest();
 private slots:
     void handleAccepted();
 
