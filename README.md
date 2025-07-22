@@ -60,6 +60,7 @@ make
 все видео в ARDA/demo video/
 
 Релиз(дебаг) выложу в крнце недели
+все новости по ссылке
 ```bash
 https://drive.google.com/drive/folders/1WpgGSEDzay4t1v7m9MojqH53PTLCiD0z?usp=drive_link
 
