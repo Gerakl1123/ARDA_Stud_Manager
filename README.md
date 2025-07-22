@@ -44,7 +44,7 @@
 
 > Убедитесь, что установлен Qt и qmake / CMake доступен в PATH.
 
-```bash
+
 git clone https://github.com/Gerakl1123/ARDA_Stud_Manager
 cd ARDA_Stud_Manager
 qmake
@@ -52,13 +52,12 @@ make
 ./ARDA_Stud_Manager
 
 В ОБНОВЛЕНИЕ 18 07 2025
-сделано 2 меню + рефакторинг + дял себя узнал многое лучше не смешивать ui & qwidjet
+сделано 2 меню + рефакторинг + дял себя узнал многое лучше не смешивать ui & qwidget
 
 
 
 Показ работоспособности методов пока не работает выбор конкурса 
 все видео в ARDA/demo video/
-
+```bash
 https://drive.google.com/drive/folders/1WpgGSEDzay4t1v7m9MojqH53PTLCiD0z?usp=drive_link
 
-завтра а именно 19 07 2025 в планах добавить автосохранение и дописать выбор конкурса
