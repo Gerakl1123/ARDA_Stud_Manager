@@ -3,6 +3,8 @@
 #include"../include/Logger.h"
 #include<optional>
 #include<QString>
+#include<QCryptographicHash>
+#include<QByteArray>
 
 class StudFileMngr;
 class Stud;
@@ -117,8 +119,8 @@ public:
 private:
     void uploadInfoStud(const std::string& file);
     void cast();
-    void encryptLine(std::string&);
-    void decryptLine(std::string&);
+    QString hashPass(const std::string&);
+   // QString DeHashPass(std::string&);  не нужен
     std::list<std::string> info_stud;
     std::unordered_map<std::string, double> rezerv_info_stud;
     std::vector<Student> Students;
