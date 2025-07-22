@@ -39,6 +39,10 @@ struct Student
     bool operator==(const Student& other)  {
         return name == other.name && ball == other.ball;
     }
+    bool empty() const
+    {
+        return this->name.empty() || this->ball == 0.0;
+    }
 
     
     friend bool operator==(const Student& s, const std::pair<std::string, double>& item)

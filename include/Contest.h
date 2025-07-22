@@ -1,57 +1,52 @@
-#pragma once
-#include"../include/Libs.h"
-#include <functional>
-#include"../include/Logger.h"
+#ifndef CONTEST_H
+#define CONTEST_H
+
+#include <vector>
+#include <QString>
+#include <memory>
+#include <fstream>
+#include <chrono>
+#include "../include/Libs.h"
+#include "../include/Logger.h"
 #include "../include/Student.h"
-#include<chrono>
 
-
-class BaseContest {
-public:
-    BaseContest() = default;
-    BaseContest(const std::string& contest, const std::string& LogFILE) : Contest(contest)
-    {
-        Logger = Log::create(LogFILE);
-    };
-	BaseContest(const std::string& contest, std::vector<Student>& otherStudent, const std::string& LogFILE)
-		: Contest(contest), CurretStudents(otherStudent)
-	{
-		Logger = Log::create(LogFILE);
-	};
-
-    virtual QString currentContest(const std::string&,const std::string&) = 0;
-    virtual	qint64 ContestBudget(double, const std::string&, const std::string&,QString& )  = 0;
-
-	~BaseContest() = default;
-
-protected:
-	std::string Contest;
-    QString FakyltetMain;
-
-	static std::vector<std::string> contestVec;
-	std::vector<Student> CurretStudents;
-	 std::shared_ptr<Log> Logger;
-	static std::vector<std::string> createContest();
-	std::shared_ptr<std::ofstream> ofile;
-
+enum class ContestType {
+    Strength,
+    Intelligence,
+    Attestat
 };
 
 
-class CurrentContest : public BaseContest
+class ContestBase
 {
+protected:
+    QString description;
+    QString contestNames;
+    float strength;
+    QString Faculty;  // исправлено
+    std::vector<Student> Students;
+    std::shared_ptr<Log> logger;
+    std::shared_ptr<std::ofstream> ofile;
+    ContestType contestType;
+
 public:
-    CurrentContest() = default;
-    CurrentContest(const std::string& contest,const std::string& LogFILE) : BaseContest(contest,LogFILE){};
-    CurrentContest(const std::string& contest, std::vector<Student>& otherStudent, const std::string& FILE)
-		: BaseContest(contest, otherStudent, FILE) {
+    ContestBase() = delete;
 
-	};
+    ContestBase(const std::string& logFile)
+        : logger(Log::create(logFile)) {
+    }
 
-    QString currentContest(const std::string& File,const std::string& FILEinput) override;
-    qint64 ContestBudget(double score, const std::string& File, const std::string& SaveFile,QString& Fakyltet) override;
+    virtual ~ContestBase() = default;
 
-private:
-    std::shared_ptr<std::ofstream>& readWinStudent(std::shared_ptr<std::ofstream>&,Student&);
-    std::vector<Student> loadStudentsFromFile(const std::string&);
+
+
+public:
+    virtual std::shared_ptr<std::ofstream>& readWinStudent(std::shared_ptr<std::ofstream>& ofile, Student& res) final;
+    virtual std::vector<Student> loadStudentsFromFile(const QString& fileName) final;
+
+    virtual qint16 findWinner(double score, const QString& file,  const QString& saveFile, QString& faculty) = 0;
 
 };
+
+#endif // CONTEST_H
+

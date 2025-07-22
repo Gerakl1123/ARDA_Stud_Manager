@@ -11,3 +11,5 @@
 #include<map>
 #include<iomanip>
 #include<cctype>
+#include<memory>
+
