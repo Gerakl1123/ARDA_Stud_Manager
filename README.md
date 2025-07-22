@@ -63,5 +63,5 @@ make
 
   **все новости по проекту ссылке ниже**
 ```bash
-https://drive.google.com/drive/folders/1WpgGSEDzay4t1v7m9MojqH53PTLCiD0z?usp=drive_link
+ссылка пока закрыта
 
