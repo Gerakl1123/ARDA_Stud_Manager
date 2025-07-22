@@ -87,16 +87,13 @@ bool Stud::findStudent(const std::string& nameF, const std::string& name, std::o
 //}
 //
 
-// Блок Регестрации и авторизацийй + ХЕШ/DEHASH  fix 08.06.2025  update 16.07.2025
+// Блок Регестрации и авторизацийй + ХЕШ/DEHASH  fix 08.06.2025  update 16.07.2025 update 22 07 2025 + QCryptographicHash
 
-void Stud::encryptLine(std::string& line) {
-    char key = 0x5A;
-    for (char& c : line)
-        c ^= key;
-}
+QString Stud::hashPass(const std::string& password) {
+    QByteArray ba = QByteArray::fromStdString(password);
+    QByteArray hashed = QCryptographicHash::hash(ba, QCryptographicHash::Sha256);
+    return QString(hashed.toHex());
 
-void Stud::decryptLine(std::string& line) {
-    encryptLine(line);
 }
 
 bool Stud::registerStudent(std::string& login, std::string password)
@@ -129,9 +126,9 @@ bool Stud::registerStudent(std::string& login, std::string password)
     }
 
     logStud.close();
-    //std::string fullLP = login + ":" + password;
 
-    encryptLine(password);
+    // Хешируем пароль hashPass
+    QString hashedPassword = hashPass(password);
 
     std::ofstream regStud("data.txt", std::ios::app);
     if (!regStud.is_open())
@@ -140,11 +137,12 @@ bool Stud::registerStudent(std::string& login, std::string password)
         return false;
     }
 
-    regStud << login << " " << password << "\n";
+    regStud << login << " " << hashedPassword.toStdString() << "\n";
     Logger->write("Registered account: " + login);
     regStud.close();
     return true;
 }
+
 
 
 bool Stud::loginStudent(std::string& login, std::string password)
@@ -174,9 +172,10 @@ bool Stud::loginStudent(std::string& login, std::string password)
 
         iss >> fileUserName >> filePassword;
 
-        decryptLine(filePassword);
+        // Разъкешироваем пароль
+        QString UnhashPass = hashPass(password);
 
-		if (login == fileUserName && password == filePassword)
+        if (login == fileUserName && UnhashPass == QString::fromStdString(filePassword))
 		{
 			std::cout << " Suceful!";
 			Logger->write("login to account " + login);
