@@ -58,6 +58,8 @@ make
 
 Показ работоспособности методов пока не работает выбор конкурса 
 все видео в ARDA/demo video/
+
+Релиз(дебаг) выложу в крнце недели
 ```bash
 https://drive.google.com/drive/folders/1WpgGSEDzay4t1v7m9MojqH53PTLCiD0z?usp=drive_link
 
