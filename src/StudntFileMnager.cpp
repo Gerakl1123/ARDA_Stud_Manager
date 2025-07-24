@@ -1,6 +1,4 @@
 ﻿#include "../include/StudntFileMnager.h"
-#include "../include/Student.h"
-#include "../include/Logger.h"
 
 void StudFileMngr::CreateDir(std::string& path_dir, const std::string& NameFolder, const std::string nameFileToUploadData, Stud& other, const std::string& fileNameInputData) const
 {

@@ -7,7 +7,7 @@ qint16 Attestat::findWinner(double ball, const QString &file, const QString &sav
 
     Students = std::vector<Student>();
 
-    ofile = std::make_shared<std::ofstream>(saveFile.toStdString(), std::ios::app);
+    ofile = std::make_shared<std::ofstream>(saveFile.toStdString(), std::ios::out | std::ios::trunc);
 
     Students = loadStudentsFromFile(file);
 
@@ -22,7 +22,7 @@ qint16 Attestat::findWinner(double ball, const QString &file, const QString &sav
 
     for (const auto& c : StudentsOnBudget)
     {
-        *ofile << c.name << " " << c.ball << "\n";
+        *ofile << c.name << " " << double(c.ball) << "\n";
 
     }
     this->logger->write("Seccuful find students on budget " + faculty.toStdString() + " " + std::to_string(countStudents) + " людей!\n");

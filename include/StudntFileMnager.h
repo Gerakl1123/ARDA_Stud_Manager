@@ -2,7 +2,7 @@
 #include<string>
 #include<memory>
 #include <filesystem>
-
+#include<ManagerStudent.h>
 #include"../include/Logger.h"
 
 namespace fs = std::filesystem;

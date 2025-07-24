@@ -7,7 +7,7 @@
 #include<QLabel>
 #include <QLineEdit>
 #include<QVBoxLayout>
-#include"../include/Student.h"
+#include"ManagerStudent.h"
 #include<QMessageBox>
 #include<QTextEdit>
 #include "windowsmanagerstudent.h"

@@ -6,9 +6,6 @@ WindowsManagerStudent::WindowsManagerStudent(QWidget *parent) : QWidget(parent)
 {
  mainWin = std::make_unique<MainWindow>();
 
-    if (!mainWin) {
-        mainWin = std::make_unique<MainWindow>();
-    }
 
     Style();
     applyStyle();

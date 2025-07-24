@@ -57,6 +57,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/AttestatContest.cpp
         include/TopBallContest.h
         src/TopBallContest.cpp
+        include/ManagerStudent.h
+        src/ManagerStudent.cpp
     )
 else()
     if(ANDROID)

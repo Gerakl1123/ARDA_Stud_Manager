@@ -1,7 +1,7 @@
 #ifndef AUTHREGWINDOW_H
 #define AUTHREGWINDOW_H
 
-#include "../include/Student.h"
+#include<ManagerStudent.h>
 #include"mainwindow.h"
 #include <QWidget>
 #include <QLineEdit>
