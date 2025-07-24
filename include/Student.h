@@ -107,8 +107,8 @@ public:
         ContributionProject.reset();
     }
 
-    void SortStudent();
-    void uploadReadyFile(const std::string& file);
+    void SortStudent(const QString& ofile,const QString& Ifile);
+
     bool uploadDataToFile(const std::string& file, const std::string& data);
     void SwapStudents(size_t index, size_t index2);
     void RezervSort();
@@ -123,10 +123,11 @@ public:
 private:
     void uploadInfoStud(const std::string& file);
     void cast();
+    void uploadReadyFile(const std::string& file);
     QString hashPass(const std::string&);
    // QString DeHashPass(std::string&);  не нужен
     std::list<std::string> info_stud;
-    std::unordered_map<std::string, double> rezerv_info_stud;
+    std::unordered_multimap<std::string, double> rezerv_info_stud;
     std::vector<Student> Students;
     std::vector<Student> BackUpStud;
     std::map<size_t, Student> Key;

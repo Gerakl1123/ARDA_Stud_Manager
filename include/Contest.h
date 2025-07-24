@@ -10,15 +10,11 @@
 #include "../include/Logger.h"
 #include "../include/Student.h"
 
-enum class ContestType {
-    Strength,
-    Intelligence,
-    Attestat
-};
 
 
 class ContestBase
 {
+
 protected:
     QString description;
     QString contestNames;
@@ -27,7 +23,7 @@ protected:
     std::vector<Student> Students;
     std::shared_ptr<Log> logger;
     std::shared_ptr<std::ofstream> ofile;
-    ContestType contestType;
+   // ContestType contestType;
 
 public:
     ContestBase() = delete;
@@ -42,7 +38,7 @@ public:
 
 public:
     virtual std::shared_ptr<std::ofstream>& readWinStudent(std::shared_ptr<std::ofstream>& ofile, Student& res) final;
-    virtual std::vector<Student> loadStudentsFromFile(const QString& fileName) final;
+    static std::vector<Student> loadStudentsFromFile(const QString& fileName);
 
     virtual qint16 findWinner(double score, const QString& file,  const QString& saveFile, QString& faculty) = 0;
 

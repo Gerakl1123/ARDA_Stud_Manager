@@ -1,6 +1,6 @@
  #ifndef ATTESTATCONTEST_H
  #define ATTESTATCONTEST_H
- #include"Contest.h"
+ #include "Contest.h"
 
 
  class Attestat : public ContestBase
@@ -13,7 +13,7 @@
 
  public:
 
-   virtual qint16 findWinner(double score, const QString& file, const QString& saveFile, QString& faculty) override;
+    qint16 findWinner(double score, const QString& file, const QString& saveFile, QString& faculty) override;
 
 
  };

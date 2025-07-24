@@ -107,9 +107,8 @@ Student DialogContest::onContest()
                                 QString("Данные добавлены в файл.\nВыиграл студент: %1 с баллом %2")
                                      .arg(winner.name)
                                      .arg(winner.ball));
-
-
     }
+
     else
     {
         QMessageBox::information(this, "Конкурс Высший Балл",

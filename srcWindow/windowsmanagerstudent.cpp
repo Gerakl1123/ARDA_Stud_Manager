@@ -51,18 +51,23 @@ void WindowsManagerStudent::backMainMenu()
 }
 void WindowsManagerStudent::SortStud()
 {
-    manag.SortStudent();
-}
+    ButtonSortStud->setEnabled(false); // отключаем кнопку
 
-void WindowsManagerStudent::SaveGlobalEdit()
-{
     QString Sfile = lineFileToSave->text();
+    QString Ifile = lineFileToInput->text();
 
-    std::string fileSTR = Sfile.toStdString();
+    manag.SortStudent(Sfile, Ifile);
 
-    manag.uploadReadyFile(fileSTR);
+    QMessageBox::information(this, "Сортировка", "Сортировка прошла успешно!");
+
+
+    QTimer::singleShot(10000, this, [this]() {
+        ButtonSortStud->setEnabled(true);
+    });
 
 }
+
+
 void WindowsManagerStudent::FindStudent()
 {
 
@@ -85,13 +90,14 @@ void WindowsManagerStudent::FindStudent()
         ballOpt = std::nullopt;
     }
 
-     bool found = manag.findStudent(fileSTR, nameSTR, ballOpt);
+    bool found = manag.findStudent(fileSTR, nameSTR, ballOpt);
 
     if (found) {
         QMessageBox::information(this, "Поиск", "Студент найден");
     } else {
         QMessageBox::warning(this, "Поиск", "Студент не найден");
     }
+
 }
 
 void WindowsManagerStudent::DeleteStudent()
@@ -213,15 +219,19 @@ void WindowsManagerStudent::Style()
     QPushButton:pressed {
         background-color: #1e88e5;
     }
+    QPushButton:disabled {
+        background-color: #9e9e9e;
+        color: #cccccc;
+        border: none;
+    }
 )");
 
 }
 
+
 void WindowsManagerStudent::applyStyle()
 {
 
-
-    // ========== Создание виджетов ==========
     auto makeLine = [this](const QString& placeholder) {
         QLineEdit* line = new QLineEdit(this);
         line->setPlaceholderText(placeholder);
@@ -231,40 +241,39 @@ void WindowsManagerStudent::applyStyle()
 
     auto makeButton = [this](const QString& text) {
         QPushButton* btn = new QPushButton(text, this);
-        btn->setMinimumSize(140, 35);
-        btn->setMaximumWidth(200);
+        btn->setMinimumSize(160, 40);
+        btn->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        btn->setFont(QFont("Segoe UI", 10));
         return btn;
     };
 
-    // --- Добавление ---
+    // Добавление
     lineFileToSaveData = makeLine("Файл");
     lineDataStudent = makeLine("ИмяФамилия Балл");
     ButtonAddStudent = makeButton("Добавить");
 
-    // --- Сортировка ---
+    // Сортировка
     ButtonSortStud = makeButton("Сортировать");
 
-    // --- Сохранение ---
-    lineFileToSave = makeLine("ФАЙЛ_СОХРАНЕНИЯ.txt");
-    lineFileToSave->setFixedSize(180, 30);
-    ButtonSaveEdit = makeButton("Сохранить");
+    lineFileToInput = makeLine("Файл считывания студентов");
+    lineFileToSave = makeLine("Файл сохранения");
 
-    // --- Главное меню ---
+    // Главное меню
     ButtonBackMenu = makeButton("Главное меню");
 
-    // --- Поиск ---
+    // Поиск
     lineFiletoFind = makeLine("Файл");
     lineNameFindStudent = makeLine("Имя");
-    lineBallFindStudent = makeLine("Балл (необязателно)");
+    lineBallFindStudent = makeLine("Балл (необязателен)");
     ButtonFindStudent = makeButton("Найти");
 
-    // --- Удаление ---
+    // Удаление
     lineFileToDelete = makeLine("Файл");
     linenNameToDelete = makeLine("Имя");
-    lineBallToDelete = makeLine("Балл (для точного удаления)");
+    lineBallToDelete = makeLine("Балл");
     ButtonDeleteStudent = makeButton("Удалить");
 
-    // --- Группа вывода содержимого файла ---
+    // Просмотр
     lineFileToPrint = makeLine("Файл для отображения");
     ButtonShowContent = makeButton("Показать содержимое");
 
@@ -274,44 +283,36 @@ void WindowsManagerStudent::applyStyle()
     StudDisplayArea->setFont(QFont("Arial", 10));
     StudDisplayArea->setStyleSheet("background-color: white; color: black;");
 
+    // --- Layout'ы ---
     QGridLayout* layoutPrint = new QGridLayout();
     layoutPrint->addWidget(new QLabel("Файл:"), 0, 0);
     layoutPrint->addWidget(lineFileToPrint, 0, 1);
     layoutPrint->addWidget(ButtonShowContent, 1, 1);
     layoutPrint->addWidget(StudDisplayArea, 2, 0, 1, 2);
+    QGroupBox* groupPrint = new QGroupBox("Просмотр файла");
+    groupPrint->setLayout(layoutPrint);
 
-
-    // ==========  Создание Групп ==========
-    auto createGroup = [](const QString& title, QLayout* layout) {
-        QGroupBox* box = new QGroupBox(title);
-        box->setLayout(layout);
-        return box;
-    };
-
-    QGroupBox* groupPrint = createGroup("Просмотр файла", layoutPrint);
-
-    // --- Группа добавления ---
     QGridLayout* layoutAdd = new QGridLayout();
     layoutAdd->addWidget(new QLabel("Файл:"), 0, 0);
     layoutAdd->addWidget(lineFileToSaveData, 0, 1);
     layoutAdd->addWidget(new QLabel("Данные:"), 1, 0);
     layoutAdd->addWidget(lineDataStudent, 1, 1);
     layoutAdd->addWidget(ButtonAddStudent, 2, 1);
-    QGroupBox* groupAdd = createGroup("Добавление", layoutAdd);
+    QGroupBox* groupAdd = new QGroupBox("Добавление");
+    groupAdd->setLayout(layoutAdd);
 
-    // --- Группа сортировки ---
-    QVBoxLayout* layoutSort = new QVBoxLayout();
-    layoutSort->addWidget(ButtonSortStud);
-    QGroupBox* groupSort = createGroup("Сортировка", layoutSort);
+    QGridLayout* layoutSort = new QGridLayout();
+    layoutSort->addWidget(new QLabel("Файл (вход):"), 0, 0);
+    layoutSort->addWidget(lineFileToInput, 0, 1);
+    layoutSort->addWidget(new QLabel("Файл (сохранение):"), 1, 0);
+    layoutSort->addWidget(lineFileToSave, 1, 1);
+    layoutSort->addWidget(ButtonSortStud, 2, 0);
 
-    // --- Группа сохранения ---
-    QGridLayout* layoutSave = new QGridLayout();
-    layoutSave->addWidget(new QLabel("Файл:"), 0, 0);
-    layoutSave->addWidget(lineFileToSave, 0, 1);
-    layoutSave->addWidget(ButtonSaveEdit, 1, 1);
-    QGroupBox* groupSave = createGroup("Сохранение", layoutSave);
 
-    // --- Группа поиска ---
+
+    QGroupBox* groupSort = new QGroupBox("Сортировка");
+    groupSort->setLayout(layoutSort);
+
     QGridLayout* layoutFind = new QGridLayout();
     layoutFind->addWidget(new QLabel("Файл:"), 0, 0);
     layoutFind->addWidget(lineFiletoFind, 0, 1);
@@ -320,9 +321,9 @@ void WindowsManagerStudent::applyStyle()
     layoutFind->addWidget(new QLabel("Балл:"), 2, 0);
     layoutFind->addWidget(lineBallFindStudent, 2, 1);
     layoutFind->addWidget(ButtonFindStudent, 3, 1);
-    QGroupBox* groupFind = createGroup("Поиск", layoutFind);
+    QGroupBox* groupFind = new QGroupBox("Поиск");
+    groupFind->setLayout(layoutFind);
 
-    // --- Группа удаления ---
     QGridLayout* layoutDelete = new QGridLayout();
     layoutDelete->addWidget(new QLabel("Файл:"), 0, 0);
     layoutDelete->addWidget(lineFileToDelete, 0, 1);
@@ -331,45 +332,40 @@ void WindowsManagerStudent::applyStyle()
     layoutDelete->addWidget(new QLabel("Балл:"), 2, 0);
     layoutDelete->addWidget(lineBallToDelete, 2, 1);
     layoutDelete->addWidget(ButtonDeleteStudent, 3, 1);
-    QGroupBox* groupDelete = createGroup("Удаление", layoutDelete);
+    QGroupBox* groupDelete = new QGroupBox("Удаление");
+    groupDelete->setLayout(layoutDelete);
 
-    // ========== Компоновка ==========
+    // --- Макеты ---
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
-    // Верхний ряд: добавление + сортировка
     QHBoxLayout* topRow = new QHBoxLayout();
     topRow->addWidget(groupAdd);
     topRow->addWidget(groupSort);
 
-    // Средний ряд: сохранение + поиск
     QHBoxLayout* midRow = new QHBoxLayout();
-    midRow->addWidget(groupSave);
     midRow->addWidget(groupFind);
 
-
-    // Нижний ряд: удаление + главное меню
     QHBoxLayout* bottomRow = new QHBoxLayout();
     bottomRow->addWidget(groupDelete);
     bottomRow->addStretch();
     bottomRow->addWidget(ButtonBackMenu);
-    mainLayout->addWidget(groupPrint);
 
+    mainLayout->addWidget(groupPrint);
     mainLayout->addLayout(topRow);
     mainLayout->addLayout(midRow);
     mainLayout->addLayout(bottomRow);
     mainLayout->setSpacing(20);
     mainLayout->setContentsMargins(15, 15, 15, 15);
 
-
     setLayout(mainLayout);
 }
+
 
 void WindowsManagerStudent::setupConnections()
 {
     connect(ButtonAddStudent,&QPushButton::clicked,this,&WindowsManagerStudent::addStudentTiFile);
     connect(ButtonBackMenu,&QPushButton::clicked,this,&WindowsManagerStudent::backMainMenu);
     connect(ButtonSortStud,&QPushButton::clicked,this,&WindowsManagerStudent::SortStud);
-    connect(ButtonSaveEdit,&QPushButton::clicked,this,&WindowsManagerStudent::SaveGlobalEdit);
     connect(ButtonFindStudent, &QPushButton::clicked, this, &WindowsManagerStudent::FindStudent);
     connect(ButtonDeleteStudent,&QPushButton::clicked,this,&WindowsManagerStudent::DeleteStudent);
     connect(ButtonShowContent,&QPushButton::clicked,this,&WindowsManagerStudent::ShowFileContent);

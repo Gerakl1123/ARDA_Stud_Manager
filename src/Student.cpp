@@ -1,6 +1,8 @@
 #include "../include/Student.h"
 #include"../include/Libs.h"
 #include<cmath>
+#include"Contest.h"
+
 bool Stud::findStudent(const std::string& nameF, const std::string& name, std::optional<double> value = std::nullopt)
 {
     if (!Logger) {
@@ -18,22 +20,8 @@ bool Stud::findStudent(const std::string& nameF, const std::string& name, std::o
         return false;
     }
 
-    std::string line;
-    std::string nameStud;
-    double ballStud;
 
-    while (std::getline(ifile, line)) {
-
-        std::istringstream iss(line);
-
-        if (!(iss >> nameStud >> ballStud)) {
-            Logger->write("Неккоректная строка: " + line);
-            continue;
-        }
-
-        Students.emplace_back(nameStud, ballStud);
-    }
-
+    Students = ContestBase::loadStudentsFromFile(QString::fromStdString(nameF));
 
     auto result = std::find_if(Students.cbegin(),Students.cend(),[&](const Student& s)
                  {
@@ -189,31 +177,13 @@ bool Stud::loginStudent(std::string& login, std::string password)
 
 //======================================================================
 
-void Stud::uploadInfoStud(const std::string& file)
-{
-	std::string line;
-	std::ifstream ifile(file);
 
-	while (std::getline(ifile, line))
-	{
-		info_stud.push_back(line);
-
-		std::istringstream iss(line);
-		std::string name;
-		double ball;
-
-		iss >> name >> ball;
-		rezerv_info_stud.emplace(name, ball);
-	}
-
-	Logger->write("Successful Backup!");
-	ifile.close();
-}
 //Fix
 //=====================================
 bool Stud::uploadDataToFile(const std::string& file, const std::string& data)
 {
     std::ofstream ofile(file, std::ios::app);
+
     if (!ofile.is_open()) {
         return false;
     }
@@ -223,21 +193,21 @@ bool Stud::uploadDataToFile(const std::string& file, const std::string& data)
     double ball = 0.0;
     iss >> name >> ball;
 
-    ofile << name << " " << std::to_string(ball) << "\n";
+    ofile << name << " " << double(ball) << "\n";
 
-    // !!! Добавляем в резервную мапу
-    rezerv_info_stud[name] = ball;
 
     Logger->write("Student successful " + name + " " + std::to_string(ball));
 
-    cast(); // обновит Students из rezerv_info_stud
-   // uploadReadyFile(file);
 
     return true;
 }
 
-void Stud::SortStudent()
+void Stud::SortStudent(const QString& Ofile,const QString& Ifile)
 {
+
+    uploadInfoStud(Ifile.toStdString()); // rezerv upload data stud
+
+    cast(); // input rezerv data to vector students
 
     std::sort(Students.begin(), Students.end(), [](const Student& a, const Student& b) {
         return a.ball < b.ball;
@@ -253,8 +223,31 @@ void Stud::SortStudent()
 
     Logger->write("Sorsted Seccuful!");
 
-}
 
+    uploadReadyFile(Ofile.toStdString());
+
+}
+//PRIVATE METHODS
+void Stud::uploadInfoStud(const std::string& file)
+{
+    std::string line;
+    std::ifstream ifile(file);
+
+    while (std::getline(ifile, line))
+    {
+        info_stud.push_back(line);
+
+        std::istringstream iss(line);
+        std::string name;
+        double ball;
+
+        iss >> name >> ball;
+        rezerv_info_stud.emplace(name, ball);
+    }
+
+    Logger->write("Successful Backup!");
+    ifile.close();
+}
 void Stud::cast()
 {
     Students.clear();
@@ -271,6 +264,8 @@ void Stud::cast()
         }
     }
     Logger->write("cast Successful");
+
+
 }
 
 void Stud::uploadReadyFile(const std::string& file)
@@ -280,12 +275,16 @@ void Stud::uploadReadyFile(const std::string& file)
     for (const auto& [name, ball] : rezerv_info_stud)
     {
         ofile << name;
-        ofile << " " << std::to_string(ball) << "\n"; // изменил double() std::to_string
+        ofile << " " << double(ball) << "\n";
     }
     Logger->write("Upload data to ready file! ");
+
+    rezerv_info_stud.clear();
+    Students.clear();
+
     ofile.close();
 }
-//===================================
+//==============END PRIVATE METHODS=====================
 
 void Stud::SwapStudents(size_t index, size_t index2) // optimization
 {

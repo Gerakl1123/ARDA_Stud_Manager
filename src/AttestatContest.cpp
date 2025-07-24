@@ -19,7 +19,7 @@ qint16 Attestat::findWinner(double ball, const QString &file, const QString &sav
     qint16 countStudents = static_cast<qint16>(StudentsOnBudget.size());
 
     *ofile << " !!! " << faculty.toStdString() << " !!! " << "\n";
-    logger->write(Students.at(2).name);
+
     for (const auto& c : StudentsOnBudget)
     {
         *ofile << c.name << " " << c.ball << "\n";

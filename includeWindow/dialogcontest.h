@@ -35,6 +35,7 @@ private:
 public:
     qint64 OnBudget();
     Student onContest();
+
 private slots:
     void handleAccepted();
 

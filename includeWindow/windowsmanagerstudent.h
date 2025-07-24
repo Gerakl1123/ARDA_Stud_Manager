@@ -15,6 +15,7 @@
 #include<QIcon>
 #include<QGroupBox>
 #include<QFile>
+#include<QTimer>
 
 class MainWindow;
 
@@ -38,9 +39,8 @@ public:
       std::unique_ptr<MainWindow> mainWin;
       //SORT STUDENT
       QPushButton* ButtonSortStud;
-      //SaveEdit
-      QPushButton* ButtonSaveEdit;
       QLineEdit* lineFileToSave;
+      QLineEdit* lineFileToInput;
     //findStudent
       QPushButton* ButtonFindStudent;
       QLineEdit* lineFiletoFind;
@@ -66,7 +66,6 @@ private slots:
     void backMainMenu();
       void SortStud();
     void FindStudent();
-    void SaveGlobalEdit();
     void DeleteStudent();
     void ShowFileContent();
 
