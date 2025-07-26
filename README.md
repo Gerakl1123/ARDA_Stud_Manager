@@ -102,6 +102,16 @@ ARDA/demo video/
 
 🧾 Лицензия
 
+
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
+
+You may use, modify, and share this software for **non-commercial purposes only**, with credit to the author.
+
+© 2025 German Niyazyan (Gerakl1123)  
+https://github.com/Gerakl1123/student-manager-arda  
+https://creativecommons.org/licenses/by-nc/4.0/
+
+
 🛡️ **NC-License** — проект распространяется **только для некоммерческого использования**  
 [📄 См. LICENSE](LICENSE)
 
