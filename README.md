@@ -1,47 +1,38 @@
-## все новости у нас в нашем телеграмм канале весь процесс рефакторинга https://t.me/ARDA_STUD_MANAGER
-## Обновлений не будет 1-1.5 недели проект уходит на очень глобальный рефакторинг кода
+ARDA_Stud_Manager
 
----
+ARDA_Stud_Manager is a local cross-platform Qt application for managing students, groups, grades, and schedules. All data is stored locally — no database or internet connection required.
+Features
 
-Будет послностью с ног до головы переписан класс конкурсов + класс менеджера студентов + фикс багов 
+    Student, group, and teacher management
 
----
-<img width="512" height="512" alt="image" src="https://github.com/user-attachments/assets/5258ddab-9109-4f20-b7c3-0d9f61051b71" />
+    Schedule and academic module creation
 
-# 📘 ARDA_Stud_Manager
+    Grade and exam tracking
 
-> 💡 **Локальное кроссплатформенное Qt-приложение для управления студентами, группами, оценками и расписанием.**  
-> **C++ / Qt** | **Без базы данных** | **Все данные хранятся локально**
+    Local file-based data storage
 
----
+    Password hashing with SHA256
 
-## 🔧 Возможности
+    Qt Widgets-based GUI
 
-- 👥 Учёт студентов, групп и преподавателей  
-- 📅 Создание расписания и учебных модулей  
-- 📝 Ведение оценок, зачетов и дисциплин  
-- 💾 Хранение всех данных в **локальных файлах**  
-- 🔐 Хеширование паролей пользователей с помощью **SHA256**  
-- 🖥️ Современный **GUI на Qt Widgets**  
-- 📤 Сериализация и десериализация данных  
-- ⚙️ Полностью **оффлайн** — не требует подключения к интернету
+    Data serialization and deserialization
 
----
+    Fully offline usage
 
-## 🧱 Технологии
+Technologies
 
-- **C++17**
-- **Qt 5.15 / 6.x** (Qt Widgets)
-- Кроссплатформенность: **Windows / Linux**
-- Сборка через  **CMake**
+    C++17
 
----
+    Qt 5.15 / 6.x
 
-## 🚀 Установка и запуск
+    CMake
 
-> Убедитесь, что Qt установлен `cmake` доступны из командной строки
+    Cross-platform: Windows, Linux
 
-```bash
+Build & Run
+
+Make sure Qt and CMake are installed and available in your system path.
+
 git clone https://github.com/Gerakl1123/ARDA_Stud_Manager
 cd ARDA_Stud_Manager
 mkdir build
@@ -49,82 +40,45 @@ cd build
 cmake ..
 make
 ./ARDA_Stud_Manager
-```
 
-🎬 Демонстрация
+Demo
 
-🔹 Видео-демонстрации находятся в папке:
+Demo videos are available in the ARDA/demo video/ folder.
+Development Status
 
-ARDA/demo video/
+Some menus (lesson plans, file manager) are under development.
+The project is currently undergoing a major code refactor — updates will pause for 1–2 weeks.
 
-    ⚠️ Некоторые меню (уроки,планы и файловый менеджр) пока не работают  — находятся в разработке переноса на qt.
+Work in progress:
 
-🛠️ В разработке
+    Full rewrite of Contest and Student Manager classes
 
-    ⚙️ Добавление новый конкурсов
-    
-    ⚙️ Добавление меню Планов Уроков и менеджера файлов для размещения директорий для папок
+    UI and logic separation
 
-    📁 Выкладка релизной (release/debug) версии в конце недели
+    Bug fixes and optimization
 
-📅 Последнее обновление
+Follow updates here: Telegram Channel
+Latest Changes
 
-    🗓 18.07.2025
+24.07.2025
 
-    Добавлено 2 меню
+    Fixed bug with student sorting and saving
 
-    Рефакторинг UI
+    Merged file saving grid into main sorting grid
 
-    Вынес логическую часть отдельно от интерфейса
+18.07.2025
 
-    Получен полезный опыт: не смешивать UI и QWidget напрямую
+    Added two new menus
 
-    24.07.2025
+    Refactored UI, logic moved out of widgets
 
-    Исправлен баг с добавлением и сортировкой стундентов в меню Менеджер студентов 
-    
-    Убран грид сохранения файла сортировке он теперь в гриде с самой сортировкой.
+Known Issues
 
-👤 Автор
+    Issue when adding many students to an existing notebook and saving after sorting (fixed 24.07.2025)
 
-    Gerakl1123
-    GitHub: https://github.com/Gerakl1123
+License
 
-⚠️ Баги
+Licensed under CC BY-NC 4.0.
+Free for non-commercial use with attribution.
 
- Баг №1
-    📌 При добавлении большого числа студентов в существующий блокнот после сортировки и сохранения — возникают ошибки.
-    🛠️ Фикс найден, исправление будет выложено в течение 1–2 дней.
-
-    ---
-    Исправлен баг №1 24 07 2025
-    ---
-
-🧾 Лицензия
-
-
-This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
-
-You may use, modify, and share this software for **non-commercial purposes only**, with credit to the author.
-
-© 2025 German Niyazyan (Gerakl1123)  
-https://github.com/Gerakl1123/student-manager-arda  
-https://creativecommons.org/licenses/by-nc/4.0/
-
-
-🛡️ **NC-License** — проект распространяется **только для некоммерческого использования**  
-[📄 См. LICENSE](LICENSE)
-
-
-
-🔗 Новости проекта
-
-Обновлений не будет 1-3 недели проект уходит на очень глобальный рефакторинг кода
-
-    ⛔ Раздел пока закрыт
-    (ссылка появится позже)
-
-
----
-
-
+Author: Gerakl1123
