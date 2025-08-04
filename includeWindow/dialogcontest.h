@@ -1,3 +1,13 @@
+/*
+ * Project: ARDA Student Manager
+ * Author: German Niyazyan (Gerakl1123)
+ * License: CC BY-NC 4.0 — Non-commercial use only
+ *
+ * © 2025 German Niyazyan
+ * https://github.com/Gerakl1123/ARDA_Stud_Manager
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ */
+
 #ifndef DIALOGCONTEST_H
 #define DIALOGCONTEST_H
 
@@ -6,8 +16,13 @@
 #include"contestwindow.h"
 #include<QSettings>
 #include<QBoxLayout>
-#include"TopBallContest.h"
-#include"AttestatContest.h"
+#include<QLayout>
+#include<memory>
+#include"BuildForm.h"
+#include"FileChooicer.h"
+#include"Serializer.h"
+
+
 enum DialogMode{
 
     ModeAttestat,
@@ -31,10 +46,17 @@ public:
 private:
     Ui::DialogContest *ui;
     DialogMode currentMode;
-    void SerelizationDeserelization();
+    SerializerData serelizer;
+
+    std::unique_ptr<FileManager> fileManager;
+    QList<QPair<QLineEdit*,QPushButton*>> buttonLineEditPairs;
+
+
+    void setupBrowseButton(FileManager *fileManager,QLineEdit* line, QPushButton* btn);
+
 public:
-    qint64 OnBudget();
-    Student onContest();
+    bool OnBudget();
+    bool onMaxScore();
 
 private slots:
     void handleAccepted();

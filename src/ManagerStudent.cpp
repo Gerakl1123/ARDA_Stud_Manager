@@ -1,12 +1,22 @@
+/*
+ * Project: ARDA Student Manager
+ * Author: German Niyazyan (Gerakl1123)
+ * License: CC BY-NC 4.0 — Non-commercial use only
+ *
+ * © 2025 German Niyazyan
+ * https://github.com/Gerakl1123/ARDA_Stud_Manager
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ */
+
 #include"ManagerStudent.h"
+#include "ContestCore/Loader.h"
+
 bool Stud::findStudent(const std::string& nameF, const std::string& name, std::optional<double> value = std::nullopt)
 {
     if (!Logger) {
         std::cerr << "Logger не инициализирован!" << std::endl;
         return false;
     }
-
-
 
     Students.clear();
 
@@ -19,7 +29,7 @@ bool Stud::findStudent(const std::string& nameF, const std::string& name, std::o
         return false;
     }
 
-    Students = ContestBase::loadStudentsFromFile(QString::fromStdString(nameF));
+    Students = StudentLoader::loadStudentsFromFile(QString::fromStdString(nameF));
 
     auto result = std::find_if(Students.cbegin(),Students.cend(),[&](const Student& s)
      {
@@ -38,105 +48,7 @@ bool Stud::findStudent(const std::string& nameF, const std::string& name, std::o
     }
 }
 
-// Блок Регестрации и авторизацийй + ХЕШ/DEHASH  fix 08.06.2025  update 16.07.2025 update 22 07 2025 + QCryptographicHash
 
-QString Stud::hashPass(const std::string& password) {
-    QByteArray ba = QByteArray::fromStdString(password);
-    QByteArray hashed = QCryptographicHash::hash(ba, QCryptographicHash::Sha256);
-    return QString(hashed.toHex());
-
-}
-
-bool Stud::registerStudent(std::string& login, std::string password)
-{
-    if (login.empty() || password.empty())
-    {
-        std::cerr << "Login or password is empty!\n";
-        Logger->write("Fail register account " + login);
-        return false;
-    }
-
-    std::ifstream logStud("data.txt");
-    if (!logStud.is_open()) {
-
-        std::ofstream create("data.txt");
-        create.close();
-    }
-
-    std::string tempName, tempPass, tempLine;
-
-    while (std::getline(logStud, tempLine))
-    {
-        std::istringstream iss(tempLine);
-        iss >> tempName >> tempPass;
-        if (tempName == login)
-        {
-            Logger->write("register account already exists: " + login);
-            return false;
-        }
-    }
-
-    logStud.close();
-
-    // Хешируем пароль hashPass
-    QString hashedPassword = hashPass(password);
-
-    std::ofstream regStud("data.txt", std::ios::app);
-    if (!regStud.is_open())
-    {
-        std::cerr << "Error opening file for writing!\n";
-        return false;
-    }
-
-    regStud << login << " " << hashedPassword.toStdString() << "\n";
-    Logger->write("Registered account: " + login);
-    regStud.close();
-    return true;
-}
-
-
-
-bool Stud::loginStudent(std::string& login, std::string password)
-{
-    std::ifstream logStud("data.txt");
-    std::string fileUserName, filePassword;
-
-    if (!logStud.is_open())
-    {
-        std::cerr << "Error not open file!\n";
-        return false;
-    }
-
-
-    if (login.empty() || password.empty())
-    {
-        std::cerr << "Error!\n";
-        return false;
-    }
-
-    std::string temp = "";
-
-    while (std::getline(logStud, temp))
-    {
-        std::istringstream iss(temp);
-
-        iss >> fileUserName >> filePassword;
-
-        // Разъкешироваем пароль
-        QString UnhashPass = hashPass(password);
-
-        if (login == fileUserName && UnhashPass == QString::fromStdString(filePassword))
-        {
-            Logger->write("login to account " + login);
-            return true;
-        }
-
-    }
-    Logger->write("Fail login to account " + login);
-    return false;
-}
-
-//======================================================================
 
 
 //Fix
@@ -163,14 +75,18 @@ bool Stud::uploadDataToFile(const std::string& file, const std::string& data)
     return true;
 }
 
-void Stud::SortStudent(const QString& Ofile,const QString& Ifile)
+bool Stud::SortStudent(const QString& Ofile,const QString& Ifile)
 {
 
     uploadInfoStud(Ifile.toStdString()); // rezerv upload data stud
 
     cast(); // input rezerv data to vector students
 
-    std::sort(Students.begin(), Students.end(), [](const Student& a, const Student& b) {
+    if(Students.empty())
+    {
+        return false;
+    }
+    std::sort(this->Students.begin(), this->Students.end(), [](const Student& a, const Student& b) {
         return a.ball > b.ball;
     });
 
@@ -185,6 +101,8 @@ void Stud::SortStudent(const QString& Ofile,const QString& Ifile)
 
 
     uploadReadyFile(Ofile.toStdString());
+
+    return true;
 
 }
 //PRIVATE METHODS
@@ -260,13 +178,6 @@ void Stud::uploadReadyFile(const std::string& file)
     Students.clear();
 }
 //==============END PRIVATE METHODS=====================
-
-void Stud::SwapStudents(size_t index, size_t index2) // optimization
-{
-
-    std::swap(Students[index], Students[index2]); // optimization later
-    Logger->write("swap Student!");
-}
 
 void Stud::RezervSort()
 {

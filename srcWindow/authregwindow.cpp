@@ -1,42 +1,52 @@
+/*
+ * Project: ARDA Student Manager
+ * Author: German Niyazyan (Gerakl1123)
+ * License: CC BY-NC 4.0 — Non-commercial use only
+ *
+ * © 2025 German Niyazyan
+ * https://github.com/Gerakl1123/ARDA_Stud_Manager
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ */
+
 #include "authregwindow.h"
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QMessageBox>
 
-std::unique_ptr<MainWindow> AuthRegWindow::mainWin = nullptr;
 
 
-AuthRegWindow::AuthRegWindow(QWidget *parent)
-    : QWidget(parent)
+AuthRegWindow::AuthRegWindow(MainWindow* mainWin, QWidget *parent)
+    : QWidget(parent), mainWin(mainWin)
 {
 
-    if (!mainWin) {
-        mainWin = std::make_unique<MainWindow>();
-    }
-
     setWindowTitle("Авторизация / Регистрация");
-    lineEditLogin = std::make_unique<QLineEdit>(this);
+    lineEditLogin = new QLineEdit(this);
     lineEditLogin->setPlaceholderText("Логин");
 
-    lineEditPassword = std::make_unique<QLineEdit>(this);
+    lineEditPassword = new QLineEdit(this);
     lineEditPassword->setPlaceholderText("Пароль");
     lineEditPassword->setEchoMode(QLineEdit::Password);
 
-    pushButtonAuth = std::make_unique<QPushButton>("Войти",this);
-    pushButtonReg =std::make_unique<QPushButton>("Зарегестрироваться",this);
+    pushButtonAuth = new QPushButton("Войти",this);
+    pushButtonReg = new QPushButton("Зарегестрироваться",this);
 
     QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addWidget(lineEditLogin.get());
-    layout->addWidget(lineEditPassword.get());
-    layout->addWidget(pushButtonAuth.get());
-    layout->addWidget(pushButtonReg.get());
+    layout->addWidget(lineEditLogin);
+    layout->addWidget(lineEditPassword);
+    layout->addWidget(pushButtonAuth);
+    layout->addWidget(pushButtonReg);
 
     setLayout(layout);
-    connect(pushButtonAuth.get(),&QPushButton::clicked,this,&AuthRegWindow::onAuthClicked);
-    connect(pushButtonReg.get(),&QPushButton::clicked,this,&AuthRegWindow::onRegClicked);
+
+    connect(pushButtonAuth,&QPushButton::clicked,this,&AuthRegWindow::onAuthClicked);
+    connect(pushButtonReg,&QPushButton::clicked,this,&AuthRegWindow::onRegClicked);
 
 
+}
+
+AuthRegWindow::~AuthRegWindow()
+{
 }
 
 void AuthRegWindow::onAuthClicked()
@@ -44,10 +54,8 @@ void AuthRegWindow::onAuthClicked()
     QString login = lineEditLogin->text();
     QString password = lineEditPassword->text();
 
-    std::string loginStr = login.toStdString();
-    std::string passwordStr = password.toStdString();
 
-    bool auth = manag.loginStudent(loginStr, passwordStr);
+    bool auth = Authenticator.loginStudent(login, password);
 
     if (auth) {
         QMessageBox::information(this, "Авторизауция", "Успешно!");
@@ -57,16 +65,15 @@ void AuthRegWindow::onAuthClicked()
     else {
         QMessageBox::warning(this, "Авторизация", "Не удалось войти.");
     }
+
 }
 
 void AuthRegWindow::onRegClicked()
 {
     QString login = lineEditLogin->text();
     QString password = lineEditPassword->text();
-    std::string loginStr = login.toStdString();
-    std::string passwordStr = password.toStdString();
 
-    bool reg = manag.registerStudent(loginStr, passwordStr);
+    bool reg = Authenticator.registerStudent(login, password);
 
 
     if (reg) {
@@ -77,9 +84,3 @@ void AuthRegWindow::onRegClicked()
         QMessageBox::warning(this, "Регистрация", "Не удалось зарегистрироваться. Или Логин уже занят");
     }
 }
-
-
-
-
-
-

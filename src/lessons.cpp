@@ -1,3 +1,13 @@
+/*
+ * Project: ARDA Student Manager
+ * Author: German Niyazyan (Gerakl1123)
+ * License: CC BY-NC 4.0 — Non-commercial use only
+ *
+ * © 2025 German Niyazyan
+ * https://github.com/Gerakl1123/ARDA_Stud_Manager
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ */
+
 #include "../include/lessons.h"
 
 std::vector<std::string> Lessons::lesson = {
@@ -19,6 +29,7 @@ void Lessons::setGradeStudent(const std::string& fileStudents, const std::string
         std::cerr << "Failed to open file: " << fileStudents << std::endl;
         return;
     }
+
     while (ifile >> line >> grade)
     {
         students.push_back(std::move(line));

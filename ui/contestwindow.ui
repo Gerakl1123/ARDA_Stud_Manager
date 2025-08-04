@@ -52,8 +52,8 @@ font: 10pt &quot;Constantia&quot;;</string>
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>40</y>
+     <x>210</x>
+     <y>50</y>
      <width>249</width>
      <height>331</height>
     </rect>
@@ -123,7 +123,7 @@ font: 10pt &quot;Constantia&quot;;</string>
     }</string>
       </property>
       <property name="text">
-       <string>АТТЕСТАТ</string>
+       <string>Конкурс Аттестатов</string>
       </property>
      </widget>
     </item>
@@ -191,11 +191,11 @@ font: 10pt &quot;Constantia&quot;;</string>
     }</string>
       </property>
       <property name="text">
-       <string>Высший Балл</string>
+       <string>Выссший балл</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="1">
+    <item row="2" column="1">
      <widget class="QPushButton" name="pushButtonBackMain">
       <property name="styleSheet">
        <string notr="true"> QWidget {
@@ -263,148 +263,12 @@ font: 10pt &quot;Constantia&quot;;</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="pushButton">
-      <property name="styleSheet">
-       <string notr="true"> QWidget {
-        background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-                                    stop:0 #1e3c72, stop:1 #2a5298);
-        color: white;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 14px;
-    }
-
-    QGroupBox {
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 8px;
-        margin-top: 15px;
-        padding: 10px 15px 15px 15px;
-        color: white;
-    }
-
-    QGroupBox:title {
-        subcontrol-origin: margin;
-        subcontrol-position: top left;
-        padding: 0 3px;
-        font-weight: bold;
-        font-size: 16px;
-    }
-
-    QLabel {
-        color: white;
-        font-weight: normal;
-        font-size: 14px;
-    }
-
-    QLineEdit {
-        background-color: rgba(255, 255, 255, 0.15);
-        border: none;
-        border-radius: 6px;
-        padding: 6px 10px;
-        color: white;
-        font-size: 14px;
-    }
-    QLineEdit::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-    }
-
-    QPushButton {
-        background-color: #4fc3f7;
-        color: white;
-        border: none;
-        border-radius: 15px;
-        padding: 12px 30px;
-        font-size: 18px;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        min-width: 180px;
-    }
-    QPushButton:hover {
-        background-color: #29b6f6;
-    }
-    QPushButton:pressed {
-        background-color: #1e88e5;
-    }</string>
-      </property>
-      <property name="text">
-       <string>пока в разработке</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="styleSheet">
-       <string notr="true"> QWidget {
-        background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-                                    stop:0 #1e3c72, stop:1 #2a5298);
-        color: white;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 14px;
-    }
-
-    QGroupBox {
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 8px;
-        margin-top: 15px;
-        padding: 10px 15px 15px 15px;
-        color: white;
-    }
-
-    QGroupBox:title {
-        subcontrol-origin: margin;
-        subcontrol-position: top left;
-        padding: 0 3px;
-        font-weight: bold;
-        font-size: 16px;
-    }
-
-    QLabel {
-        color: white;
-        font-weight: normal;
-        font-size: 14px;
-    }
-
-    QLineEdit {
-        background-color: rgba(255, 255, 255, 0.15);
-        border: none;
-        border-radius: 6px;
-        padding: 6px 10px;
-        color: white;
-        font-size: 14px;
-    }
-    QLineEdit::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-    }
-
-    QPushButton {
-        background-color: #4fc3f7;
-        color: white;
-        border: none;
-        border-radius: 15px;
-        padding: 12px 30px;
-        font-size: 18px;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        min-width: 180px;
-    }
-    QPushButton:hover {
-        background-color: #29b6f6;
-    }
-    QPushButton:pressed {
-        background-color: #1e88e5;
-    }</string>
-      </property>
-      <property name="text">
-       <string>пока в разработке</string>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QLabel" name="labelMENU">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>270</x>
      <y>10</y>
      <width>111</width>
      <height>20</height>

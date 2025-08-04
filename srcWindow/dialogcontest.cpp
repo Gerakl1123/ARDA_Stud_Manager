@@ -1,23 +1,59 @@
+/*
+ * Project: ARDA Student Manager
+ * Author: German Niyazyan (Gerakl1123)
+ * License: CC BY-NC 4.0 — Non-commercial use only
+ *
+ * © 2025 German Niyazyan
+ * https://github.com/Gerakl1123/ARDA_Stud_Manager
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ */
+
 #include "dialogcontest.h"
 #include "ui_dialogcontest.h"
+#include"ContestCore/ContestManager.h"
+#include"ContestCore/AttestatContest.h"
+#include"ContestCore/TopBallContest.h"
+#include"Student.h"
+#include"FileChooicer.h"
+#include"BuildForm.h"
 
 DialogContest::DialogContest(DialogMode mode, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::DialogContest)
     , currentMode(mode)
 {
+
     ui->setupUi(this);
 
+    fileManager = std::make_unique<FileManager>(this);
 
     setWindowTitle("ПодМеню");
 
-    SerelizationDeserelization();
+    FormBuilder temp;
 
+    buttonLineEditPairs = temp.initializer(this);
+
+    for (const auto& pair : buttonLineEditPairs) {
+        setupBrowseButton(fileManager.get(),pair.first,pair.second);
+    }
 
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &DialogContest::handleAccepted);
+    connect(ui->pushButtonInfoAttestat, &QPushButton::clicked, this, [this] {
+        QMessageBox::information(this, "📋 Информация о конкурсе",
+                                 "Перед началом работы, пожалуйста, заполните следующие поля:\n\n"
+                                 "📁 Файл со списком студентов\n"
+                                 "💾 Файл для сохранения результатов (например: ФайлБюджет.txt / ФайлКоммерция.txt)\n"
+                                 "🏫 Название факультета\n"
+                                 "🎯 Количество бюджетных мест\n"
+                                 "📊 Проходной балл на бюджет\n"
+                                 "💼 Проходной балл на контракт\n\n"
+                                 "✅ После заполнения всех данных нажмите кнопку для запуска конкурса.");
+    });
 
     setupInterface();
+
 }
+
 
 DialogContest::~DialogContest()
 {
@@ -28,6 +64,7 @@ void DialogContest::setupInterface()
 {
     switch (currentMode) {
     case ModeCurrent:
+        serelizer.DataSerelization(this,ModeSerelization::MaxScore);
 
         for(int i = 0; i< ui->gridLayout->count();++i)
         {
@@ -35,10 +72,13 @@ void DialogContest::setupInterface()
             if(w)
             {
                 w->hide();
+                ui->pushButtonInfoAttestat->hide();
             }
         }
         break;
     case ModeAttestat:
+
+        serelizer.DataSerelization(this,ModeSerelization::Attestat);
 
         for (int i = 0; i < ui->verticalLayout->count(); ++i) {
 
@@ -46,92 +86,109 @@ void DialogContest::setupInterface()
 
             if (w)
             {
-               w->hide();
+                w->hide();
+
             }
         }
-
 
         break;
     }
 }
 
-qint64 DialogContest::OnBudget()
+bool DialogContest::OnBudget()
 {
-    QString QFakyltet = ui->lineEditFakyltet->text();
-    QString ballSTR = ui->lineEditBall->text();
-    QString file = ui->lineEditFile->text();
-    QString savefile = ui->lineEditFileSave->text();
-    QString logFile = ui->lineEditFileLogAttestat ->text();
 
-    std::string log = logFile.toStdString();
+    ContestResult result;
 
-    Attestat contestAttestat(log);
+    QString QFakyltet = ui->lineEdit_Attestat_Fakyltet->text();
+    QString file = ui->lineEdit_Attestat_InputFile->text();
+    QString savefile = ui->lineEdit_Attestat_FileSave->text();
+    QString logFile = ui->lineEdit_Attestat_FileLog ->text();
+    QString BudgetMinBall = ui->lineEdit_Attestat_BudgetMinBall->text();
+    QString ContractMinBall = ui->lineEdit_Attestat_ContractMinBall->text();
+    QString slotsBudget = ui->lineEdit_Attestat_BudgetSlots->text();
 
-    bool ok = true;
-    double ballValue = ballSTR.toDouble(&ok);
 
-    if (!ok) {
-        QMessageBox::warning(this, "Ошибка", "Некорректное значение балла");
-        return -1;
+    ContestManager manager(logFile);
+
+    bool ok1 = true;
+    bool ok2 = true;
+    bool ok3 = true;
+
+    double budget = BudgetMinBall.toDouble(&ok1);
+    double contract = ContractMinBall.toDouble(&ok2);
+    double SlotBudget = slotsBudget.toInt(&ok3);
+
+    if (!ok1 || !ok2 || !ok3) {
+        QMessageBox::warning(this, "Ошибка", "Некорректные значения проходных баллов");
+        return false;
+    }
+    AttestatContest contest;
+
+    result = manager.runContestAttestat(contest,file,savefile,budget,contract,SlotBudget,QFakyltet);
+
+    if(!result.budget.empty())
+    {
+        QMessageBox::information(this, "Конкурс Аттестатов",QString("Данные добавлены в файл"));
+
+    }else
+    {
+        QMessageBox::information(this, "Конкурс Аттестатов",
+                                 "Нет студентов попавших на бюджет");
     }
 
-    qint16 count =  contestAttestat.findWinner(ballValue, file, savefile, QFakyltet);
 
-    if(count)
-        QMessageBox::information(this, "Конкурс Аттестатов",
-                             QString("Данные добавлены в файл.\nПоступило: %1 студентов").arg(count));
-    else
-        QMessageBox::information(this, "Конкурс Аттестатов",
-                                 "Нет студентов соответствующих этим критериям");
+    return !result.winnerInfo.empty();;
 
-    return count;
 }
 
-Student DialogContest::onContest()
+bool DialogContest::onMaxScore()
 {
 
-    QString inputFile = ui->lineEditFileInputContest->text();
-    QString fileSave = ui->lineEditFileSaveContest->text();
-    QString LogFile = ui->lineEditFileLogContest->text();
+    ContestResult result;
 
-    std::string logA = LogFile.toStdString();
+    QString studentFile = ui->lineEdit_MaxScore_FileInput->text();
+    QString fileSave = ui->lineEdit_MaxScore_FileSave->text();
+    QString faculty = ui->lineEdit_MaxScore_Faculty->text();
+    QString LogFile = ui->lineEdit_MaxScore_FileLog->text();
 
-    TopContest topCon(logA);
+    ContestManager manager(LogFile);
 
-   Student winner = topCon.TopBall(inputFile,fileSave);
+    TopBallContest contest;
 
-    if(!winner.empty())
+    result = manager.runContestMaxScore(contest,studentFile,fileSave,faculty);
+
+    if(!result.winnerInfo.empty())
     {
-       QMessageBox::information(this,
-                                "Конкурс Высший Балл" ,
-                                QString("Данные добавлены в файл.\nВыиграл студент: %1 с баллом %2")
-                                     .arg(winner.name)
-                                     .arg(winner.ball));
-    }
+        const Student& winner = *result.winnerInfo.at(0);
 
-    else
+        QMessageBox::information(this,
+                                 "Конкурс Высший Балл",
+                                 QString("Данные добавлены в файл.\nВыиграл студент: %1 с баллом %2")
+                                     .arg(QString::fromStdString(winner.name))
+                                     .arg(winner.ball));
+
+    }else
     {
         QMessageBox::information(this, "Конкурс Высший Балл",
                                  "Нет побидителя в этом конкурсе");
     }
 
-    return winner;
+    return !result.winnerInfo.empty();
+
 }
-
-
 
 
 void DialogContest::handleAccepted()
 {
     if (currentMode == ModeAttestat) {
-        if (OnBudget() > 0) {
+        if (OnBudget()) {
             accept();
         } else {
             QMessageBox::warning(this, "Результат", "Нет подходящих студентов.");
         }
     } else if (currentMode == ModeCurrent) {
-        Student winner = onContest();
-        if (!winner.empty()) {
+        if (onMaxScore()) {
             accept();
         } else {
             QMessageBox::information(this, "Результат", "Нет победителя.");
@@ -139,59 +196,9 @@ void DialogContest::handleAccepted()
     }
 }
 
-void DialogContest::SerelizationDeserelization()
+
+void DialogContest::setupBrowseButton(FileManager *fileManager,QLineEdit* line, QPushButton* btn)
 {
-    // ATTESTAT METHOD
-    QSettings settingsAttestat("StudManagARDA", "Attestat");
-    ui->lineEditFileLogAttestat->setText(settingsAttestat.value("dialogContest/lineEditFileLogAttestat").toString());
-    ui->lineEditFakyltet->setText(settingsAttestat.value("dialogContest/lineEditFakyltet").toString());
-    ui->lineEditBall->setText(settingsAttestat.value("dialogContest/lineEditBall").toString());
-    ui->lineEditFile->setText(settingsAttestat.value("dialogContest/lineEditFile").toString());
-    ui->lineEditFileSave->setText(settingsAttestat.value("dialogContest/lineEditFileSave").toString());
-
-    connect(ui->lineEditFileLogAttestat, &QLineEdit::textChanged, this, [](const QString &text){
-        QSettings settings("StudManagARDA", "Attestat");
-        settings.setValue("dialogContest/lineEditFileLogAttestat", text);
-    });
-
-    connect(ui->lineEditFakyltet, &QLineEdit::textChanged, this, [](const QString &text){
-        QSettings settings("StudManagARDA", "Attestat");
-        settings.setValue("dialogContest/lineEditFakyltet", text);
-    });
-    connect(ui->lineEditBall, &QLineEdit::textChanged, this, [](const QString &text){
-        QSettings settings("StudManagARDA", "Attestat");
-        settings.setValue("dialogContest/lineEditBall", text);
-    });
-    connect(ui->lineEditFile, &QLineEdit::textChanged, this, [](const QString &text){
-        QSettings settings("StudManagARDA", "Attestat");
-        settings.setValue("dialogContest/lineEditFile", text);
-    });
-    connect(ui->lineEditFileSave, &QLineEdit::textChanged, this, [](const QString &text){
-        QSettings settings("StudManagARDA", "Attestat");
-        settings.setValue("dialogContest/lineEditFileSave", text);
-    });
-    //end attestat serelization
-
-
-    QSettings settingsContest("StudManagARDA", "ContestMethod");
-
-    ui->lineEditFileSaveContest->setText(settingsContest.value("CurretContest/lineEditFileSaveContest").toString());
-    ui->lineEditFileLogContest->setText(settingsContest.value("CurretContest/lineEditFileLogContest").toString());
-    ui->lineEditFileInputContest ->setText(settingsContest.value("CurretContest/lineEditFileInputContest").toString());
-
-    connect(ui->lineEditFileSaveContest,&QLineEdit::textChanged,this,[](const QString& text){
-        QSettings settings("StudManagARDA","ContestMethod");
-        settings.setValue("CurretContest/lineEditFileSaveContest",text);
-    });
-
-    connect(ui->lineEditFileLogContest, &QLineEdit::textChanged, this, [](const QString &text){
-        QSettings settings("StudManagARDA", "ContestMethod");
-        settings.setValue("CurretContest/lineEditFileLogContest", text);
-    });
-    connect(ui->lineEditFileInputContest, &QLineEdit::textChanged, this, [](const QString &text){
-        QSettings settings("StudManagARDA", "ContestMethod");
-        settings.setValue("CurretContest/lineEditFileInputContest", text);
-    });
+    FormBuilder::setupBrowseButton(btn,line,fileManager);
 
 }
-

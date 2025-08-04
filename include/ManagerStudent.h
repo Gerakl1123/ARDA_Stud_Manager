@@ -1,18 +1,25 @@
+/*
+ * Project: ARDA Student Manager
+ * Author: German Niyazyan (Gerakl1123)
+ * License: CC BY-NC 4.0 — Non-commercial use only
+ *
+ * © 2025 German Niyazyan
+ * https://github.com/Gerakl1123/ARDA_Stud_Manager
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ */
+
 #ifndef MANAGERSTUDENT_H
 #define MANAGERSTUDENT_H
 
 #include"Libs.h"
 #include"Logger.h"
 #include"Student.h"
-#include"Contest.h"
 #include<optional>
 #include<QString>
-#include<QCryptographicHash>
-#include<QByteArray>
+
 
 class StudFileMngr;
 class Lessons;
-class Log;
 
 class Stud {
     friend class StudFileMngr;
@@ -22,33 +29,28 @@ class Stud {
 
 public:
 
-    explicit Stud(const std::string& file)
-        : Logger(Log::create(file))
+    explicit Stud(std::shared_ptr<Log> logger)
+        :Logger(logger)
     {
     };
 
     Stud() = delete;
 
 public:
-    void SortStudent(const QString& ofile,const QString& Ifile);
+    bool SortStudent(const QString& ofile,const QString& Ifile);
     bool uploadDataToFile(const std::string& file, const std::string& data);
     QString PrintSortStud(const std::string& file);
     bool DeleteStudentFromFile(const std::string&, const std::string&, std::optional<double> );
     bool findStudent(const std::string&, const std::string&, std::optional<double>);
-    bool registerStudent(std::string& login, std::string password);
-    bool loginStudent(std::string& login, std::string password);
 
     //=====
     bool DeleteStudent(size_t index);
-    void SwapStudents(size_t index, size_t index2);
     void RezervSort();
 
 private:
     void uploadInfoStud(const std::string& file);
     void cast();
     void uploadReadyFile(const std::string& file);
-    QString hashPass(const std::string&);
-    // QString DeHashPass(std::string&);  не нужен
 private:
 
     std::vector<Student> Students;

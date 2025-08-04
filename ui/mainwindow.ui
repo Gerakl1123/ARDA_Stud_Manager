@@ -16,60 +16,45 @@
   <property name="windowTitle">
    <string>ARDA</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="QIcon::ThemeIcon::UserOffline"/>
+  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="gridLayoutWidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>170</y>
-      <width>551</width>
-      <height>181</height>
+      <x>90</x>
+      <y>200</y>
+      <width>601</width>
+      <height>190</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0">
-      <widget class="QPushButton" name="ButtoLessons">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #3498db;
-    color: white;
-    border-radius: 8px;
-    padding: 6px 12px;
-}</string>
-       </property>
-       <property name="text">
-        <string>Пары/Уроки</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
       <widget class="QPushButton" name="ButtonStudent">
        <property name="styleSheet">
         <string notr="true">QPushButton {
     background-color: #3498db;
     color: white;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 6px 12px;
 }</string>
        </property>
        <property name="text">
         <string>Менеджр Студентов</string>
        </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item>
       <widget class="QPushButton" name="ButtonContest">
        <property name="styleSheet">
         <string notr="true">QPushButton {
     background-color: #3498db;
     color: white;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 6px 12px;
 }</string>
        </property>
@@ -78,13 +63,28 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item>
+      <widget class="QPushButton" name="ButtoLessons">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 12px;
+    padding: 6px 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>Пары/Уроки</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="ButtonFileManag">
        <property name="styleSheet">
         <string notr="true">QPushButton {
     background-color: #3498db;
     color: white;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 6px 12px;
 }</string>
        </property>
@@ -93,7 +93,43 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 12px;
+    padding: 6px 12px;
+}</string>
+       </property>
+       <property name="text">
+        <string>АДМИН-ПАНЕЛЬ</string>
+       </property>
+      </widget>
+     </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButtonAppStyle">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>141</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 12px;
+    padding: 6px 12px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Изменить Тему</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

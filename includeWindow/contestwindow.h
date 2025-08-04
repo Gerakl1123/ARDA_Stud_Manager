@@ -1,3 +1,13 @@
+/*
+ * Project: ARDA Student Manager
+ * Author: German Niyazyan (Gerakl1123)
+ * License: CC BY-NC 4.0 — Non-commercial use only
+ *
+ * © 2025 German Niyazyan
+ * https://github.com/Gerakl1123/ARDA_Stud_Manager
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ */
+
 #ifndef CONTESTWINDOW_H
 #define CONTESTWINDOW_H
 
@@ -19,14 +29,12 @@ class contestwindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit contestwindow(QWidget *parent = nullptr);
+    explicit contestwindow(MainWindow* mainWindow, QWidget *parent = nullptr);
     ~contestwindow();
 
 private:
     Ui::contestwindow *ui;
-    std::unique_ptr<MainWindow> main;
-
-    QLineEdit* contestCurrentLine;
+    MainWindow* mainWindow_;
 
 private slots:
     void pushHelp();
