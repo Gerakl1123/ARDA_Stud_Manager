@@ -10,6 +10,7 @@
 #include"BuildForm.h"
 #include"Serializer.h"
 #include"LogicOperation.h"
+
 class QFormLayout;// использую 1 раз
 
 class DynamicDialog : public QDialog {

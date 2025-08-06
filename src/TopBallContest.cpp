@@ -1,38 +1,44 @@
-#include"TopBallContest.h"
+/*
+ * Project: ARDA Student Manager
+ * Author: German Niyazyan (Gerakl1123)
+ * License: CC BY-NC 4.0 — Non-commercial use only
+ *
+ * © 2025 German Niyazyan
+ * https://github.com/Gerakl1123/ARDA_Stud_Manager
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ */
 
-Student TopContest::TopBall(const QString &ifile, const QString &saveFile)
+#include"../include/TopBallContest.h"
+#include"../include/ContestResult.h"
+#include<QDebug>
+void TopBallContest::setStudents(const std::vector<std::shared_ptr<Student>>& students)
 {
-    Students = std::vector<Student>();
-
-    Students = loadStudentsFromFile(ifile);
-
-    if (Students.empty()) {
-        logger->write("No students to compare.\n");
-        return Student();
-    }
-
-    ofile = std::make_shared<std::ofstream>(saveFile.toStdString(), std::ios::app);
-    if (!ofile->is_open()) {
-        logger->write("Failed to open save file.\n");
-        return Student();
-    }
-
-
-    auto res = std::max_element(Students.begin(), Students.end(), [](const Student& s1, const Student& s2)
-                                {
-                                    return s1.ball < s2.ball;
-                                });
-
-
-    ofile = readWinStudent(ofile, *res);
-
-    logger->write("Winner: " + res->name + " with score " + std::to_string(res->ball));
-
-    return {res->name, res->ball};
-
+    this->Students = students;
 }
-qint16 TopContest::findWinner(double score, const QString& file, const QString& saveFile, QString& faculty)
+
+
+ContestResult TopBallContest::MaxScore()
 {
-    // просто заглушка
-    return 0;
+
+    auto it = std::max_element(Students.begin(), Students.end(),[](const auto& a, const auto& b) {
+            return a->ball < b->ball;
+    });
+
+    ContestResult result;
+
+    if(it != Students.end())
+    {
+        auto topStudent = *it;
+
+        Students.clear();
+        result.winnerInfo.emplace_back(topStudent);
+
+        qDebug() << "Winner:" << QString::fromStdString(topStudent->name) << topStudent->ball;
+    }
+    else
+    {
+        qDebug() << "No winner.";
+    }
+
+    return result;
 }

@@ -120,10 +120,10 @@ QList<QPair<QLineEdit*,QPushButton*>> FormBuilder::initializer(QWidget *w)
         return temp;
 
 
-    for(auto i = nameLineButton.cbegin();i!= nameLineButton.cend();++i)
+    for(auto i = nameLineButton.cbegin(); i != nameLineButton.cend(); ++i)
     {
-        QString lineName = i.key();
-        QString btnName = i.value();
+        QString lineName = i.key(); //first
+        QString btnName = i.value(); //second
 
         QList<QLineEdit*> lineEdits = w->findChildren<QLineEdit*>(lineName);
         QList<QPushButton*> buttons = w->findChildren<QPushButton*>(btnName);
@@ -144,7 +144,7 @@ QList<QPair<QLineEdit*,QPushButton*>> FormBuilder::initializer(QWidget *w)
     return temp;
 }
 
-void  FormBuilder::setupBrowseButton(QPushButton *btn,QLineEdit* line,FileManager* fileManager)
+void FormBuilder::setupBrowseButton(QPushButton *btn,QLineEdit* line,FileManager* fileManager)
 {
 
     QObject::connect(btn, &QPushButton::clicked, btn, [=]() {

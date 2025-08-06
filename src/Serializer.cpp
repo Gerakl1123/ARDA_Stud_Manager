@@ -5,7 +5,7 @@
 
 void SerializerData::DataSerelization(QWidget *w, ModeSerelization mode)
 {
-    // под папка 1->2->3dirGroup
+
     QString app;
     QString org = "ARDA";
 
@@ -19,7 +19,6 @@ void SerializerData::DataSerelization(QWidget *w, ModeSerelization mode)
     case ModeSerelization::ManagerStudent:
         app = "ManagerStudent/";
         break;
-
     default:
         break;
     }
@@ -39,10 +38,10 @@ void SerializerData::DataSerelization(QWidget *w, ModeSerelization mode)
             continue;
         }
 
-        QString key = app + QLname;  // dir/lineEdit
+        QString key = app + QLname;
 
         line->setText(mainSettings.value(key).toString());
-
+        //Save Text
         QObject::connect(line,&QLineEdit::textChanged,w,[=](const QString& text){
             QSettings tempSettings(org,app);
             tempSettings.setValue(key,text);

@@ -18,7 +18,7 @@ class StudentDataService : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentDataService(QWidget *parent = nullptr);
+    explicit StudentDataService(MainWindow* main,QWidget *parent = nullptr);
     ~StudentDataService();
 
 private:

@@ -16,6 +16,7 @@
 #include"contestwindow.h"
 #include"studentdataservice.h"
 
+class academicrecordwindow;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,15 +31,18 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-Ui::MainWindow *ui;
 private:
 
+    Ui::MainWindow *ui;
     void styleMainW();
     StudentDataService* windowStudent;
     contestwindow* windowContest;
+    academicrecordwindow* windowLesson;
+
     bool StyleChoice = false;
 private slots:
     void openManagerStud();
+    void openLessons();
     void openContestWindow();
     void ToggleStyleApp();
 

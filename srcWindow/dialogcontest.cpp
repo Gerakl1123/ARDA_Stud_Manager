@@ -10,9 +10,9 @@
 
 #include "dialogcontest.h"
 #include "ui_dialogcontest.h"
-#include"ContestCore/ContestManager.h"
-#include"ContestCore/AttestatContest.h"
-#include"ContestCore/TopBallContest.h"
+#include"ContestManager.h"
+#include"AttestatContest.h"
+#include"TopBallContest.h"
 #include"Student.h"
 #include"FileChooicer.h"
 #include"BuildForm.h"

@@ -22,6 +22,13 @@ struct Student
 
     Student() = default;
 
+    QString name_;
+    QVector<QString> grades_;
+
+    Student( QString& name, QVector<QString>& grades)
+        : name_(name), grades_(grades) {};
+
+
     Student(const std::string& n, double b) : name(n), ball(b) {};
 
 

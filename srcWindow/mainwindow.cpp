@@ -16,6 +16,7 @@
 #include <QDebug>
 #include<QIcon>
 #include<QStyleFactory>
+#include"../academicrecordwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,13 +28,16 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButtonAppStyle, &QPushButton::clicked, this,&MainWindow::ToggleStyleApp);
     connect(ui->ButtonStudent,&QPushButton::clicked,this,&MainWindow::openManagerStud);
     connect(ui->ButtonContest,&QPushButton::clicked,this,&MainWindow::openContestWindow);
+    connect(ui->ButtoLessons,&QPushButton::clicked,this,&MainWindow::openLessons);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete windowLesson;
     delete windowStudent;
     delete windowContest;
+
 }
 
 void MainWindow::styleMainW()
@@ -63,12 +67,25 @@ void MainWindow::styleMainW()
 
 }
 
+void MainWindow::openLessons()
+{
+    windowLesson = new academicrecordwindow(this);
 
+    if (windowLesson) {
+        qDebug() << "Окно создано";
+        this->close();
+        windowLesson->show();
+
+    } else {
+        qDebug() << "Не удалось создать окно";
+    }
+
+}
 void MainWindow::openManagerStud()
 {
 
     qDebug() << "openManagerStud() вызван";
-    windowStudent = new StudentDataService();
+    windowStudent = new StudentDataService(this);
 
     if (windowStudent) {
         qDebug() << "Окно создано";

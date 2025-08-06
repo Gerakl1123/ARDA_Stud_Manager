@@ -11,6 +11,7 @@ class FileManager
 public:
     explicit FileManager(QWidget *parent = nullptr);
     QString chooseFile();
+    QString saveFile();
 private:
     QWidget *parentWidget;
 };

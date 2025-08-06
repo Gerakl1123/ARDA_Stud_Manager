@@ -1,4 +1,4 @@
-    #include"DynamicFormDialog.h"
+#include"DynamicFormDialog.h"
 #include <QVBoxLayout>
 #include <QFormLayout>
 #include <QLineEdit>

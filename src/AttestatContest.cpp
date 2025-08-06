@@ -1,32 +1,37 @@
-#include "AttestatContest.h"
+/*
+ * Project: ARDA Student Manager
+ * Author: German Niyazyan (Gerakl1123)
+ * License: CC BY-NC 4.0 — Non-commercial use only
+ *
+ * © 2025 German Niyazyan
+ * https://github.com/Gerakl1123/ARDA_Stud_Manager
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ */
 
-qint16 Attestat::findWinner(double ball, const QString &file, const QString &saveFile, QString &faculty)
+#include "../include/AttestatContest.h"
+#include <algorithm>
+
+void AttestatContest::setStudents(const std::vector<std::shared_ptr<Student>> &students)
 {
-
-    std::vector<Student> StudentsOnBudget =std::vector<Student>();
-
-    Students = std::vector<Student>();
-
-    ofile = std::make_shared<std::ofstream>(saveFile.toStdString(), std::ios::out | std::ios::trunc);
-
-    Students = loadStudentsFromFile(file);
-
-    std::copy_if(this->Students.begin(), this->Students.end(), std::back_inserter(StudentsOnBudget),
-                 [ball](const Student& s) {
-                     return s.ball >= ball;
-                 });
-
-    qint16 countStudents = static_cast<qint16>(StudentsOnBudget.size());
-
-    *ofile << " !!! " << faculty.toStdString() << " !!! " << "\n";
-
-    for (const auto& c : StudentsOnBudget)
-    {
-        *ofile << c.name << " " << double(c.ball) << "\n";
-
-    }
-    this->logger->write("Seccuful find students on budget " + faculty.toStdString() + " " + std::to_string(countStudents) + " людей!\n");
-
-    return countStudents;
+    this->students = students;
 }
 
+ContestResult AttestatContest::evaluate(double budgetThreshold, double contractThreshold, int budgetSlots)
+{
+    std::sort(students.begin(), students.end(), [](const auto& a, const auto& b) {
+        return a->ball > b->ball;
+    });
+
+    ContestResult result;
+
+    for (const auto& s : students)
+    {
+        if (s->ball >= budgetThreshold && (int)result.budget.size() < budgetSlots)
+            result.budget.push_back(s);
+        else if (s->ball >= contractThreshold)
+            result.contract.push_back(s);
+        else
+            result.reject.push_back(s);
+    }
+    return result;
+}

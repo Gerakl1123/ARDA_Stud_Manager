@@ -13,7 +13,7 @@
 #include<QFile>
 #include<QTextStream>
 #include<QIODevice>
-#include"../include/ContestCore/Loader.h"
+#include"../include/Loader.h"
 
 QString UserAuthenticator::hashPass(const QString& password) {
     QByteArray ba = password.toUtf8();

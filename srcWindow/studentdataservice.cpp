@@ -2,11 +2,11 @@
 #include "ui_studentdataservice.h"
 #include"DynamicFormDialog.h"
 
-StudentDataService::StudentDataService(QWidget *parent)
+StudentDataService::StudentDataService(MainWindow* main, QWidget *parent)
     : QWidget(parent)
+    , mainWindow(main)
     , ui(new Ui::StudentDataService)
 {
-    mainWindow  = new MainWindow();
 
     ui->setupUi(this);
     setWindowTitle("Менеджер Студентов");

@@ -2,7 +2,7 @@
 #define LOGICOPERATION_H
 #include"Logger.h"
 #include"Validator.h"
-#include"ContestCore/Loader.h"
+#include"Loader.h"
 #include"Serializer.h"
 #include<QTextEdit>
 

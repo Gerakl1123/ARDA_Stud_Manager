@@ -43,7 +43,6 @@ private:
     MainWindow* mainWin;
 
 signals:
-
      void authSuccess();
 };
 

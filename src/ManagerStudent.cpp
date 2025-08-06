@@ -9,7 +9,7 @@
  */
 
 #include"ManagerStudent.h"
-#include "ContestCore/Loader.h"
+#include "Loader.h"
 
 bool Stud::findStudent(const std::string& nameF, const std::string& name, std::optional<double> value = std::nullopt)
 {

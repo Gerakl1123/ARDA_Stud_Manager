@@ -7,6 +7,15 @@ FileManager::FileManager(QWidget *parent)
 {
 
 }
+QString FileManager::saveFile()
+{
+    return QFileDialog::getSaveFileName(
+        parentWidget,
+        "Сохранить конфиг",
+        "",
+        "JSON файлы (*.json);;Все файлы (*.*)"
+        );
+}
 
 QString FileManager::chooseFile()
 {

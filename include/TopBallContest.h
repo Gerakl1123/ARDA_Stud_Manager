@@ -1,19 +1,28 @@
+/*
+ * Project: ARDA Student Manager
+ * Author: German Niyazyan (Gerakl1123)
+ * License: CC BY-NC 4.0 — Non-commercial use only
+ *
+ * © 2025 German Niyazyan
+ * https://github.com/Gerakl1123/ARDA_Stud_Manager
+ * https://creativecommons.org/licenses/by-nc/4.0/
+ */
+
 #ifndef TOPBALLCONTEST_H
 #define TOPBALLCONTEST_H
+
 #include"Contest.h"
+#include"Student.h"
 
-class TopContest : public ContestBase
+class TopBallContest : public IMaxContest
 {
-public:
-  explicit TopContest(const std::string& logFile)
-        : ContestBase(logFile) {};
-
+private:
+    std::vector<std::shared_ptr<Student>> Students;
 
 public:
+    void setStudents(const std::vector<std::shared_ptr<Student>>& students) override;
 
-    Student TopBall(const QString &ifile, const QString &saveFile);
-
-    qint16 findWinner(double score, const QString& file, const QString& saveFile, QString& faculty) override;
+    ContestResult MaxScore() override;
 
 };
 

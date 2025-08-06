@@ -1,5 +1,6 @@
 #ifndef BUILDFORM_H
 #define BUILDFORM_H
+
 #include<QLineEdit>
 #include<QPushButton>
 #include<QTextEdit>
@@ -10,9 +11,9 @@
 
 struct AddStudentWidgets
 {
-    QLineEdit* fileEdit;
-    QLineEdit* dataEdit;
-    QPushButton* browseButton;
+    QLineEdit* fileEdit = nullptr;
+    QLineEdit* dataEdit = nullptr;
+    QPushButton* browseButton = nullptr;
 };
 
 struct SortStudentWidgets
