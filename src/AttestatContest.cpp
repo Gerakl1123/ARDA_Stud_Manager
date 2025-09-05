@@ -16,7 +16,7 @@ void AttestatContest::setStudents(const std::vector<std::shared_ptr<Student>> &s
     this->students = students;
 }
 
-ContestResult AttestatContest::evaluate(double budgetThreshold, double contractThreshold, int budgetSlots)
+ContestResult AttestatContest::evaluate(double budgetThreshold, double contractThreshold, int budgetSlots,int contractSlots)
 {
     std::sort(students.begin(), students.end(), [](const auto& a, const auto& b) {
         return a->ball > b->ball;
@@ -28,7 +28,7 @@ ContestResult AttestatContest::evaluate(double budgetThreshold, double contractT
     {
         if (s->ball >= budgetThreshold && (int)result.budget.size() < budgetSlots)
             result.budget.push_back(s);
-        else if (s->ball >= contractThreshold)
+        else if (s->ball >= contractThreshold && (int)result.contract.size() < contractSlots)
             result.contract.push_back(s);
         else
             result.reject.push_back(s);

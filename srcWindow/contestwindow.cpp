@@ -18,7 +18,8 @@ contestwindow::contestwindow(MainWindow* mainWindow,QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowTitle("ContestMenu");
+    setWindowIcon(QIcon("C:/Users/Gera/Desktop/JSONS/Contest.png"));
+    setWindowTitle("Менеджер Конкурсов");
 
 
     connect(ui->pushButtonHelp, &QPushButton::clicked, this, &contestwindow::pushHelp);

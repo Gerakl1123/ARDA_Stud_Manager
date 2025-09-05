@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1140</width>
-    <height>708</height>
+    <width>1020</width>
+    <height>507</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,78 +55,18 @@
 )&quot;);
 </string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>640</y>
-     <width>621</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">  QPushButton {
-        background-color: #3A6EA5;
-        color: #E0E6F2;
-        border: none;
-        border-radius: 8px;
-        padding: 8px 16px;
-        font-weight: 600;
-    }
-    QPushButton:hover {
-        background-color: #5591D3;
-    }
-    QPushButton:pressed {
-        background-color: #2C5588;
-    }</string>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
-   </property>
-  </widget>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>60</y>
-     <width>571</width>
-     <height>361</height>
+     <x>10</x>
+     <y>50</y>
+     <width>661</width>
+     <height>381</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="8" column="1">
-     <widget class="QLabel" name="labelBudgetMesta">
-      <property name="styleSheet">
-       <string notr="true">  QLabel {
-        color: #D1D9E6;
-        font-weight: 500;
-        font-size: 15px;
-    }</string>
-      </property>
-      <property name="text">
-       <string>Кол-во мест на бюджет</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLabel" name="labelReadFile">
-      <property name="styleSheet">
-       <string notr="true">  QLabel {
-        color: #D1D9E6;
-        font-weight: 500;
-        font-size: 15px;
-    }</string>
-      </property>
-      <property name="text">
-       <string>Файл считывания(со студентами)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="2">
-     <widget class="QLineEdit" name="lineEdit_Attestat_BudgetSlots">
+    <item row="0" column="2">
+     <widget class="QLineEdit" name="lineEdit_Attestat_FileSave">
       <property name="styleSheet">
        <string notr="true"> QLineEdit {
         background-color: #1B3B5F;
@@ -166,8 +106,8 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="labelFakyltet">
+    <item row="2" column="1">
+     <widget class="QLabel" name="labelFileLogAttestat">
       <property name="styleSheet">
        <string notr="true">  QLabel {
         color: #D1D9E6;
@@ -176,7 +116,7 @@
     }</string>
       </property>
       <property name="text">
-       <string>Факультет</string>
+       <string>Файл Лога</string>
       </property>
      </widget>
     </item>
@@ -203,6 +143,70 @@
       </property>
      </widget>
     </item>
+    <item row="8" column="1">
+     <widget class="QLabel" name="labelBudgetMesta">
+      <property name="styleSheet">
+       <string notr="true">  QLabel {
+        color: #D1D9E6;
+        font-weight: 500;
+        font-size: 15px;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Кол-во мест на бюджет</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="2">
+     <widget class="QLineEdit" name="lineEdit_Attestat_ContractMinBall">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="2">
+     <widget class="QLineEdit" name="lineEdit_Attestat_BudgetSlots">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLabel" name="labelContracrBallMin">
+      <property name="styleSheet">
+       <string notr="true">  QLabel {
+        color: #D1D9E6;
+        font-weight: 500;
+        font-size: 15px;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Проходной на контракт</string>
+      </property>
+     </widget>
+    </item>
     <item row="3" column="3">
      <widget class="QPushButton" name="btnAttestatInputFile">
       <property name="styleSheet">
@@ -226,8 +230,61 @@
       </property>
      </widget>
     </item>
+    <item row="5" column="1">
+     <widget class="QLabel" name="labelOnBudget">
+      <property name="styleSheet">
+       <string notr="true">  QLabel {
+        color: #D1D9E6;
+        font-weight: 500;
+        font-size: 15px;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Проходной на бюджет</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="2">
      <widget class="QLineEdit" name="lineEdit_Attestat_Fakyltet">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="labelFakyltet">
+      <property name="styleSheet">
+       <string notr="true">  QLabel {
+        color: #D1D9E6;
+        font-weight: 500;
+        font-size: 15px;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Факультет</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Кол-во мест на конктракт</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLineEdit" name="lineEdit_Attestat_FileLog">
       <property name="styleSheet">
        <string notr="true"> QLineEdit {
         background-color: #1B3B5F;
@@ -258,6 +315,20 @@
       </property>
      </widget>
     </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="labelReadFile">
+      <property name="styleSheet">
+       <string notr="true">  QLabel {
+        color: #D1D9E6;
+        font-weight: 500;
+        font-size: 15px;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Файл считывания(со студентами)</string>
+      </property>
+     </widget>
+    </item>
     <item row="3" column="2">
      <widget class="QLineEdit" name="lineEdit_Attestat_InputFile">
       <property name="styleSheet">
@@ -276,8 +347,8 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="2">
-     <widget class="QLineEdit" name="lineEdit_Attestat_FileSave">
+    <item row="9" column="2">
+     <widget class="QLineEdit" name="lineEdit_Attestat_ContractSlots">
       <property name="styleSheet">
        <string notr="true"> QLineEdit {
         background-color: #1B3B5F;
@@ -317,86 +388,8 @@
       </property>
      </widget>
     </item>
-    <item row="6" column="2">
-     <widget class="QLineEdit" name="lineEdit_Attestat_ContractMinBall">
-      <property name="styleSheet">
-       <string notr="true"> QLineEdit {
-        background-color: #1B3B5F;
-        color: #E0E6F2;
-        border: 2px solid #5591D3;
-        border-radius: 6px;
-        padding: 6px 10px;
-        font-size: 14px;
-    }
-   QLineEdit:focus {
-        border-color: #7FB4FF;
-        background-color: #274C77;
-    }</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLabel" name="labelContracrBallMin">
-      <property name="styleSheet">
-       <string notr="true">  QLabel {
-        color: #D1D9E6;
-        font-weight: 500;
-        font-size: 15px;
-    }</string>
-      </property>
-      <property name="text">
-       <string>Проходной на контракт</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QLabel" name="labelOnBudget">
-      <property name="styleSheet">
-       <string notr="true">  QLabel {
-        color: #D1D9E6;
-        font-weight: 500;
-        font-size: 15px;
-    }</string>
-      </property>
-      <property name="text">
-       <string>Проходной на бюджет</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLabel" name="labelFileLogAttestat">
-      <property name="styleSheet">
-       <string notr="true">  QLabel {
-        color: #D1D9E6;
-        font-weight: 500;
-        font-size: 15px;
-    }</string>
-      </property>
-      <property name="text">
-       <string>Файл Лога</string>
-      </property>
-     </widget>
-    </item>
     <item row="5" column="2">
      <widget class="QLineEdit" name="lineEdit_Attestat_BudgetMinBall">
-      <property name="styleSheet">
-       <string notr="true"> QLineEdit {
-        background-color: #1B3B5F;
-        color: #E0E6F2;
-        border: 2px solid #5591D3;
-        border-radius: 6px;
-        padding: 6px 10px;
-        font-size: 14px;
-    }
-   QLineEdit:focus {
-        border-color: #7FB4FF;
-        background-color: #274C77;
-    }</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QLineEdit" name="lineEdit_Attestat_FileLog">
       <property name="styleSheet">
        <string notr="true"> QLineEdit {
         background-color: #1B3B5F;
@@ -418,8 +411,8 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>70</y>
+     <x>680</x>
+     <y>30</y>
      <width>321</width>
      <height>408</height>
     </rect>
@@ -653,150 +646,36 @@
     <string>Информация</string>
    </property>
   </widget>
-  <widget class="QWidget" name="gridLayoutWidget_2">
+  <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>430</y>
-     <width>461</width>
-     <height>277</height>
+     <x>490</x>
+     <y>460</y>
+     <width>171</width>
+     <height>29</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="7" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Кол-во мест на бюджет</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLineEdit" name="lineEdit_6"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>Факультет</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QLineEdit" name="lineEdit_5"/>
-    </item>
-    <item row="4" column="1">
-     <widget class="QLineEdit" name="lineEdit_4"/>
-    </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Файл Лога</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>Проходной на бюджет</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>Проходной на контракт</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Файл сохранения</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit"/>
-    </item>
-    <item row="7" column="1">
-     <widget class="QLineEdit" name="lineEdit_7"/>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Файл считывания(со студентами)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="lineEdit_3"/>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_2"/>
-    </item>
-    <item row="0" column="2">
-     <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="2">
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="2">
-     <widget class="QPushButton" name="pushButton_4">
-      <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <property name="styleSheet">
+    <string notr="true">  QPushButton {
+        background-color: #3A6EA5;
+        color: #E0E6F2;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+    QPushButton:hover {
+        background-color: #5591D3;
+    }
+    QPushButton:pressed {
+        background-color: #2C5588;
+    }</string>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::StandardButton::Close|QDialogButtonBox::StandardButton::Ok</set>
+   </property>
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>DialogContest</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>DialogContest</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

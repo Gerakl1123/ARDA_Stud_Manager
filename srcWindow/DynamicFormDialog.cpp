@@ -11,7 +11,7 @@
 DynamicDialog::DynamicDialog(Mode mode, QWidget* parent)
     : QDialog(parent), currentMode(mode), fileManager(std::make_unique<FileManager>())
 {
-    handleAdd = std::make_unique<IHandleStudent>();
+    handleAdd = std::make_unique<LogicOperation>();
     serializer = std::make_unique<SerializerData>();
 
     setupUI();

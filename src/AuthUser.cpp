@@ -20,6 +20,7 @@ QString UserAuthenticator::hashPass(const QString& password) {
     QByteArray hashed = QCryptographicHash::hash(ba, QCryptographicHash::Sha256);
     return QString(hashed.toHex());
 }
+
 bool UserAuthenticator::registerStudent(const QString& login, const QString& password) {
 
     //Проверка логина и пароля
@@ -34,14 +35,14 @@ bool UserAuthenticator::registerStudent(const QString& login, const QString& pas
 
     //Проверка доступности файла на запись
     if (!isFileWritable(fileName)) {
-        QMessageBox::warning(nullptr, "Ошибка файла", "Не удалось открыть файл для записи.");
+        QMessageBox::warning(nullptr, "Ошибка файла", "Не удалось открыть файл для записи ");
         return false;
     }
 
     //Проверка что логин не существует
     if (StudentLoader::isLoginExists(login, fileName)) {
         logger->write("Попытка регистрации существующего логина: " + login.toStdString());
-        QMessageBox::warning(nullptr, "Ошибка", "Пользователь с таким логином уже существует.");
+        QMessageBox::warning(nullptr, "Ошибка", "Такой логин уже существует");
         return false;
     }
 
@@ -51,7 +52,7 @@ bool UserAuthenticator::registerStudent(const QString& login, const QString& pas
     //Сохраненяем данные
     if (!StudentLoader::saveLoginPassword(login, hashedPassword, fileName)) {
         logger->write("Ошибка при записи логина: " + login.toStdString());
-        QMessageBox::warning(nullptr, "Ошибка", "Не удалось сохранить пользователя.");
+        QMessageBox::warning(nullptr, "Ошибка", "Не удалось сохранить пользователя");
         return false;
     }
 

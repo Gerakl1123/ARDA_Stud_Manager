@@ -28,17 +28,6 @@ public:
 };
 
 
-class IEgeContest : public ContestBase
-{
-public:
-
-    virtual ContestResult evaluateEge(double budgetThreshold,double contractThreshold,int budgetSlots)=0;
-
-
-    virtual ~IEgeContest() = default;
-
-};
-
 class IMaxContest : public ContestBase
 {
 public:
@@ -51,7 +40,7 @@ public:
 class IAttestatContest : public ContestBase
 {
 public:
-    virtual ContestResult evaluate(double budgetThreshold,double contractThreshold,int budgetSlots)=0;
+    virtual ContestResult evaluate(double budgetThreshold,double contractThreshold,int budgetSlots,int contractSlots)=0;
 
     virtual ~IAttestatContest() = default;
 };

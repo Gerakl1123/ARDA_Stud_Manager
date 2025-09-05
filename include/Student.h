@@ -11,25 +11,20 @@
 #pragma once
 #include"../include/Libs.h"
 #include"../include/Logger.h"
-#include<QIcon>
-#include"QString"
 
+// OLD CODE НЕ ТРОГАЙ И ТАК РАБОТАЕТ
 struct Student
 {
     std::string name = "";
     double ball = 0.0;
-    QString Fakulty;
 
     Student() = default;
 
-    QString name_;
-    QVector<QString> grades_;
 
-    Student( QString& name, QVector<QString>& grades)
-        : name_(name), grades_(grades) {};
+    Student(const std::string& n, double b) : name(n), ball(b)
+    {
 
-
-    Student(const std::string& n, double b) : name(n), ball(b) {};
+    }
 
 
 

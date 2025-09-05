@@ -21,7 +21,8 @@ enum class ModeValidator
     Login,
     Register,
     WriteFile,
-    ReadFile
+    ReadFile,
+    Delete
 };
 
 struct Validator

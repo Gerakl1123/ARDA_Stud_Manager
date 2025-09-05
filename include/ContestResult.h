@@ -18,7 +18,7 @@
 
 struct ContestResult // класс для хранения студентов
 {
-    // После 9
+    // После 9 и 11(тоже подойдет)
     std::vector<std::shared_ptr<Student>> budget;
 
     std::vector<std::shared_ptr<Student>> contract;
@@ -27,13 +27,6 @@ struct ContestResult // класс для хранения студентов
 
     //Для конкурса высший балл среди студентов
     std::vector<std::shared_ptr<Student>> winnerInfo;
-
-    // Еге
-    std::vector<std::shared_ptr<Student>> budgetEge;
-
-    std::vector<std::shared_ptr<Student>> contractEge;
-
-    std::vector<std::shared_ptr<Student>> rejectEge; // те кто не постпли
 
 
 };

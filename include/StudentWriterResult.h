@@ -23,7 +23,6 @@ class StudentWritter
 public:
     static void writeResultContestAttestat(const QString& file,ContestResult& result, const QString& faculty);
     static void writeResultContestMaxScore(const QString& file,ContestResult& result, const QString& faculty);
-    static void writeResultContestEge(const QString& file, ContestResult& result,const QString& faculty);
 
 };
 

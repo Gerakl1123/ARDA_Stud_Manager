@@ -203,7 +203,6 @@ bool StudentLoader::isLoginExists(const QString &login, const QString &file)
         QString fileLogin = parts[0].trimmed().remove(QChar::ByteOrderMark).toLower();
         QString inputLogin = login.trimmed().remove(QChar::ByteOrderMark).toLower();
 
-        qDebug() << fileLogin <<" "<< inputLogin;
 
         if (fileLogin == inputLogin)
         {

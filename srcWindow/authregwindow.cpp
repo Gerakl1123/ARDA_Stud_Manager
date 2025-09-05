@@ -16,11 +16,13 @@
 
 
 
-AuthRegWindow::AuthRegWindow(MainWindow* mainWin, QWidget *parent)
-    : QWidget(parent), mainWin(mainWin)
+AuthRegWindow::AuthRegWindow(QWidget *parent)
+    : QWidget(parent)
 {
 
+    setWindowIcon(QIcon("C:/Users/Gera/Desktop/JSONS/AU.png"));
     setWindowTitle("Авторизация / Регистрация");
+
     lineEditLogin = new QLineEdit(this);
     lineEditLogin->setPlaceholderText("Логин");
 
@@ -64,6 +66,7 @@ void AuthRegWindow::onAuthClicked()
     }
     else {
         QMessageBox::warning(this, "Авторизация", "Не удалось войти.");
+        return;
     }
 
 }
@@ -82,5 +85,6 @@ void AuthRegWindow::onRegClicked()
 
     } else {
         QMessageBox::warning(this, "Регистрация", "Не удалось зарегистрироваться. Или Логин уже занят");
+        return;
     }
 }

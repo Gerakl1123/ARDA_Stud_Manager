@@ -23,7 +23,7 @@ class AuthRegWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit AuthRegWindow(MainWindow* main,QWidget *parent = nullptr);
+    explicit AuthRegWindow(QWidget *parent = nullptr);
 
 
     ~AuthRegWindow();
@@ -40,7 +40,6 @@ private:
     QPushButton* pushButtonAuth;
     QPushButton* pushButtonReg;
 
-    MainWindow* mainWin;
 
 signals:
      void authSuccess();

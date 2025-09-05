@@ -25,3 +25,21 @@ QString FileManager::chooseFile()
         "Текстовые файлы (*.txt);;Все файлы (*.*)"
         );
 }
+
+QString FileManager::chooseFileJson()
+{
+    return QFileDialog::getOpenFileName(parentWidget,
+        "Выберите файл",
+        "",
+        "Текстовые файлы (*.json);;Все файлы (*.*)"
+        );
+}
+
+QString FileManager::saveFilePDF()
+{
+    return QFileDialog::getSaveFileName(parentWidget,
+        "Выберите файл",
+        "",
+        "Pdf файл (*.pdf);; Все Файлы(*.*)"
+        );
+}

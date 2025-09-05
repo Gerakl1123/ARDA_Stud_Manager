@@ -23,9 +23,7 @@ bool Stud::findStudent(const std::string& nameF, const std::string& name, std::o
     std::ifstream ifile(nameF);
 
     if (!ifile.is_open()) {
-        std::ofstream create(nameF);
         Logger->write("Failed open file: " + nameF);
-        create.close();
         return false;
     }
 
@@ -46,10 +44,10 @@ bool Stud::findStudent(const std::string& nameF, const std::string& name, std::o
         Logger->write("Failed to find student: " + name + (value ? " " + std::to_string(value.value()) : ""));
         return false;
     }
+
+
+
 }
-
-
-
 
 //Fix
 //=====================================
@@ -146,7 +144,7 @@ void Stud::cast()
 {
     Students.clear();
 
-    for (const auto& [name, ball] : rezerv_info_stud)
+    for (const auto& [name, ball] : rezerv_info_stud) // c++ 17
     {
         if (std::isfinite(ball))
         {
@@ -207,7 +205,7 @@ QString Stud::PrintSortStud(const std::string& file)
 
     std::ostringstream oss;
 
-    for (const auto& [k, stud] : Key)
+    for (const auto& [k, stud] : Key) // c++ 17
     {
         oss << k << ") " << stud.name << " - "
             << std::fixed << std::setprecision(2) << stud.ball << "\n";
@@ -241,10 +239,9 @@ bool Stud::DeleteStudentFromFile(const std::string& filename, const std::string&
     if (!ifile.is_open()) {
         return false;
     }
-
+    bool shouldDelete = false;
     std::string line;
     std::vector<std::string> filter;
-    std::vector<std::string> thisStudents; // Все прочитанные строки
 
     while (std::getline(ifile, line))
     {
@@ -253,28 +250,30 @@ bool Stud::DeleteStudentFromFile(const std::string& filename, const std::string&
         double ball;
 
         if (!(iss >> name >> ball)) {
-            filter.push_back(line);
             continue;
         }
 
-        thisStudents.push_back(line);
+         shouldDelete = (name == targetName) && (!targetBall || std::abs(ball - *targetBall) < 1e-6);
 
-        bool shouldDelete = (name == targetName) && (!targetBall || std::abs(ball - *targetBall) < 1e-6);
 
         if (shouldDelete)
         {
             Logger->write("Deleted Student from file: " + name + (targetBall ? " " + std::to_string(*targetBall) : ""));
 
-            continue;
+        }else
+        {
+          filter.push_back(line);
         }
 
-        filter.push_back(line);
+
+
     }
 
     ifile.close();
 
 
     std::ofstream ofile(filename, std::ios::trunc);
+
     if (!ofile.is_open()) {
 
         return false;
@@ -287,6 +286,6 @@ bool Stud::DeleteStudentFromFile(const std::string& filename, const std::string&
     ofile.close();
 
 
-    return thisStudents.size() != filter.size();
+    return shouldDelete;
 }
 

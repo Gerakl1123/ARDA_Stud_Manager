@@ -37,7 +37,7 @@ void Validator::verifyLoginAndPassword(const QString &login, const QString &pass
     }
     else if(mode == ModeValidator::Login)
     {
-
+        // А тут пусто 😁
     }
 }
 
@@ -56,6 +56,13 @@ void Validator::isFileValid(QFile &file, ModeValidator modeIO)
             qWarning() << "Не удалось открыть файл для чтения:" << file.fileName();
             Logger->write("Не удалось открыть файл для чтения");
             throw std::invalid_argument("Ошибка: не удалось открыть файл для чтения.");
+        }
+    }
+    else if (modeIO == ModeValidator::Delete) {
+        if (!file.open(QIODevice::Truncate | QIODevice::Text)) {
+            qWarning() << "Не удалось открыть файл для удаления:" << file.fileName();
+            Logger->write("Не удалось открыть файл для удаления");
+            throw std::invalid_argument("Ошибка: не удалось открыть файл для удаления.");
         }
     }
 }

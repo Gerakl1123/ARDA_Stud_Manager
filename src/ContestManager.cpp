@@ -12,17 +12,17 @@
 #include "Loader.h"
 #include "StudentWriterResult.h"
 
-ContestResult ContestManager::runContestAttestat(IAttestatContest &contest, const QString &studentFile, const QString &saveFile, double budgetThreshold, double contractThreshold, int budgetSlots, const QString &faculty)
+ContestResult ContestManager::runContestAttestat(IAttestatContest &contest, const QString &studentFile, const QString &saveFile, double budgetThreshold, double contractThreshold, int budgetSlots,int contracrSlots, const QString &faculty)
 {
     logger->write("Loading students from " + studentFile.toStdString());
 
-    std::vector<std::shared_ptr<Student>> stud = StudentLoader::fromFile(studentFile);
+    auto stud = StudentLoader::fromFile(studentFile);
 
     contest.setStudents(stud);
 
     logger->write("Running contest Attestat");
 
-    ContestResult result = contest.evaluate(budgetThreshold, contractThreshold, budgetSlots);
+    ContestResult result = contest.evaluate(budgetThreshold, contractThreshold, budgetSlots,contracrSlots);
 
     logger->write("Writing results to " + saveFile.toStdString());
 
@@ -37,7 +37,7 @@ ContestResult ContestManager::runContestMaxScore(IMaxContest &contest, const QSt
 {
     logger->write("Loading students from " + studentFile.toStdString());
 
-    std::vector<std::shared_ptr<Student>> stud = StudentLoader::fromFile(studentFile);
+    auto stud = StudentLoader::fromFile(studentFile);
 
     contest.setStudents(stud);
 
@@ -52,26 +52,4 @@ ContestResult ContestManager::runContestMaxScore(IMaxContest &contest, const QSt
     logger->write("Contest finished successfully");
 
     return result;
-}
-
-ContestResult ContestManager::runContestEge(IEgeContest &contest, const QString &studentFile, const QString &saveFile, const QString &faculty, double budgetThreshold, double contractThreshold, int budgetSlots)
-{
-    logger->write("Loading students from " + studentFile.toStdString());
-
-    std::vector<std::shared_ptr<Student>> stud = StudentLoader::fromFile(studentFile);
-
-    contest.setStudents(stud);
-
-    logger->write("Running contest Attestat");
-
-    ContestResult result = contest.evaluateEge(budgetThreshold, contractThreshold, budgetSlots);
-
-    logger->write("Writing results to " + saveFile.toStdString());
-
-    StudentWritter::writeResultContestEge(saveFile,result,faculty);
-
-    logger->write("Contest finished successfully");
-
-    return result;
-
 }

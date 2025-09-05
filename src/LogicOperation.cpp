@@ -2,7 +2,7 @@
 #include"ManagerStudent.h"
 #include"DynamicFormDialog.h"
 
-bool IHandleStudent::handleAddStudent(const QString &file, const QString &data,QLineEdit* LineEditClear,QWidget* parent)
+bool LogicOperation::handleAddStudent(const QString &file, const QString &data,QLineEdit* LineEditClear,QWidget* parent)
 {
     auto logger = Log::create("AddStudentLog.txt");
     Stud manager(logger);
@@ -32,7 +32,7 @@ bool IHandleStudent::handleAddStudent(const QString &file, const QString &data,Q
     return true;
 }
 
-QString IHandleStudent::handlePriviewFile(const QString &file, QTextEdit *display, QWidget *parent)
+QString LogicOperation::handlePriviewFile(const QString &file, QTextEdit *display, QWidget *parent)
 {
     auto logger = Log::create("PriviewLog.txt");
     Stud manager(logger);
@@ -60,7 +60,7 @@ QString IHandleStudent::handlePriviewFile(const QString &file, QTextEdit *displa
     return show;
 }
 
-bool IHandleStudent::handleSortStudent(const QString &file, const QString &saveFile, QWidget *parent)
+bool LogicOperation::handleSortStudent(const QString &file, const QString &saveFile, QWidget *parent)
 {
     auto logger = Log::create("SortLogStudent.txt");
     Stud manager(logger);
@@ -93,7 +93,7 @@ bool IHandleStudent::handleSortStudent(const QString &file, const QString &saveF
 
 }
 
-void IHandleStudent::handleDeleteStudent(const QString &file, const QString &name, const QString &score, QWidget *parent)
+void LogicOperation::handleDeleteStudent(const QString &file, const QString &name, const QString &score, QWidget *parent)
 {
     auto logger = Log::create("LogDeleted.txt");
     Stud manager(logger);
@@ -130,7 +130,7 @@ void IHandleStudent::handleDeleteStudent(const QString &file, const QString &nam
 
 }
 
-void IHandleStudent::handleFindStudent(const QString &file, const QString &name, const QString &score, QWidget *parent)
+void LogicOperation::handleFindStudent(const QString &file, const QString &name, const QString &score, QWidget *parent)
 {
     auto logger = Log::create("LogFind.txt");
     Stud manager(logger);
@@ -167,4 +167,31 @@ void IHandleStudent::handleFindStudent(const QString &file, const QString &name,
 
 
 
+}
+
+std::optional<double> LogicOperation::handleAutoTestStudent(QTableWidgetItem* checkItem, QList<int>& averageScore)
+{
+
+    if (!checkItem) return std::nullopt;
+    if(checkItem->checkState() != Qt::Checked) return std::nullopt;
+    if (averageScore.isEmpty()) return std::nullopt;
+    int sum = 0;
+
+    for(const int c : averageScore) sum+= c;
+
+    double result = static_cast<double>(sum) / averageScore .size();
+
+    averageScore.clear();
+
+    return result;
+
+}
+
+double LogicOperation::converterTOnumberInString(const QString &number)
+{
+    double Num;
+    bool isNum = false;
+    Num = number.toDouble(&isNum);
+
+    return Num;
 }

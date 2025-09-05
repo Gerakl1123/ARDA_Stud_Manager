@@ -5,8 +5,10 @@
 #include"Loader.h"
 #include"Serializer.h"
 #include<QTextEdit>
+#include<optional>
+#include<QTableWidgetItem>
 
-class IHandleStudent
+class LogicOperation
 {
 public:
     bool handleAddStudent(const QString& file, const QString& data,QLineEdit* LineEditClear,QWidget* parent);
@@ -14,6 +16,10 @@ public:
     bool handleSortStudent(const QString& file,const QString& saveFile,QWidget* parent);
     void handleDeleteStudent(const QString& file,const QString& name, const QString& score, QWidget* parent);
     void handleFindStudent(const QString& file, const QString& name, const QString& score,QWidget* parent);
+
+    std::optional<double> handleAutoTestStudent(QTableWidgetItem* checkItem,QList<int>& averageScore);
+
+    double converterTOnumberInString(const QString& number);
 
 };
 

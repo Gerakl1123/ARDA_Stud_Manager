@@ -27,7 +27,7 @@ DialogContest::DialogContest(DialogMode mode, QWidget *parent)
 
     fileManager = std::make_unique<FileManager>(this);
 
-    setWindowTitle("ПодМеню");
+    setWindowTitle("Конкурсы");
 
     FormBuilder temp;
 
@@ -38,6 +38,11 @@ DialogContest::DialogContest(DialogMode mode, QWidget *parent)
     }
 
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &DialogContest::handleAccepted);
+    connect(ui->buttonBox,&QDialogButtonBox::rejected,this,[=]()
+            {
+        this->close();
+
+    });
     connect(ui->pushButtonInfoAttestat, &QPushButton::clicked, this, [this] {
         QMessageBox::information(this, "📋 Информация о конкурсе",
                                  "Перед началом работы, пожалуйста, заполните следующие поля:\n\n"
@@ -107,25 +112,27 @@ bool DialogContest::OnBudget()
     QString BudgetMinBall = ui->lineEdit_Attestat_BudgetMinBall->text();
     QString ContractMinBall = ui->lineEdit_Attestat_ContractMinBall->text();
     QString slotsBudget = ui->lineEdit_Attestat_BudgetSlots->text();
-
+    QString slotsContract =ui->lineEdit_Attestat_ContractSlots->text();
 
     ContestManager manager(logFile);
 
-    bool ok1 = true;
-    bool ok2 = true;
-    bool ok3 = true;
+    bool ok1 = false;
+    bool ok2 = false;
+    bool ok3 = false;
+    bool ok4 = false;
 
     double budget = BudgetMinBall.toDouble(&ok1);
     double contract = ContractMinBall.toDouble(&ok2);
-    double SlotBudget = slotsBudget.toInt(&ok3);
+    int SlotBudget = slotsBudget.toInt(&ok3);
+    int SlotContract = slotsContract.toInt(&ok4);
 
-    if (!ok1 || !ok2 || !ok3) {
+    if (!ok1 || !ok2 || !ok3 || !ok4) {
         QMessageBox::warning(this, "Ошибка", "Некорректные значения проходных баллов");
         return false;
     }
     AttestatContest contest;
 
-    result = manager.runContestAttestat(contest,file,savefile,budget,contract,SlotBudget,QFakyltet);
+    result = manager.runContestAttestat(contest,file,savefile,budget,contract,SlotBudget,SlotContract,QFakyltet);
 
     if(!result.budget.empty())
     {

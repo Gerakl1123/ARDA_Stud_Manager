@@ -42,7 +42,7 @@
     }</string>
       </property>
       <property name="text">
-       <string>Добавить Студента</string>
+       <string>Добавить Студента в Конкурс</string>
       </property>
      </widget>
     </item>
@@ -162,6 +162,35 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>320</y>
+     <width>301</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">  QPushButton {
+        background-color: #3A6EA5;
+        color: #E0E6F2;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+    QPushButton:hover {
+        background-color: #5591D3;
+    }
+    QPushButton:pressed {
+        background-color: #2C5588;
+    }</string>
+   </property>
+   <property name="text">
+    <string>Добавить информацию об студенте</string>
+   </property>
   </widget>
  </widget>
  <resources/>

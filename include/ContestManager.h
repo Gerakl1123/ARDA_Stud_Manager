@@ -1,4 +1,4 @@
-/*
+ /*
  * Project: ARDA Student Manager
  * Author: German Niyazyan (Gerakl1123)
  * License: CC BY-NC 4.0 — Non-commercial use only
@@ -31,19 +31,14 @@ public:
                     double budgetThreshold,
                     double contractThreshold,
                     int budgetSlots,
+                    int contractSlots,
                     const QString &faculty);
 
     ContestResult runContestMaxScore(IMaxContest &contest,
                                      const QString &studentFile,
                                      const QString &saveFile,
                                      const QString &faculty);
-    ContestResult runContestEge(IEgeContest& contest,
-                                const QString& studentFile,
-                                const QString& saveFile,
-                                const QString& faculty,
-                                double budgetThreshold,
-                                double contractThreshold,
-                                int budgetSlots);
+
 };
 
 #endif // CONTESTMANAGER_H

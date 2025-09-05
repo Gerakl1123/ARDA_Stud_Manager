@@ -21,7 +21,7 @@ class AttestatContest : public IAttestatContest
 public:
     void setStudents(const std::vector<std::shared_ptr<Student>>& students) override;
 
-    ContestResult evaluate(double budgetThreshold,double contractThreshold,int budgetSlots) override;
+    ContestResult evaluate(double budgetThreshold,double contractThreshold,int budgetSlots,int contractSlots) override;
 
 };
 

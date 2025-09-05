@@ -9,6 +9,8 @@ StudentDataService::StudentDataService(MainWindow* main, QWidget *parent)
 {
 
     ui->setupUi(this);
+
+    setWindowIcon(QIcon("C:/Users/Gera/Desktop/JSONS/Manager.png"));
     setWindowTitle("Менеджер Студентов");
     setupConnections();
 }

@@ -94,7 +94,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="ButtonADMINPANEL">
        <property name="styleSheet">
         <string notr="true">QPushButton {
     background-color: #3498db;
@@ -113,8 +113,8 @@
    <widget class="QPushButton" name="pushButtonAppStyle">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>10</x>
+      <y>50</y>
       <width>141</width>
       <height>29</height>
      </rect>

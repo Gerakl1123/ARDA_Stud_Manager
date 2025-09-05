@@ -12,6 +12,9 @@ public:
     explicit FileManager(QWidget *parent = nullptr);
     QString chooseFile();
     QString saveFile();
+    QString chooseFileJson();
+    QString saveFilePDF();
+
 private:
     QWidget *parentWidget;
 };

@@ -22,7 +22,8 @@ public:
         DeleteStudent,
         Back,
         SortStudent,
-        FindStudent
+        FindStudent,
+        AddInfo
     };
 
     explicit DynamicDialog(Mode mode,QWidget* parent = nullptr);
@@ -49,7 +50,7 @@ private:
 
 private:
     std::unique_ptr<SerializerData> serializer;
-    std::unique_ptr<IHandleStudent> handleAdd;
+    std::unique_ptr<LogicOperation> handleAdd;
 
     void Style();
     void SetBTNbrowse(QPushButton* btn,QLineEdit* line);
@@ -73,6 +74,15 @@ private:
     // === Print Students ===
     QTextEdit* studentDisplay = nullptr;
     QLineEdit* ManagerStudent_printFileEdit = nullptr;
+
+    // === Add Info Students ===
+    QLineEdit* Passport = nullptr;
+    QLineEdit* Name = nullptr;
+    QLineEdit* LastName = nullptr;
+    QLineEdit* Otchestvo = nullptr;
+    QLineEdit* year = nullptr;
+    QLineEdit*  e= nullptr;
+
 private:
     QPushButton* btnAddStudentBrowse = nullptr;
     QPushButton* btnSortInputBrowse = nullptr;
