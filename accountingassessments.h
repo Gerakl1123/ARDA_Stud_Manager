@@ -3,8 +3,9 @@
 
 #include <QWidget>
 #include<QSettings>
-#include"StudentDataHandler.h"
-
+#include"IODataHandler.h"
+#include"Serializer.h"
+#include<FileChooicer.h>
 
 class academicrecordwindow;
 class MainWindow;
@@ -22,12 +23,21 @@ public:
 
     ~accountingassessments();
 
+
+private slots:
+    void DeleteRow();
+    void Find(const QString& searchName);
+    void Back();
+    void ClearTabl();
+    void Printer();
+
 private:
+    void setupConnections();
     Ui::accountingassessments *ui;
     std::unique_ptr<ImportSaveData> obj;
+    std::unique_ptr<SerializerData> ser;
     MainWindow* backWindow;
-
-    void Back();
+    std::unique_ptr<FileManager> fileManager;
 };
 
 #endif // ACCOUNTINGASSESSMENTS_H

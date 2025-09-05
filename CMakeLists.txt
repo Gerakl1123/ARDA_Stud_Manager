@@ -9,17 +9,18 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS "${CMAKE_SOURCE_DIR}/ui")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Подключаем необходимые модули Qt
+find_package(Qt6 COMPONENTS Network REQUIRED)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Xml Core Gui)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Xml Core Gui)
+find_package(Qt6 REQUIRED COMPONENTS PrintSupport)
 
-# Включаем свои include каталоги
+
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/includeWindow
 )
 
-# Собираем исходники и ui
+
 file(GLOB_RECURSE SRC_FILES "${CMAKE_SOURCE_DIR}/src/*.cpp")
 file(GLOB_RECURSE SRCWINDOW_FILES "${CMAKE_SOURCE_DIR}/srcWindow/*.cpp")
 file(GLOB_RECURSE HEADER_FILES "${CMAKE_SOURCE_DIR}/includeWindow/*.h")
@@ -36,30 +37,51 @@ set(PROJECT_SOURCES
     ${MAIN_FILE}
 )
 
-# Создаем исполняемый файл
 qt_add_executable(ARDA
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
     academicrecordwindow.h academicrecordwindow.cpp academicrecordwindow.ui
     accountingassessments.h accountingassessments.cpp accountingassessments.ui
-    DataHandler.h
-    DataHandler.cpp
-    StudentDataHandler.h
-    StudentDataHandler.cpp
+
+
+    IODataHandler.h IODataHandler.cpp
+    recordbook.h recordbook.cpp recordbook.ui
+    confrimdialog.h confrimdialog.cpp confrimdialog.ui
+    project.h project.cpp project.ui
+    texpanel.h texpanel.cpp texpanel.ui
+    coursework.h coursework.cpp coursework.ui
+    icons.qrc
+    JsonKeys.h
+    diploma.h diploma.cpp diploma.ui
+    CurrentVersionApplication.h
+    updatechecker.h updatechecker.cpp
+    parserjsonnetwork.h parserjsonnetwork.cpp
+    Data.h Data.cpp
+    clearcash.h clearcash.cpp
+    passport.h passport.cpp
+    extradata.h extradata.cpp
+    admin.h admin.cpp admin.ui
+
+
 )
 
-# Включаем include external (если там что-то кроме QXlsx всё ещё используется)
-target_include_directories(ARDA PRIVATE
-    ${CMAKE_SOURCE_DIR}/external
-)
+
 
 target_link_libraries(ARDA
     PRIVATE
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Xml
 )
+target_link_libraries(ARDA
+    PRIVATE
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Widgets
+        Qt6::PrintSupport
+)
+target_link_libraries(ARDA PRIVATE Qt6::Network)
 
-# Свойства для macOS и Windows
+
 set_target_properties(ARDA PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE

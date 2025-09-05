@@ -3,6 +3,10 @@
 
 #include <QWidget>
 #include"accountingassessments.h"
+#include"recordbook.h"
+#include"project.h"
+#include"coursework.h"
+#include"diploma.h"
 
 class MainWindow;
 
@@ -19,14 +23,19 @@ public:
     ~academicrecordwindow();
     MainWindow*  mainwindow;
     accountingassessments* lesson;
-
+    RecordBook* RecorderBook;
+    project* Projects;
+    Coursework* course;
+    Diploma* diplom;
 private:
-
     Ui::academicrecordwindow *ui;
 private slots:
     void BackMenu();
     void openLessons();
-
+    void openRecorderBooks();
+    void openProject();
+    void openCourseWork();
+    void openDiploma();
 };
 
 #endif // ACADEMICRECORDWINDOW_H

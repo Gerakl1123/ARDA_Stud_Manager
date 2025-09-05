@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>accountingassessments</class>
- <widget class="QWidget" name="accountingassessments">
+ <class>project</class>
+ <widget class="QWidget" name="project">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1016</width>
-    <height>800</height>
+    <width>785</width>
+    <height>613</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -155,134 +155,65 @@ QScrollBar::sub-line:horizontal {
 }
 </string>
   </property>
-  <widget class="QTableWidget" name="tableWidget">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>73</y>
-     <width>1011</width>
-     <height>271</height>
+     <x>60</x>
+     <y>50</y>
+     <width>641</width>
+     <height>551</height>
     </rect>
    </property>
-   <column>
-    <property name="text">
-     <string>ID</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>ФИО</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Группа</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Название Урока</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Оценки Студента</string>
-    </property>
-   </column>
-  </widget>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>343</y>
-     <width>1011</width>
-     <height>261</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTableWidget" name="tableWidget"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnAdd">
+      <property name="text">
+       <string>Добавить</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="bntSave">
+      <property name="text">
+       <string>Сохранить</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnUpload">
+      <property name="text">
+       <string>Загрузить</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnPrint">
+      <property name="text">
+       <string>Печатать</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QPushButton" name="btnDelete">
       <property name="text">
        <string>Удалить</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="0" colspan="2">
-     <widget class="QPushButton" name="btnHelp">
-      <property name="text">
-       <string>Помощь</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0" colspan="2">
-     <widget class="QPushButton" name="btnPrinter">
-      <property name="text">
-       <string>Печатать</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="btnAdd">
-      <property name="text">
-       <string>Добавить Студента</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="2">
+    <item>
      <widget class="QPushButton" name="btnClear">
       <property name="text">
-       <string>Очистить Группу</string>
+       <string>Очистить Данные</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="0" colspan="2">
+    <item>
      <widget class="QCheckBox" name="checkBoxConfrimDelete">
       <property name="text">
-       <string>Подтверждение для удаления/очистки</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QLineEdit" name="lineEditFindName">
-   <property name="geometry">
-    <rect>
-     <x>-10</x>
-     <y>40</y>
-     <width>1021</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="inputMask">
-    <string/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>false</bool>
-   </property>
-   <property name="clearButtonEnabled">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>610</y>
-     <width>1011</width>
-     <height>183</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QPushButton" name="btnInput">
-      <property name="text">
-       <string>Загрузить группу</string>
+       <string>Подтверждение для удаления</string>
       </property>
      </widget>
     </item>
@@ -293,21 +224,17 @@ QScrollBar::sub-line:horizontal {
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QPushButton" name="btnBD">
-      <property name="text">
-       <string>Загрузить в БД(в разработке)</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnSave">
-      <property name="text">
-       <string>Сохранить</string>
-      </property>
-     </widget>
-    </item>
    </layout>
+  </widget>
+  <widget class="QLineEdit" name="lineEditFind">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>20</y>
+     <width>641</width>
+     <height>28</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <resources/>

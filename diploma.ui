@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>accountingassessments</class>
- <widget class="QWidget" name="accountingassessments">
+ <class>Diploma</class>
+ <widget class="QWidget" name="Diploma">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1016</width>
-    <height>800</height>
+    <width>1488</width>
+    <height>553</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -159,9 +159,9 @@ QScrollBar::sub-line:horizontal {
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>73</y>
-     <width>1011</width>
-     <height>271</height>
+     <y>20</y>
+     <width>1491</width>
+     <height>192</height>
     </rect>
    </property>
    <column>
@@ -176,134 +176,122 @@ QScrollBar::sub-line:horizontal {
    </column>
    <column>
     <property name="text">
+     <string>Зачетная книжка</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
      <string>Группа</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Название Урока</string>
+     <string>Тема</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Оценки Студента</string>
+     <string>Куратор/Руководитель</string>
     </property>
    </column>
-  </widget>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>343</y>
-     <width>1011</width>
-     <height>261</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QPushButton" name="btnDelete">
-      <property name="text">
-       <string>Удалить</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0" colspan="2">
-     <widget class="QPushButton" name="btnHelp">
-      <property name="text">
-       <string>Помощь</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0" colspan="2">
-     <widget class="QPushButton" name="btnPrinter">
-      <property name="text">
-       <string>Печатать</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="btnAdd">
-      <property name="text">
-       <string>Добавить Студента</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="2">
-     <widget class="QPushButton" name="btnClear">
-      <property name="text">
-       <string>Очистить Группу</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QCheckBox" name="checkBoxConfrimDelete">
-      <property name="text">
-       <string>Подтверждение для удаления/очистки</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QLineEdit" name="lineEditFindName">
-   <property name="geometry">
-    <rect>
-     <x>-10</x>
-     <y>40</y>
-     <width>1021</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="inputMask">
-    <string/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>false</bool>
-   </property>
-   <property name="clearButtonEnabled">
-    <bool>false</bool>
-   </property>
+   <column>
+    <property name="text">
+     <string>Этап Работы</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Оценка</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Дата Сдачи</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Доп. Данные</string>
+    </property>
+   </column>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>610</y>
-     <width>1011</width>
-     <height>183</height>
+     <x>400</x>
+     <y>220</y>
+     <width>641</width>
+     <height>324</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QPushButton" name="btnInput">
-      <property name="text">
-       <string>Загрузить группу</string>
+     <widget class="QPushButton" name="bntAdd">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/plus.png);</string>
       </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnBack">
       <property name="text">
-       <string>Выйти</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnBD">
-      <property name="text">
-       <string>Загрузить в БД(в разработке)</string>
+       <string/>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="btnSave">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/Save.png);</string>
+      </property>
       <property name="text">
-       <string>Сохранить</string>
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnUpload">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/Upload.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnRemove">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/Delete.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="bntClear">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/Clear.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnPrint">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/Printer.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnQuit">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/quit.png);</string>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </item>

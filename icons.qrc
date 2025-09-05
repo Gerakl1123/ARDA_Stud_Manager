@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>plus.png</file>
+        <file>Save.png</file>
+        <file>quit.png</file>
+        <file>Upload.png</file>
+        <file>Printer.png</file>
+        <file>Clear.png</file>
+        <file>Delete.png</file>
+    </qresource>
+</RCC>
