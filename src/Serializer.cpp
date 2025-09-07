@@ -1,54 +1,46 @@
 #include"Serializer.h"
 #include<QList>
-#include<QSettings>
 #include<QLineEdit>
 #include"../JsonKeys.h"
 #include<QDateEdit>
 #include<QComboBox>
+#include"../IODataHandler.h"
+#include"../JsonKeys.h"
+#include"Validator.h"
+#include"../settingsbinder.h"
+#include"LogicOperation.h"
 
+SerializerData::SerializerData()
+    : saveDataManager(std::make_unique<ImportSaveData>())
+
+{
+}
+SerializerData::~SerializerData()
+{
+    delete logicOperation;
+}
 void SerializerData::DataSerelization(QWidget *w, ModeSerelization mode)
 {
 
-    QString app;
-    QString org = "ARDA";
+    SettingsBinder* binder = new SettingsBinder(w);
 
-    switch (mode) {
-    case ModeSerelization::Attestat:
-        app = "AttestatContest/";
-        break;
-    case ModeSerelization::MaxScore:
-        app = "MaxScoreContest/";
-        break;
-    case ModeSerelization::ManagerStudent:
-        app = "ManagerStudent/";
-        break;
-    default:
-        break;
-    }
-
-    QSettings mainSettings(org,app);
+    QString app = Validator::SwitchAppContest(mode);
+    QSettings mainSettings(SerelizationData::ORG_NAME,app);
 
     QList<QLineEdit*> lines = w->findChildren<QLineEdit*>();
 
     for(const auto line : lines)
     {
         QString QLname = line->objectName();
-
-        if( mode == ModeSerelization::Attestat && !QLname.contains("_Attestat_") ||
-            mode == ModeSerelization::MaxScore && !QLname.contains("_MaxScore_") ||
-            mode == ModeSerelization::ManagerStudent && !QLname.contains("_ManagerStudent_"))
+        if(!Validator::IsObjectForMode(QLname,mode))
         {
             continue;
         }
-
         QString key = app + QLname;
 
         line->setText(mainSettings.value(key).toString());
         //Save Text
-        QObject::connect(line,&QLineEdit::textChanged,w,[=](const QString& text){
-            QSettings tempSettings(org,app);
-            tempSettings.setValue(key,text);
-        });
+        binder->ConnectionsContest(line,SerelizationData::ORG_NAME,app,key);
 
     }
 
@@ -56,85 +48,21 @@ void SerializerData::DataSerelization(QWidget *w, ModeSerelization mode)
 
 void SerializerData::DataSerelizationMenuStudentRecords(QTableWidget *t, QWidget *p,ModeSerelization mode)
 {
-    QString app;
-    QString org = "ARDA";
 
-    switch (mode) {
-    case  ModeSerelization::Lessons:
-        app = "Lessons";
-        break;
-    case  ModeSerelization::Projects:
-        app = "Projects";
-        break;
-    case ModeSerelization::Records:
-        app="Records";
-        break;
-    default:
-        break;
-    }
+    SettingsBinder* binder = new SettingsBinder(p);
+    logicOperation = new LogicOperation;
 
-    QSettings mainS(org,app);
+    QString app = Validator::SwitchAppGradesMenu(mode);
+    QSettings mainS(SerelizationData::ORG_NAME,app);
 
-    QObject::connect(t,&QTableWidget::cellChanged,p,[=](){
-        QSettings mainS(org,app);
-        mainS.setValue("rowCount",t->rowCount());
-        mainS.setValue("columnCount",t->columnCount());
-
-
-        for(int row=0;row< t->rowCount();row++)
-        {
-
-            for(int col=0;col< t->columnCount();col++)
-            {
-                QString key = QString("row_%1_col_%2").arg(row).arg(col);
-                QTableWidgetItem* item = t->item(row, col);
-                if (!item) continue;
-
-                QString header = t->horizontalHeaderItem(col) ? t->horizontalHeaderItem(col)->text() : "";
-                if (header == "Автомат" && (item->flags() & Qt::ItemIsUserCheckable)) {
-                    mainS.setValue(key, static_cast<int>(item->checkState()));
-                } else {
-                    mainS.setValue(key, item->text());
-                }
-            }
-        }
-
-    });
-
-    t->blockSignals(true);
+    binder->ConnectionsGradesMenu(t,SerelizationData::ORG_NAME,mainS,app);
 
     int currRow = mainS.value("rowCount").toInt();
     int currColumn = mainS.value("columnCount").toInt();
 
-
     t->setRowCount(currRow);
 
-    for(int i = 0; i< currRow; i++)
-    {
-        for(int j = 0; j < currColumn;j++)
-        {
-            QString key = QString("row_%1_col_%2").arg(i).arg(j);
-            QVariant value = mainS.value(key);
-            QTableWidgetItem* item = t->item(i,j);            
-            QString header = t->horizontalHeaderItem(j) ? t->horizontalHeaderItem(j)->text() : "";
-
-
-            if (!item) {
-                item = new QTableWidgetItem();
-                t->setItem(i, j, item);
-            }
-
-            if (header == "Автомат") {
-                item->setFlags(item->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-                item->setCheckState(static_cast<Qt::CheckState>(mainS.value(key, Qt::Unchecked).toInt()));
-            }  else {
-                item->setText(value.toString());
-            }
-
-        }
-    }
-
-    t->blockSignals(false);
+    logicOperation->FillTableWidget(mainS,t,currRow,currColumn);
 
 }
 
@@ -142,8 +70,7 @@ void SerializerData::DataSerelizationCourse(QTableWidget *t, QWidget *p)
 {
 
     QString app = "CourseWork";
-    QString org = "ARDA";
-    QSettings mainS(org,app);
+    QSettings mainS(SerelizationData::ORG_NAME,app);
 
 
     t->blockSignals(true);
@@ -171,7 +98,7 @@ void SerializerData::DataSerelizationCourse(QTableWidget *t, QWidget *p)
                 t->setCellWidget(row, col, dateEdit);
 
                 QObject::connect(dateEdit, &QDateEdit::editingFinished, p, [=]() {
-                    QSettings mainS(org, app);
+                    QSettings mainS(SerelizationData::ORG_NAME, app);
                     mainS.setValue(key, dateEdit->date().toString("dd.MM.yyyy"));
                 });
 
@@ -184,8 +111,7 @@ void SerializerData::DataSerelizationCourse(QTableWidget *t, QWidget *p)
                 t->setCellWidget(row,col,comboBox);
 
                 QObject::connect(comboBox, &QComboBox::currentTextChanged, p, [=]() {
-                    QSettings mainS(org, app);
-
+                    QSettings mainS(SerelizationData::ORG_NAME, app);
                     mainS.setValue(key, comboBox->currentText());
                 });
             }
@@ -202,7 +128,7 @@ void SerializerData::DataSerelizationCourse(QTableWidget *t, QWidget *p)
 
 
       QObject::connect(t,&QTableWidget::cellChanged,p,[=](){
-          QSettings mainS(org,app);
+          QSettings mainS(SerelizationData::ORG_NAME,app);
 
 
           mainS.setValue("rowCount", t->rowCount());
@@ -215,11 +141,136 @@ void SerializerData::DataSerelizationCourse(QTableWidget *t, QWidget *p)
                   QTableWidgetItem* item = t->item(i,j);
                   QString key = QString("row_%1_col_%2").arg(i).arg(j);
 
+                  QString header = t->horizontalHeaderItem(i)->text();
 
                   if (item) {
                       mainS.setValue(key, item->text());
                   }
+                  else if(header == JsonKeys::StageWork)
+                  {
+                      if (auto comboBox = qobject_cast<QComboBox*>(t->cellWidget(i, j))) {
+                          mainS.setValue(key, comboBox->currentText());
+                      }
+                  }
+                  else if(header == JsonKeys::Date)
+                  {
+                      if(auto CurrDate = qobject_cast<QDateEdit*>(t->cellWidget(i,j)))
+                      {
+                          mainS.setValue(key,CurrDate->date().toString("dd.MM.yyyy"));
+                      }
+                  }
               }
           }
       });
+}
+
+void SerializerData::DataSerelizationDiploma(QTableWidget *t, QWidget *p)
+{
+
+   QString app = "Diploma";
+   QSettings mainS(SerelizationData::ORG_NAME,app);
+
+
+    t->blockSignals(true);
+
+    int rowCount = mainS.value("rowCount").toInt(); // 2
+    int colCount = mainS.value("columnCount").toInt(); // 3
+
+    t->setRowCount(rowCount);
+//    t->setColumnCount(colCount);
+
+//Вынрузка в таблицу из реестра
+
+    for(int row = 0; row< t->rowCount(); ++row)
+    {
+        for(int col = 0; col <t->columnCount(); ++col)
+        {
+            QString key = QString("row_%1_col_%2").arg(row).arg(col);
+            QString header = t->horizontalHeaderItem(col)->text();
+            QVariant value = mainS.value(key);
+
+            if(header == JsonKeys::Date)
+            {
+                QDateEdit* dateEdit = new QDateEdit(p);
+                QDate date = QDate::fromString(value.toString(), "dd.MM.yyyy");
+                dateEdit->setDate(date);
+
+                t->setCellWidget(row,col,dateEdit);
+
+                QObject::connect(dateEdit, &QDateEdit::dateChanged, p, [=](const QDate &d){
+                    QSettings mainS(SerelizationData::ORG_NAME, app);
+                    mainS.setValue(key, d.toString("dd.MM.yyyy"));
+                });
+
+            }
+            else if(header == JsonKeys::StageWork)
+            {
+                QComboBox* combo = new QComboBox(p);
+                combo->addItems(Stages::StageListDiplom);
+                combo->setCurrentText(value.toString());
+
+                t->setCellWidget(row,col,combo);
+
+
+                QObject::connect(combo, &QComboBox::currentTextChanged, p, [=]() {
+                    QSettings mainS(SerelizationData::ORG_NAME, app);
+                    mainS.setValue(key, combo->currentText());
+                });
+            }
+            else
+            {
+                QTableWidgetItem* item = new QTableWidgetItem(value.toString());
+                if(item){
+                    t->setItem(row,col,item);
+                }else
+                {
+                    continue;
+                }
+            }
+
+        }
+    }
+
+    t->blockSignals(false);
+
+    QObject::connect(t,&QTableWidget::cellChanged,p,[=](){
+        QSettings mainS(SerelizationData::ORG_NAME,app);
+
+
+        mainS.setValue("rowCount", t->rowCount());
+        mainS.setValue("columnCount", t->columnCount());
+
+        for(int row = 0; row < t->rowCount(); ++row)
+        {
+            for(int col = 0; col<t->columnCount(); ++col)
+            {
+                QTableWidgetItem* item = t->item(row,col);
+                QString key = QString("row_%1_col_%2").arg(row).arg(col);
+
+                QString header = t->horizontalHeaderItem(col)->text();
+
+                if (item) {
+                    mainS.setValue(key, item->text());
+                }
+                else if(header == JsonKeys::StageWork)
+                {
+                    if (auto comboBox = qobject_cast<QComboBox*>(t->cellWidget(row, col))) {
+                        mainS.setValue(key, comboBox->currentText());
+                    }
+                }
+                else if(header == JsonKeys::Date)
+                {
+                    if(auto CurrDate = qobject_cast<QDateEdit*>(t->cellWidget(row,col)))
+                    {
+                        qDebug() << "Current date: "<< CurrDate->date().toString("dd.MM.yyyy");
+                        mainS.setValue(key,CurrDate->date().toString("dd.MM.yyyy"));
+                    }
+                }
+
+
+            }
+        }
+
+    });
+
 }

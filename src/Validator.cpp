@@ -85,4 +85,44 @@ std::optional<double> Validator::ValidOptional(const QString& scoreStr)
     return val;
 }
 
+QString Validator::SwitchAppContest(const ModeSerelization& mode)
+{
+    static const QMap<ModeSerelization, QString> mapApp
+    {
+        { ModeSerelization::Attestat, "AttestatContest" },
+        { ModeSerelization::MaxScore, "MaxScoreContest" },
+        { ModeSerelization::ManagerStudent, "ManagerStudent" }
+    };
+
+    return mapApp.value(mode, {});
+}
+
+
+
+bool Validator::IsObjectForMode(const QString &objectName,const ModeSerelization &mode)
+{
+    switch (mode) {
+    case ModeSerelization::Attestat:
+        return objectName.contains("_Attestat_");
+    case ModeSerelization::MaxScore:
+        return objectName.contains("_MaxScore_");
+    case ModeSerelization::ManagerStudent:
+        return objectName.contains("_ManagerStudent_");
+    default:
+        return false;
+    }
+}
+
+QString Validator::SwitchAppGradesMenu(const ModeSerelization& mode)
+{
+    static const QMap<ModeSerelization,QString> myApp
+    {
+        { ModeSerelization::Lessons, "Lessons" },
+        { ModeSerelization::Projects, "Projects" },
+        { ModeSerelization::Records, "Records" }
+    };
+
+    return myApp.value(mode,{});
+}
+
 

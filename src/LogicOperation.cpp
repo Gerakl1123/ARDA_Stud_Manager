@@ -1,6 +1,7 @@
 #include"LogicOperation.h"
 #include"ManagerStudent.h"
 #include"DynamicFormDialog.h"
+#include"Serializer.h"
 
 bool LogicOperation::handleAddStudent(const QString &file, const QString &data,QLineEdit* LineEditClear,QWidget* parent)
 {
@@ -194,4 +195,57 @@ double LogicOperation::converterTOnumberInString(const QString &number)
     Num = number.toDouble(&isNum);
 
     return Num;
+}
+
+void LogicOperation::FillSettingsTable(QSettings &settings, QTableWidget* t)
+{
+    for(int row=0;row< t->rowCount();row++)
+    {
+
+        for(int col=0;col< t->columnCount();col++)
+        {
+            QString key = QString("row_%1_col_%2").arg(row).arg(col);
+            QTableWidgetItem* item = t->item(row, col);
+            if (!item) continue;
+
+            QString header = t->horizontalHeaderItem(col) ? t->horizontalHeaderItem(col)->text() : "";
+            if (header == "Автомат" && (item->flags() & Qt::ItemIsUserCheckable)) {
+                settings.setValue(key, static_cast<int>(item->checkState()));
+            } else {
+                settings.setValue(key, item->text());
+            }
+        }
+    }
+}
+
+void LogicOperation::FillTableWidget(QSettings &settings, QTableWidget *t,int row,int column)
+{
+    t->blockSignals(true);
+
+    for(int i = 0; i < row; i++)
+    {
+        for(int j = 0; j < column;j++)
+        {
+            QString key = QString("row_%1_col_%2").arg(i).arg(j);
+            QVariant value = settings.value(key);
+            QTableWidgetItem* item = t->item(i,j);
+            QString header = t->horizontalHeaderItem(j) ? t->horizontalHeaderItem(j)->text() : "";
+
+
+            if (!item) {
+                item = new QTableWidgetItem();
+                t->setItem(i, j, item);
+            }
+
+            if (header == "Автомат") {
+                item->setFlags(item->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+                item->setCheckState(static_cast<Qt::CheckState>(settings.value(key, Qt::Unchecked).toInt()));
+            }  else {
+                item->setText(value.toString());
+            }
+
+        }
+    }
+
+    t->blockSignals(false);
 }

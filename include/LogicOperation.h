@@ -3,10 +3,11 @@
 #include"Logger.h"
 #include"Validator.h"
 #include"Loader.h"
-#include"Serializer.h"
 #include<QTextEdit>
 #include<optional>
 #include<QTableWidgetItem>
+
+class SerializerData;
 
 class LogicOperation
 {
@@ -20,6 +21,9 @@ public:
     std::optional<double> handleAutoTestStudent(QTableWidgetItem* checkItem,QList<int>& averageScore);
 
     double converterTOnumberInString(const QString& number);
+
+    void FillSettingsTable(QSettings& settings,QTableWidget* t);
+    void FillTableWidget(QSettings& settings,QTableWidget* t,int row,int column);
 
 };
 

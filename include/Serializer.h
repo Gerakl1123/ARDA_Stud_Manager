@@ -3,26 +3,26 @@
 #include<QWidget>
 #include<QTableWidget>
 #include<QTableWidgetItem>
+#include<QSettings>
+#include"../IODataHandler.h"
+#include"../ModeSerelization.h"
+class LogicOperation;
 
-enum class ModeSerelization
-{
-    Attestat,
-    MaxScore,
-    ManagerStudent,
-    Lessons,
-    Records,
-    Projects,
-    CourseWork
-};
 
 class SerializerData
 {
 public:
+    SerializerData();
 
-    void DataSerelization(QWidget* w,ModeSerelization mode);
+    void DataSerelization(QWidget* w, ModeSerelization mode);
     void DataSerelizationMenuStudentRecords(QTableWidget* t,QWidget* p,ModeSerelization);
     void DataSerelizationCourse(QTableWidget* t,QWidget* p);
+    void DataSerelizationDiploma(QTableWidget* t,QWidget* p);
+    ~SerializerData();
 
+private:
+    std::unique_ptr<ImportSaveData> saveDataManager;
+    LogicOperation* logicOperation;
 };
 
 #endif // SERIALIZER_H

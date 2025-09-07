@@ -15,6 +15,8 @@
 #include"../include/Logger.h"
 #include<QFile>
 #include<optional>
+#include"Serializer.h"
+#include"../ModeSerelization.h"
 
 enum class ModeValidator
 {
@@ -33,9 +35,14 @@ struct Validator
     static void isFileValid(QFile& File,ModeValidator modeIO);
     static std::optional<double> ValidOptional(const QString& scoreStr);
 
+    static QString SwitchAppContest(const ModeSerelization& mode);
+    static bool IsObjectForMode(const QString& objectName, const ModeSerelization& mode);
+    static QString SwitchAppGradesMenu(const ModeSerelization& mode);
+
     //static bool isPasswordStrong(const std::string& password);
     //static bool isEmailValid(const std::string& email);
 private:
+
     static std::shared_ptr<Log> Logger;
 };
 
