@@ -13,6 +13,7 @@ find_package(Qt6 COMPONENTS Network REQUIRED)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Xml Core Gui)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Xml Core Gui)
 find_package(Qt6 REQUIRED COMPONENTS PrintSupport)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
 
 include_directories(
@@ -61,6 +62,9 @@ qt_add_executable(ARDA
     passport.h passport.cpp
     extradata.h extradata.cpp
     admin.h admin.cpp admin.ui
+    settingsbinder.h settingsbinder.cpp
+    ModeSerelization.h
+
 
 
 )
@@ -80,6 +84,7 @@ target_link_libraries(ARDA
         Qt6::PrintSupport
 )
 target_link_libraries(ARDA PRIVATE Qt6::Network)
+target_link_libraries(ARDA PRIVATE Qt6::Core)
 
 
 set_target_properties(ARDA PROPERTIES

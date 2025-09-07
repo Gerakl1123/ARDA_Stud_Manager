@@ -44,6 +44,8 @@ inline const QStringList StageListDiplom = {
 };
 
 } // namespace Stages
-
+namespace SerelizationData {
+constexpr inline auto ORG_NAME = "ARDA";
+}
 
 #endif // JSONKEYS_H

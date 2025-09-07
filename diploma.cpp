@@ -12,6 +12,7 @@
 #include<QJsonDocument>
 #include<QJsonArray>
 #include<QJsonObject>
+
 Diploma::Diploma(MainWindow* main,QWidget *parent)
     : QWidget(parent)
     , mainWin(main)
@@ -21,7 +22,9 @@ Diploma::Diploma(MainWindow* main,QWidget *parent)
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     isd = std::make_unique<ImportSaveData>();
+    ser = std::make_unique<SerializerData>();
     fileManager = std::make_unique<FileManager>(this);
+
 
     QMenuBar *menuBar = new QMenuBar(this);
     QMenu *moreMenu = new QMenu("Прочее", menuBar);
@@ -37,6 +40,8 @@ Diploma::Diploma(MainWindow* main,QWidget *parent)
     menuBar->addMenu(moreMenu);
 
 
+    ser->DataSerelizationDiploma(ui->tableWidget,this);
+
     connect(ui->bntAdd,&QPushButton::clicked,this,&Diploma::addRow);
     connect(ui->btnRemove,&QPushButton::clicked,this,&Diploma::deleteRow);
     connect(ui->bntClear,&QPushButton::clicked,this,&Diploma::ClearTable);
@@ -49,6 +54,9 @@ Diploma::Diploma(MainWindow* main,QWidget *parent)
 
     connect(ui->btnPrint,&QPushButton::clicked,this,&Diploma::PrinterData);
     connect(ui->btnQuit, &QPushButton::clicked,this,&Diploma::backMain);
+    connect(ui->btnSaveDate,&QPushButton::clicked,this,[=](){
+        isd->SaveDateWidget(ui->tableWidget);
+    });
 }
 
 
@@ -61,9 +69,11 @@ Diploma::~Diploma()
 
 void Diploma::addRow()
 {
-    ui->tableWidget->insertRow(ui->tableWidget->rowCount());
 
-    for(int i = 0; i < ui->tableWidget->rowCount(); i++)
+    int row = ui->tableWidget->rowCount();
+    ui->tableWidget->insertRow(row);
+
+    for(int i = row; i < ui->tableWidget->rowCount(); i++)
     {
         for(int j = 0; j < ui->tableWidget->columnCount(); j++)
         {
@@ -221,4 +231,8 @@ void Diploma::backMain()
     this->close();
     mainWin->show();
 }
+
+
+
+
 

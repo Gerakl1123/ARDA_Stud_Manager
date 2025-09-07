@@ -5,7 +5,7 @@
 #include<QCheckBox>
 #include"IODataHandler.h"
 #include"FileChooicer.h"
-
+#include"Serializer.h"
 class MainWindow;
 
 namespace Ui {
@@ -27,6 +27,8 @@ private:
     QCheckBox *confirmCheckBox;
     QCheckBox* OnOffSerelization;
     std::unique_ptr<FileManager> fileManager;
+    std::unique_ptr<SerializerData> ser;
+
 public slots:
     void addRow();
     void deleteRow();

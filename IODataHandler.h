@@ -2,6 +2,9 @@
 #define IODATAHANDLER_H
 #include"FileChooicer.h"
 #include<QTableWidget>
+#include"QSettings"
+#include<QDateEdit>
+#include<QComboBox>
 
 class ImportSaveData
 {
@@ -23,6 +26,9 @@ public:
 
     void saveToJsonDiploma(QTableWidget* table, QWidget* p);
     void loadFromDiploma(QTableWidget* table, QWidget* p);
+
+    void SaveDateWidget(QTableWidget* table);
+
 
 private:
     std::unique_ptr<FileManager> fileManager;

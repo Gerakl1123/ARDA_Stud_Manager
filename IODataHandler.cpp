@@ -659,12 +659,34 @@ void ImportSaveData::loadFromDiploma(QTableWidget *table, QWidget *p)
         combo->setCurrentText(Stage);
         table->setCellWidget(row,6,combo);
 
+        QDate date = QDate::fromString(DateSTR, "dd.MM.yyyy");
+        if(!date.isValid()){
+            qDebug()<<date.toString("dd.MM.yyyy");
+            date = QDate::currentDate();
+        }
+
         QDateEdit* dateEdit = new QDateEdit(p);
-        QDate date = QDate::fromString(DateSTR,"dd.MM.yyyy");
         dateEdit->setDate(date);
         dateEdit->setDisplayFormat("dd.MM.yyyy");
 
-        table->setCellWidget(row,8,dateEdit);
+        table->setCellWidget(row, 8, dateEdit);
 
+
+    }
+}
+
+void ImportSaveData::SaveDateWidget(QTableWidget *table)
+{
+
+    if(!table) return;
+
+    for(int row = 0; row < table->rowCount(); ++row)
+    {
+        for(int col = 0; col < table->columnCount(); ++col)
+        {
+            QMetaObject::invokeMethod(table, "cellChanged",
+                                      Q_ARG(int, row),
+                                      Q_ARG(int, col));
+        }
     }
 }

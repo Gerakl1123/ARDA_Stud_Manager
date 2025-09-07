@@ -93,7 +93,7 @@ void accountingassessments::DeleteRow()
     if(ui->checkBoxConfrimDelete->isChecked())
     {
         ConfrimDialog dlg(this);
-        if(dlg.exec() ==QDialog::Accepted)
+        if(dlg.exec() == QDialog::Accepted)
         {
             int selectedRow = ui->tableWidget->currentRow();
             if (selectedRow >= 0) {

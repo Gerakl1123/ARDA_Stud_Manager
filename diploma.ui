@@ -297,6 +297,32 @@ QScrollBar::sub-line:horizontal {
     </item>
    </layout>
   </widget>
+  <widget class="QPushButton" name="btnSaveDate">
+   <property name="geometry">
+    <rect>
+     <x>1060</x>
+     <y>220</y>
+     <width>261</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Сохранить Данные Виджетов</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>1060</x>
+     <y>290</y>
+     <width>261</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>помощь по меню </string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
