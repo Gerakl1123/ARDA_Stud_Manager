@@ -21,9 +21,9 @@ Features
 
 Technologies
 
-    C++17
+    C++11/17
 
-    Qt 5.15 / 6.x
+    Qt 6 qwidget
 
     CMake
 
