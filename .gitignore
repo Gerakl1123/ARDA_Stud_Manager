@@ -18,3 +18,7 @@ build/
 
 # Backup files
 *~
+
+#API
+config.json
+
