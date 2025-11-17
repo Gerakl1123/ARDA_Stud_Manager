@@ -32,7 +32,7 @@
 > Заменишь на настоящие позже!
 
 <p align="center">
-  <img src="https://via.placeholder.com/800x420?text=Screenshot+1" width="80%">
+  <img src="https://github.com/Gerakl1123/ARDA_Stud_Manager/blob/main/assets/main.png" width="80%">
   <br><em>Главное окно приложения</em>
 </p>
 
