@@ -1,6 +1,6 @@
 <!-- ЛОГОТИП ПРОЕКТА -->
 <p align="center">
-  <img src="https://ibb.co/S453vDXk" width="180" alt="ARDA Logo" />
+  <img src="https://github.com/Gerakl1123/ARDA_Stud_Manager/blob/main/assets/logo.png" width="180" alt="ARDA Logo" />
 </p>
 
 <h1 align="center">ARDA — Academic Records Data Application</h1>
