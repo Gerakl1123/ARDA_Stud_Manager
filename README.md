@@ -13,7 +13,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Windows-blue?style=for-the-badge">
   <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge">
-  <img src="https://img.shields.io/badge/License-Free-lightgrey?style=for-the-badge">
+  <img src="https://img.shields.io/badge/License-Freeware-blue?style=for-the-badge">
   <img src="https://img.shields.io/badge/Language-C%2B%2B%2011--17%20%7C%20Qt%206-green?style=for-the-badge">
 </p>
 
