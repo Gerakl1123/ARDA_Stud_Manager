@@ -37,7 +37,7 @@
 </p>
 
 <p align="center">
-  <img src="https://via.placeholder.com/800x420?text=Screenshot+2" width="80%">
+  <img src="https://github.com/Gerakl1123/ARDA_Stud_Manager/blob/main/assets/manager-stud.png" width="80%">
   <br><em>Менеджер студентов</em>
 </p>
 
