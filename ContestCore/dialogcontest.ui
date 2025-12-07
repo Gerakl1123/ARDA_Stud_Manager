@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogContest</class>
+ <widget class="QDialog" name="DialogContest">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1085</width>
+    <height>529</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLabel {
+    background-color: transparent;
+    color: black;
+}</string>
+  </property>
+  <widget class="QPushButton" name="pushButtonInfoAttestat">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">  QPushButton {
+        background-color: #3A6EA5;
+        color: #E0E6F2;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+    QPushButton:hover {
+        background-color: #5591D3;
+    }
+    QPushButton:pressed {
+        background-color: #2C5588;
+    }</string>
+   </property>
+   <property name="text">
+    <string>Информация</string>
+   </property>
+  </widget>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>850</x>
+     <y>480</y>
+     <width>181</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::StandardButton::Close|QDialogButtonBox::StandardButton::Ok</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>50</y>
+     <width>701</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="lineEdit_Attestat_FileSave">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Файл сохранения</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="lineEdit_Attestat_InputFile">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Файл со студентами</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QPushButton" name="btnAttestatFileLog">
+      <property name="styleSheet">
+       <string notr="true">  QPushButton {
+        background-color: #3A6EA5;
+        color: #E0E6F2;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+    QPushButton:hover {
+        background-color: #5591D3;
+    }
+    QPushButton:pressed {
+        background-color: #2C5588;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Выбрать</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QLineEdit" name="lineEdit_Attestat_ContractSlots">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Кол-во мест на контракт</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLineEdit" name="lineEdit_Attestat_BudgetMinBall">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Проходной балл на бюджет</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="btnBrowseAttestatSaveFile">
+      <property name="styleSheet">
+       <string notr="true">  QPushButton {
+        background-color: #3A6EA5;
+        color: #E0E6F2;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+    QPushButton:hover {
+        background-color: #5591D3;
+    }
+    QPushButton:pressed {
+        background-color: #2C5588;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Выбрать</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="lineEdit_Attestat_FileLog">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Файл лога</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QPushButton" name="btnAttestatInputFile">
+      <property name="styleSheet">
+       <string notr="true">  QPushButton {
+        background-color: #3A6EA5;
+        color: #E0E6F2;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+    QPushButton:hover {
+        background-color: #5591D3;
+    }
+    QPushButton:pressed {
+        background-color: #2C5588;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Выбрать</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLineEdit" name="lineEdit_Attestat_BudgetSlots">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Кол-во мест на бюджет</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLineEdit" name="lineEdit_Attestat_ContractMinBall">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Проходной балл на контракт</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="lineEdit_Attestat_Fakyltet">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Факультет</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>50</y>
+     <width>351</width>
+     <height>408</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLineEdit" name="lineEdit_MaxScore_FileInput">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Файл считывания</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnBrowseMaxScoreInputFile">
+      <property name="styleSheet">
+       <string notr="true">  QPushButton {
+        background-color: #3A6EA5;
+        color: #E0E6F2;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+    QPushButton:hover {
+        background-color: #5591D3;
+    }
+    QPushButton:pressed {
+        background-color: #2C5588;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Выбрать</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEdit_MaxScore_FileSave">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Файл сохранения</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnMaxScoreFileSave">
+      <property name="styleSheet">
+       <string notr="true">  QPushButton {
+        background-color: #3A6EA5;
+        color: #E0E6F2;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+    QPushButton:hover {
+        background-color: #5591D3;
+    }
+    QPushButton:pressed {
+        background-color: #2C5588;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Выбрать</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEdit_MaxScore_FileLog">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Файл Лога</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnMaxScoreFileLog">
+      <property name="styleSheet">
+       <string notr="true">  QPushButton {
+        background-color: #3A6EA5;
+        color: #E0E6F2;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+    }
+    QPushButton:hover {
+        background-color: #5591D3;
+    }
+    QPushButton:pressed {
+        background-color: #2C5588;
+    }</string>
+      </property>
+      <property name="text">
+       <string>Выбрать</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEdit_MaxScore_Faculty">
+      <property name="styleSheet">
+       <string notr="true"> QLineEdit {
+        background-color: #1B3B5F;
+        color: #E0E6F2;
+        border: 2px solid #5591D3;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+   QLineEdit:focus {
+        border-color: #7FB4FF;
+        background-color: #274C77;
+    }</string>
+      </property>
+      <property name="placeholderText">
+       <string>Факультет студентов участвующих в  конкурсе</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

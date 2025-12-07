@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>contestwindow</class>
+ <widget class="QWidget" name="contestwindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #2e3440;          /* Темный фон */
+    border-radius: 10px;                /* Скругленные углы */
+    padding: 20px;
+    color: #d8dee9;                    /* Светлый текст */
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+QLabel {
+    color: #d8dee9;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+QPushButton {
+    background-color: #5e81ac;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    min-width: 80px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+QPushButton:hover {
+    background-color: #81a1c1;
+}
+
+QPushButton:pressed {
+    background-color: #4c6a94;
+}
+
+QPushButton#buttonCancel {
+    background-color: #bf616a;
+}
+
+QPushButton#buttonCancel:hover {
+    background-color: #d08770;
+}
+
+QPushButton#buttonCancel:pressed {
+    background-color: #a0494f;
+}
+
+QTableWidget {
+    background-color: #3b4252; /* Немного более светлый фон, чем у QWidget, для визуального разделения */
+    color: #d8dee9;
+    border: 1px solid #434c5e; /* Тонкая рамка */
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+QHeaderView::section {
+    background-color: #434c5e; /* Цвет заголовков */
+    color: #d8dee9;
+    border: none;
+    padding: 4px;
+    font-weight: bold;
+}
+
+QTableWidget::item {
+    padding: 4px;
+}
+
+QTableWidget::item:selected {
+    background-color: #5e81ac; /* Цвет выделения */
+    color: white;
+}
+
+QTableWidget QTableCornerButton::section {
+    background-color: #434c5e; /* Цвет уголка таблицы */
+    border: none;
+}
+</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>460</y>
+     <width>331</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Перед работой с данным меню прочтите Help</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelMENU">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>10</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 900 12pt &quot;Arial&quot;;
+</string>
+   </property>
+   <property name="text">
+    <string>МЕНЮ</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>120</y>
+     <width>641</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="pushButtonAttestat">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Конкурс Аттестатов</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButtonCurrent">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Выссший балл</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButtonBackMain">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Главное Меню</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButtonHelp">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Help</string>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
