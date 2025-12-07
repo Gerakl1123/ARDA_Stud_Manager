@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PriviewWorks</class>
+ <widget class="QDialog" name="PriviewWorks">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>907</width>
+    <height>636</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QListWidget" name="listWidgetPriview">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>731</width>
+     <height>481</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* КНОПКА С ОКРУГЛЕНИЕМ */
+QPushButton {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 12px;  /* Увеличил радиус для большего округления */
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: normal;
+    min-height: 25px;
+    min-width: 80px;
+}
+
+QPushButton:hover {
+    background-color: #333333;
+    border-color: #444;
+}
+
+QPushButton:pressed {
+    background-color: #3a3a3a;
+    border-color: #555;
+}
+
+QPushButton:disabled {
+    background-color: #1a1a1a;
+    color: #666;
+    border-color: #222;
+}</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnLeave">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>570</y>
+     <width>122</width>
+     <height>47</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Выйти</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidgetDeleter">
+   <property name="geometry">
+    <rect>
+     <x>750</x>
+     <y>70</y>
+     <width>141</width>
+     <height>481</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    border: none;
+    background: transparent;
+    padding: 5px;
+    margin: 0px;
+    border-radius: 3px;
+min-height: 25px;
+    min-width: 80px;
+}
+QPushButton:hover {
+    background: rgba(255, 0, 0, 0.1);
+}</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

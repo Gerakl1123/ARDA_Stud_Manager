@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PriviewStudentDialog</class>
+ <widget class="QDialog" name="PriviewStudentDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+/* === QLineEdit поля === */
+QLineEdit {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 6px 8px;
+    selection-background-color: #a8d0ff;
+}
+
+/* === QTextEdit === */
+QTextEdit {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 6px;
+    selection-background-color: #a8d0ff;
+}
+
+/* === QPushButton === */
+QPushButton {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+}
+
+QPushButton:hover {
+    background-color: #357abd;
+}
+
+QPushButton:pressed {
+    background-color: #2a5d9f;
+}
+
+/* === QDialogButtonBox кнопки === */
+QDialogButtonBox QPushButton {
+    min-width: 80px;
+}
+
+/* === QLabels === */
+QLabel {
+    font-weight: 500;
+}
+
+/* === QLineEdit поля (тёмная тема) === */
+QLineEdit {
+    background-color: #2b2b2b;    /* тёмный фон */
+    color: #ffffff;               /* белый текст */
+    border: 1px solid #555555;    /* тёмная граница */
+    border-radius: 6px;
+    padding: 6px 8px;
+    selection-background-color: #4a90e2; /* цвет выделения */
+    selection-color: #ffffff;             /* цвет текста при выделении */
+}
+
+/* === Эффект при фокусе === */
+QLineEdit:focus {
+    border: 2px solid #4a90e2;
+    outline: none;
+}
+QTextEdit{
+border: 2px solid #4a90e2;
+  outline: none;
+    background-color: #2b2b2b;    /* тёмный фон */
+    color: #ffffff;               /* белый текст */
+    border: 1px solid #555555;    /* тёмная граница */
+    border-radius: 6px;
+    padding: 6px 8px;
+    selection-background-color: #4a90e2; /* цвет выделения */
+    selection-color: #ffffff;    
+}
+</string>
+  </property>
+  <widget class="QPushButton" name="btnOk">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>310</y>
+     <width>90</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ok</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnClose">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>310</y>
+     <width>90</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>36</y>
+     <width>541</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLineEdit" name="lineEditFile_ManagerStudent_">
+      <property name="placeholderText">
+       <string>Файл со студенатами для представления</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextEdit" name="textEdit"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnBrowse">
+      <property name="text">
+       <string>📂Выбрать</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

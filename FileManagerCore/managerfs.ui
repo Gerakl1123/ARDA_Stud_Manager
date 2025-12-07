@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ManagerFS</class>
+ <widget class="QWidget" name="ManagerFS">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>665</width>
+    <height>696</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Основной стиль в стиле 7-Zip */
+QWidget {
+    background-color: #f0f0f0;
+    color: #000000;
+    font-family: &quot;Segoe UI&quot;, Tahoma, sans-serif;
+    font-size: 9pt;
+}
+
+/* Стиль для кнопок */
+QPushButton {
+    background-color: #e1e1e1;
+    border: 1px solid #a0a0a0;
+    border-radius: 3px;
+    padding: 4px 12px;
+    font-weight: normal;
+    min-width: 60px;
+    min-height: 22px;
+}
+
+QPushButton:hover {
+    background-color: #e8e8e8;
+    border: 1px solid #909090;
+}
+
+QPushButton:pressed {
+    background-color: #d0d0d0;
+    border: 1px solid #808080;
+}
+
+QPushButton:disabled {
+    background-color: #f5f5f5;
+    color: #a0a0a0;
+    border: 1px solid #d0d0d0;
+}
+
+/* Кнопка по умолчанию (акцентная) */
+QPushButton[default=&quot;true&quot;] {
+    background-color: #0078d4;
+    color: white;
+    border: 1px solid #005a9e;
+}
+
+QPushButton[default=&quot;true&quot;]:hover {
+    background-color: #106ebe;
+    border: 1px solid #004578;
+}
+
+QPushButton[default=&quot;true&quot;]:pressed {
+    background-color: #005a9e;
+    border: 1px solid #003966;
+}
+
+/* Стиль для ListView */
+QListView {
+    background-color: white;
+    border: 1px solid #a0a0a0;
+    border-radius: 2px;
+    outline: 0;
+    padding: 1px;
+}
+
+QListView::item {
+    background-color: white;
+    border: none;
+    padding: 2px 4px;
+    margin: 1px;
+}
+
+QListView::item:hover {
+    background-color: #e5f3ff;
+}
+
+QListView::item:selected {
+    background-color: #0078d4;
+    color: white;
+}
+
+QListView::item:selected:!active {
+    background-color: #e1e1e1;
+    color: black;
+}
+
+/* Полоса прокрутки */
+QScrollBar:vertical {
+    background-color: #f0f0f0;
+    width: 15px;
+    margin: 0px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #c0c0c0;
+    border-radius: 7px;
+    min-height: 20px;
+    margin: 2px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #a0a0a0;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QScrollBar:horizontal {
+    background-color: #f0f0f0;
+    height: 15px;
+    margin: 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #c0c0c0;
+    border-radius: 7px;
+    min-width: 20px;
+    margin: 2px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #a0a0a0;
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    width: 0px;
+}
+
+/* Дополнительные стили для окон и панелей */
+QMainWindow {
+    background-color: #f0f0f0;
+}
+
+QDialog {
+    background-color: #f0f0f0;
+}
+
+QGroupBox {
+    border: 1px solid #c0c0c0;
+    border-radius: 3px;
+    margin-top: 1ex;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 10px;
+    padding: 0 5px;
+}
+/* Стили для QMenuBar */
+QMenuBar {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #cccccc;
+    padding: 2px;
+}
+
+QMenuBar::item {
+    background-color: transparent;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+
+QMenuBar::item:selected {
+    background-color: #e0e0e0;
+}
+
+QMenuBar::item:pressed {
+    background-color: #d0d0d0;
+}
+
+/* Стили для QMenu */
+QMenu {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QMenu::item {
+    background-color: transparent;
+    padding: 4px 16px 4px 8px;
+    border-radius: 2px;
+}
+
+QMenu::item:selected {
+    background-color: #0078d4;
+    color: white;
+}
+
+QMenu::item:pressed {
+    background-color: #106ebe;
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 2px 4px;
+}
+
+/* Стили для QWidgetAction (чекбокс в меню) */
+QCheckBox {
+    spacing: 4px;
+    padding: 4px 8px;
+}
+
+QCheckBox::indicator {
+    width: 13px;
+    height: 13px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: 1px solid #a0a0a0;
+    background-color: #ffffff;
+    border-radius: 2px;
+}
+
+QCheckBox::indicator:unchecked:hover {
+    border: 1px solid #707070;
+}
+
+QCheckBox::indicator:checked {
+    border: 1px solid #0078d4;
+    background-color: #0078d4;
+    border-radius: 2px;
+}
+
+QCheckBox::indicator:checked:hover {
+    border: 1px solid #106ebe;
+    background-color: #106ebe;
+}</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>470</y>
+     <width>541</width>
+     <height>217</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="btnCreateFile">
+      <property name="text">
+       <string>Создать Файл</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="btnCreate">
+      <property name="text">
+       <string>Создать Директорию</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QPushButton" name="btnQuit">
+      <property name="text">
+       <string>Выйти</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="btnDelete">
+      <property name="text">
+       <string>Удалить(Delete)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="statusLabel">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QPushButton" name="btnRename">
+      <property name="text">
+       <string>Переименовать</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>13</x>
+     <y>30</y>
+     <width>641</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QLineEdit" name="lineEdiFindPath">
+      <property name="placeholderText">
+       <string>Путь</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEditFind">
+      <property name="placeholderText">
+       <string>Найти файлы</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="comboBoxExtisions">
+      <property name="placeholderText">
+       <string>Расширение</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QTableView" name="tableView">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>641</width>
+     <height>381</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTableView::item:selected {
+    background-color: lightblue; /* Или любой другой оттенок синего */
+    color: black; /* Цвет текста при выделении. Можно оставить прежним или изменить на более контрастный */
+}
+
+</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

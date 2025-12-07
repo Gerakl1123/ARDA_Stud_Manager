@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddWork</class>
+ <widget class="QDialog" name="AddWork">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>765</width>
+    <height>615</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* === СТИЛЬ ARDA === */
+
+/* БАЗОВЫЙ СТИЛЬ */
+QWidget {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-family: &quot;Segoe UI&quot;, Arial;
+    font-size: 14px;
+    outline: none;
+    border: none;
+}
+
+/* LINE EDIT - как поля ввода на сайте */
+QLineEdit {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    selection-background-color: #2a2a2a;
+    selection-color: #ffffff;
+}
+
+QLineEdit:focus {
+    border-color: #444;
+    background-color: #1f1f1f;
+}
+
+QLineEdit:hover {
+    border-color: #555;
+}
+
+QLineEdit:disabled {
+    color: #666;
+    background-color: #151515;
+    border-color: #222;
+}
+
+/* КНОПКИ - как кнопки на сайте */
+QPushButton {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: normal;
+    min-height: 20px;
+    min-width: 80px;
+}
+
+QPushButton:hover {
+    background-color: #333333;
+    border-color: #444;
+}
+
+QPushButton:pressed {
+    background-color: #3a3a3a;
+    border-color: #555;
+}
+
+QPushButton:disabled {
+    background-color: #1a1a1a;
+    color: #666;
+    border-color: #222;
+}
+
+/* КАЛЕНДАРЬ */
+QCalendarWidget {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+QCalendarWidget QToolButton {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 3px;
+    padding: 6px 10px;
+    font-weight: normal;
+}
+
+QCalendarWidget QToolButton:hover {
+    background-color: #333333;
+}
+
+QCalendarWidget QMenu {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #333;
+}
+
+QCalendarWidget QSpinBox {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 3px;
+    padding: 4px;
+}
+
+QCalendarWidget QAbstractItemView:enabled {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    selection-background-color: #333333;
+    selection-color: #ffffff;
+    border: 1px solid #222;
+}
+
+QCalendarWidget QAbstractItemView:disabled {
+    color: #666;
+}
+
+/* TIME EDIT */
+QTimeEdit {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+QTimeEdit:focus {
+    border-color: #444;
+}
+
+QTimeEdit::up-button, QTimeEdit::down-button {
+    background-color: #2a2a2a;
+    border: 1px solid #333;
+    width: 18px;
+    border-radius: 2px;
+}
+
+QTimeEdit::up-button:hover, QTimeEdit::down-button:hover {
+    background-color: #333333;
+}
+
+QTimeEdit::up-arrow {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #ffffff;
+}
+
+QTimeEdit::down-arrow {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #ffffff;
+}
+
+/* COMBOBOX */
+QComboBox {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px 12px;
+    min-width: 100px;
+}
+
+QComboBox:focus {
+    border-color: #444;
+}
+
+QComboBox:hover {
+    border-color: #555;
+}
+
+QComboBox::drop-down {
+    width: 20px;
+    background-color: #2a2a2a;
+    border-left: 1px solid #333;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+QComboBox::down-arrow {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #ffffff;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #333;
+    selection-background-color: #333333;
+    selection-color: #ffffff;
+    padding: 4px;
+}
+
+QComboBox QAbstractItemView::item {
+    padding: 6px 8px;
+    border-radius: 2px;
+}
+
+QComboBox QAbstractItemView::item:hover {
+    background-color: #333333;
+}
+
+/* SCROLLBAR */
+QScrollBar:vertical {
+    background: #1a1a1a;
+    width: 10px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: #333;
+    border-radius: 5px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #444;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+}
+
+/* HEADER (для таблиц если будут) */
+QHeaderView::section {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #333;
+    padding: 6px;
+    font-weight: normal;
+}
+
+/* PROGRESS BAR */
+QProgressBar {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 4px;
+    text-align: center;
+}
+
+QProgressBar::chunk {
+    background-color: #333333;
+    border-radius: 3px;
+}</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>540</y>
+     <width>621</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Orientation::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>30</y>
+     <width>691</width>
+     <height>481</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLineEdit" name="lineEditName"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEditDesc"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Дата окончания</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCalendarWidget" name="calendarWidget"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Время окончания</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTimeEdit" name="timeEdit"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Приоритет</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="comboBoxPriority">
+      <item>
+       <property name="text">
+        <string>Легкий</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Нормальный</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Высший</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Экстримальный</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>AddWork</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>AddWork</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

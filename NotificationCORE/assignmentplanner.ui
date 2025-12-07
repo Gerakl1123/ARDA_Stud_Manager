@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AssignmentPlanner</class>
+ <widget class="QWidget" name="AssignmentPlanner">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Общие стили */
+QMainWindow {
+    background-color: #282c34; /* Темно-серый фон */
+    color: #abb2bf; /* Светло-серый текст */
+    font-family: &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+    font-size: 14px;
+}
+
+/* Прокрутка (если используете QScrollArea или подобные) */
+QScrollBar:vertical {
+    background: #3e4451;
+    width: 8px;
+    margin: 0px 0 0px 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #528bff;
+    min-height: 20px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    background: none;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+    width: 0px;
+    height: 0px;
+    background: none;
+}
+
+/* Кнопки */
+QPushButton {
+    background-color: #528bff; /* Синий акцентный цвет */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #669eff; /* Более светлый синий при наведении */
+}
+
+QPushButton:pressed {
+    background-color: #3a72d6; /* Более темный синий при нажатии */
+}
+
+/* Поля ввода */
+QLineEdit, QTextEdit {
+    background-color: #3e4451;
+    color: #abb2bf;
+    border: 1px solid #528bff;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+/* Выпадающие списки */
+QComboBox {
+    background-color: #3e4451;
+    color: #abb2bf;
+    border: 1px solid #528bff;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+QComboBox::drop-down {
+    border: 0px;
+}
+
+QComboBox::down-arrow {
+    image: url(:/down_arrow.png); /* Замените на свою иконку стрелки */
+    width: 12px;
+    height: 12px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #3e4451;
+    color: #abb2bf;
+    border: 1px solid #528bff;
+    selection-background-color: #528bff;
+}
+
+/* Боковая панель (если используете QWidget или QFrame) */
+QWidget#sideMenu, QFrame#sideMenu { /* ID боковой панели (важно!) */
+    background-color: #343a40; /* Темно-серый, чуть светлее основного фона */
+    color: #abb2bf;
+    border: none;
+}
+
+/* Список меню (QListWidget) */
+QListWidget {
+    background-color: transparent;
+    color: #abb2bf;
+    border: none;
+    outline: none; /* Убирает рамку при фокусе */
+}
+
+QListWidget::item {
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin: 2px 0; /* Небольшой отступ между элементами */
+}
+
+QListWidget::item:selected {
+    background-color: #528bff; /* Синий фон при выделении */
+    color: white;
+}
+
+QListWidget::item:hover {
+    background-color: #3e4451; /* Более светлый фон при наведении */
+}
+
+/* Tooltips */
+QToolTip {
+    background-color: #3e4451;
+    color: #abb2bf;
+    border: 1px solid #528bff;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+/* Labels */
+QLabel {
+    color: #abb2bf;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>70</y>
+     <width>491</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="btnAdd">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Добавить задачу</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnPriview">
+      <property name="text">
+       <string>Просмотр</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnNotificationSettenings">
+      <property name="text">
+       <string>Оповещения</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnLeave">
+      <property name="text">
+       <string>Выйти</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Coursework</class>
+ <widget class="QWidget" name="Coursework">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1285</width>
+    <height>714</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Общий стиль для всего приложения */
+QWidget {
+    background-color: #1e1e2f;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+/* Группа */
+QGroupBox {
+    border: 1px solid #3a3f4b;
+    border-radius: 8px;
+    margin-top: 20px;
+    padding: 12px 16px;
+    background-color: #2b2b3c;
+    color: #e0e0e0;
+}
+
+QGroupBox:title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 6px;
+    font-weight: bold;
+    font-size: 15px;
+    color: #ffffff;
+}
+
+/* Метки */
+QLabel {
+    color: #d6d6d6;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 4px;
+}
+
+QLabel#sectionTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: #87cefa; /* light sky blue */
+    padding: 4px 0;
+}
+
+/* Кнопки */
+QPushButton {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 24px 10px 40px; /* добавил слева больше, чтобы текст не прилипал к иконке */
+    font-size: 15px;
+    font-weight: 600;
+    qproperty-iconSize: 20px 20px; /* размер иконки */
+}
+
+QPushButton:hover {
+    background-color: #357ab8;
+}
+
+QPushButton:pressed {
+    background-color: #2e5c9a;
+}
+
+QToolButton &gt; QLabel {
+    margin-top: 8px; /* Отступ текста от иконки */
+}
+
+
+/* Поля ввода */
+QLineEdit {
+    background-color: #2e2e3e;
+    color: #ffffff;
+    border: 1px solid #4a4a60;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+QLineEdit:focus {
+    border: 1px solid #4a90e2;
+    background-color: #3a3a50;
+}
+
+/* Таблица */
+QTableWidget {
+    background-color: #262637;
+    alternate-background-color: #2e2e42;
+    gridline-color: #3a3f4b;
+    border: 1px solid #3a3f4b;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #e0e0e0;
+    selection-background-color: #4a90e2;
+    selection-color: #ffffff;
+}
+
+QHeaderView::section {
+    background-color: #333344;
+    color: #ffffff;
+    padding: 6px;
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+QTableCornerButton::section {
+    background-color: #333344;
+    border: none;
+}
+
+/* Скроллбары (для виджетов с прокруткой) */
+QScrollBar:vertical {
+    background: #1e1e2f;
+    width: 12px;
+    margin: 0px;
+    border-radius: 6px;
+}
+
+QScrollBar::handle:vertical {
+    background: #4a90e2;
+    min-height: 20px;
+    border-radius: 6px;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QScrollBar:horizontal {
+    background: #1e1e2f;
+    height: 12px;
+    margin: 0px;
+    border-radius: 6px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #4a90e2;
+    min-width: 20px;
+    border-radius: 6px;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0px;
+}
+
+</string>
+  </property>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>1271</width>
+     <height>251</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>ID</string>
+    </property>
+    <property name="font">
+     <font>
+      <stylestrategy>PreferDefault</stylestrategy>
+      <kerning>false</kerning>
+      <fontweight>Black</fontweight>
+     </font>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>ФИО</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Зачетная книжка</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Группа</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Тема</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Куратор/Руководитель</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Этап Работы</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Оценка</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Дата Сдачи</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>310</y>
+     <width>981</width>
+     <height>324</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="btnAdd">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/plus.png);</string>
+      </property>
+      <property name="text">
+       <string>                            Добавить</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnSave">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/Save.png);</string>
+      </property>
+      <property name="text">
+       <string>                            Сохранить</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnUpload">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/Upload.png);</string>
+      </property>
+      <property name="text">
+       <string>                            Загрузить</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnPrinter">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/Printer.png);</string>
+      </property>
+      <property name="text">
+       <string>                                     Печатать в PDF</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnClear">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/Clear.png);</string>
+      </property>
+      <property name="text">
+       <string>                            Очистить</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="bntDelete">
+      <property name="styleSheet">
+       <string notr="true">image: url(:/icons/Delete.png);</string>
+      </property>
+      <property name="text">
+       <string>                                      Удалить Строку</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnBack">
+      <property name="styleSheet">
+       <string notr="true">image:url(:/icons/quit.png)</string>
+      </property>
+      <property name="text">
+       <string>                       Выйти</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLineEdit" name="lineEditFind">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>10</y>
+     <width>1061</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

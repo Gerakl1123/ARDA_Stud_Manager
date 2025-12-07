@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BackUp</class>
+ <widget class="QWidget" name="BackUp">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>784</width>
+    <height>690</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* ------------------- Общий фон ------------------- */
+QWidget {
+    background-color: #f0f0f0;  /* нейтральный светлый фон */
+    font-family: &quot;Segoe UI&quot;, &quot;Tahoma&quot;, sans-serif;
+    font-size: 10pt;
+    color: #222222;
+}
+
+/* ------------------- Кнопки ------------------- */
+QPushButton {
+    background-color: #e6e6e6;
+    border: 1px solid #a0a0a0;
+    padding: 5px 12px;
+    border-radius: 4px;
+}
+
+QPushButton:hover {
+    background-color: #d0d0d0;
+}
+
+QPushButton:pressed {
+    background-color: #b8b8b8;
+}
+
+/* ------------------- QTextEdit ------------------- */
+QTextEdit {
+    background-color: #ffffff;
+    border: 1px solid #c0c0c0;
+    padding: 4px;
+    selection-background-color: #4a90e2;
+    selection-color: #ffffff;
+}
+
+/* ------------------- QTableView ------------------- */
+QTableView {
+    background-color: #ffffff;
+    alternate-background-color: #f7f7f7;
+    gridline-color: #d0d0d0;
+    border: 1px solid #c0c0c0;
+    selection-background-color: #4a90e2;
+    selection-color: #ffffff;
+}
+
+QHeaderView::section {
+    background-color: #e0e0e0;
+    padding: 4px;
+    border: 1px solid #c0c0c0;
+    font-weight: bold;
+}
+
+/* ------------------- QListView ------------------- */
+QListView {
+    background-color: #ffffff;
+    alternate-background-color: #f7f7f7;
+    border: 1px solid #c0c0c0;
+    padding: 2px;
+    outline: 0;
+    selection-background-color: #4a90e2;
+    selection-color: #ffffff;
+    show-decoration-selected: 1;
+}
+
+QListView::item {
+    padding: 4px 6px;
+    margin: 1px;
+    border-radius: 4px;
+}
+
+QListView::item:hover {
+    background-color: #e0e0e0;
+}
+
+QListView::item:selected {
+    background-color: #4a90e2;
+    color: #ffffff;
+}
+
+/* ------------------- QProgressBar ------------------- */
+QProgressBar {
+    border: 1px solid #a0a0a0;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #e0e0e0;
+}
+
+QProgressBar::chunk {
+    background-color: #4a90e2;
+    border-radius: 5px;
+}
+
+/* ------------------- Скроллбары ------------------- */
+QScrollBar:vertical {
+    border: 1px solid #c0c0c0;
+    background: #f0f0f0;
+    width: 12px;
+}
+
+QScrollBar::handle:vertical {
+    background: #c0c0c0;
+    min-height: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #a0a0a0;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QScrollBar:horizontal {
+    border: 1px solid #c0c0c0;
+    background: #f0f0f0;
+    height: 12px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #c0c0c0;
+    min-width: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #a0a0a0;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0px;
+}
+</string>
+  </property>
+  <widget class="QPushButton" name="bntBckUp">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>380</y>
+     <width>371</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Скопировать все элементы</string>
+   </property>
+  </widget>
+  <widget class="QListView" name="sourceB">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>20</y>
+     <width>311</width>
+     <height>351</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QListView" name="BackUpB">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>20</y>
+     <width>321</width>
+     <height>351</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="textEdit">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>480</y>
+     <width>641</width>
+     <height>201</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBar">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>450</y>
+     <width>641</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>24</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>0</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>От куда</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>0</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Куда</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnQuit">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>330</y>
+     <width>151</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Выйти</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSelectElement">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>410</y>
+     <width>371</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Скопировать выделеные элменты</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

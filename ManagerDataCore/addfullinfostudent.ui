@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddFullInfoStudent</class>
+ <widget class="QWidget" name="AddFullInfoStudent">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Основное окно */
+QWidget {
+    background-color: #f4f6f9;   /* светлый фон */
+    font-family: Segoe UI, Arial, sans-serif;
+    font-size: 12pt;
+    color: #2c3e50;
+}
+
+/* Заголовки */
+QLabel {
+    font-weight: bold;
+    font-size: 13pt;
+    color: #1a1a1a;
+}
+
+/* Поля ввода */
+QLineEdit, QDateEdit, QComboBox, QTextEdit {
+    background-color: #ffffff;
+    border: 1px solid #b0bec5;
+    border-radius: 6px;
+    padding: 4px 6px;
+}
+
+QLineEdit:focus, QDateEdit:focus, QComboBox:focus, QTextEdit:focus {
+    border: 1px solid #1976d2;
+    background-color: #f9fcff;
+}
+
+/* Кнопки */
+QPushButton {
+    background-color: #1976d2;
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: 600;
+}
+
+QPushButton:hover {
+    background-color: #1565c0;
+}
+
+QPushButton:pressed {
+    background-color: #0d47a1;
+}
+
+/* Секции */
+QGroupBox {
+    border: 1px solid #b0bec5;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 8px;
+    font-weight: bold;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px;
+}
+
+/* Скроллбар */
+QScrollBar:vertical {
+    border: none;
+    background: #e0e0e0;
+    width: 10px;
+    margin: 0px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: #90a4ae;
+    min-height: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #607d8b;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>140</y>
+     <width>451</width>
+     <height>179</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="btnPassport">
+      <property name="text">
+       <string>Паспортные Данные</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnExtraData">
+      <property name="text">
+       <string>Доп.Данные</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnLeave">
+      <property name="text">
+       <string>Выйти</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

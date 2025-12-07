@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddStudentDialog</class>
+ <widget class="QDialog" name="AddStudentDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>541</width>
+    <height>334</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+
+/* === QLineEdit поля === */
+QLineEdit {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 6px 8px;
+    selection-background-color: #a8d0ff;
+}
+
+
+
+/* === QPushButton === */
+QPushButton {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+}
+
+QPushButton:hover {
+    background-color: #357abd;
+}
+
+QPushButton:pressed {
+    background-color: #2a5d9f;
+}
+
+/* === QDialogButtonBox кнопки === */
+QDialogButtonBox QPushButton {
+    min-width: 80px;
+}
+
+/* === QLabels === */
+QLabel {
+    font-weight: 500;
+}
+
+/* === QLineEdit поля (тёмная тема) === */
+QLineEdit {
+    background-color: #2b2b2b;    /* тёмный фон */
+    color: #ffffff;               /* белый текст */
+    border: 1px solid #555555;    /* тёмная граница */
+    border-radius: 6px;
+    padding: 6px 8px;
+    selection-background-color: #4a90e2; /* цвет выделения */
+    selection-color: #ffffff;             /* цвет текста при выделении */
+}
+
+/* === Эффект при фокусе === */
+QLineEdit:focus {
+    border: 2px solid #4a90e2;
+    outline: none;
+}</string>
+  </property>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>471</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLineEdit" name="lineEditFile">
+      <property name="placeholderText">
+       <string>Файл сохранения</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEditData">
+      <property name="placeholderText">
+       <string>Данные формате ФИО БАЛЛ</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnBrowse">
+      <property name="text">
+       <string>Выбор 📂</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="btnOk">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>250</y>
+     <width>90</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ок</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnClose">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>250</y>
+     <width>90</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Закрыть</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
