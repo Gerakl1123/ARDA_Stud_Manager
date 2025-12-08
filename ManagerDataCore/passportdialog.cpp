@@ -4,11 +4,13 @@
 #include<QComboBox>
 #include<QPushButton>
 #include"../JsonKeys.h"
+#include"../Serializer.h"
 PassportDialog::PassportDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::PassportDialog)
 {
     ui->setupUi(this);
+    ser = new SerializerData(this);
 
     ui->lineEditName->setPlaceholderText("Имя");
     ui->lineEditMiddleName->setPlaceholderText("Фамилия");
@@ -31,9 +33,13 @@ PassportDialog::PassportDialog(QWidget *parent)
         parser->SaveJsonPassport(this);
     });
 
+    ser->DataSerelizationPassport(this);
+
 }
 
 PassportDialog::~PassportDialog()
 {
+
+    ser->DataSerelizationPassport(this);
     delete ui;
 }

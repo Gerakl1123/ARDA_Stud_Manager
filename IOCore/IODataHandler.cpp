@@ -813,6 +813,7 @@ void ImportSaveData::loadListInformationExtra(QStringListModel *model, QWidget *
     if (diplomaIssuedBy == "-") diplomaIssuedBy.clear();
 
     QStringList extraDataList{
+        "ID: " + ID,
         "СНИЛС: " + snils,
         "Номер Телефона: " + phone,
         "Адрес Почты: " + email,

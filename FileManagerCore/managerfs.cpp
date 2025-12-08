@@ -42,6 +42,7 @@ ManagerFS::ManagerFS(filemanagerdialog* dlg, QWidget *parent)
     actionBox->setDefaultWidget(defaultExtesions);
     menu->addAction(actionBox);
     menuBar->addMenu(menu);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     model->setFilter(QDir::AllEntries);
     model->setRootPath("");
@@ -183,6 +184,7 @@ ManagerFS::ManagerFS(filemanagerdialog* dlg, QWidget *parent)
         QModelIndex index = SortModel->mapFromSource(model->setRootPath(path));
         ui->tableView->setRootIndex(index);
     });
+
 
     worker->moveToThread(threadWorker);
     threadWorker->start();

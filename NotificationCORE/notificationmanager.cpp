@@ -55,7 +55,7 @@ void NotificationManager::updateNotifications()
     });
 }
 
-int NotificationManager::getInt(Notification notif)
+int NotificationManager::getInt(Notification&& notif)
 {
     return static_cast<int>(notif);
 }
@@ -219,28 +219,28 @@ void NotificationManager::NotificationStart(Notification notific, std::optional<
         const Task& task = data->get();
         QSystemTrayIcon* trayIcon = new QSystemTrayIcon;
 
-        trayIcon->setIcon(QIcon(":/icons/not.png"));
+        trayIcon->setIcon(QIcon(":/icons/Delete.png"));
         trayIcon->setToolTip("ARDA Manager-ToDo");
         trayIcon->show();
 
         trayIcon->showMessage(
             "📋 У вас есть активная задача",
             "Задача: " + task.nameT + "\n"
-                                      "📅 Срок: " + task.dateT.toString("dd.MM.yyyy") + "\n"
-                                                      "⏰ Время: " + task.timeT.toString("hh:mm") + "\n"
-                                                 "⚡ Приоритет: " + task.priorityT,
+            "📅 Срок: " + task.dateT.toString("dd.MM.yyyy") + "\n"
+            "⏰ Время: " + task.timeT.toString("hh:mm") + "\n"
+            "⚡ Приоритет: " + task.priorityT,
             QSystemTrayIcon::Information,
-            getInt(notific)
+            getInt(std::move(notific))
             );
 
-        connect(trayIcon, &QSystemTrayIcon::messageClicked, this, [this]() {
-            if (!priview_) {
-                priview_ = new PriviewWorks(planner_);
-            }
-            priview_->exec();
-        });
+        // connect(trayIcon, &QSystemTrayIcon::messageClicked, this, [this]() {
+        //     if (!priview_) {
+        //         priview_ = new PriviewWorks(planner_);
+        //     }
+        //     priview_->exec();
+        // });
 
-        QTimer::singleShot(getInt(notific) + 1000, trayIcon, &QSystemTrayIcon::deleteLater);
+        QTimer::singleShot(getInt(std::move(notific)) + 1000, trayIcon, &QSystemTrayIcon::deleteLater);
     }
 }
 

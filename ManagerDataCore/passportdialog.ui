@@ -174,7 +174,7 @@ QScrollBar::handle:vertical:hover {
      <widget class="QLineEdit" name="lineEditKemVidan"/>
     </item>
     <item row="0" column="0">
-     <widget class="QLineEdit" name="lineEditID">
+     <widget class="QLineEdit" name="lineEditIDPassport">
       <property name="placeholderText">
        <string>Уникальный ID</string>
       </property>

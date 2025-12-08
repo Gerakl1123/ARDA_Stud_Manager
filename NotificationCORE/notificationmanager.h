@@ -77,7 +77,7 @@ private:
     void SetChtsInfo();
     void instance();
     void setupConnections();
-    int getInt(Notification notif);
+    int getInt(Notification &&notif);
 };
 
 #endif // NOTIFICATIONMANAGER_H

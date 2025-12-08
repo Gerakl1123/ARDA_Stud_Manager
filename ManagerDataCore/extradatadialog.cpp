@@ -2,6 +2,8 @@
 #include "ui_extradatadialog.h"
 #include<QDate>
 
+
+
 ExtraDataDialog::ExtraDataDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ExtraDataDialog)
@@ -11,20 +13,22 @@ ExtraDataDialog::ExtraDataDialog(QWidget *parent)
     ui->spinBoxYearGraduationAttestat->setValue(QDate::currentDate().year());
     ui->spinBoxYearDiploma->setValue(QDate::currentDate().year());
 
+    ser = new SerializerData(this);
+
     connect(ui->checkBoxPreviousPlace,&QCheckBox::checkStateChanged,this,[=](Qt::CheckState state){
         if(static_cast<int>(state) == 2)
         {
-            ui->lineEditSerialDiploma->setEnabled(true);
-            ui->lineEditGetDiploma->setEnabled(true);
+            ui->lineEditSerialDiploma->setReadOnly(false);
+            ui->lineEditGetDiploma->setReadOnly(false);
             ui->spinBoxYearDiploma->setReadOnly(false);
-            ui->checkBoxDiploma->setEnabled(true);
+            ui->checkBoxDiploma->setCheckable(true);
         }else
         {
 
-            ui->lineEditSerialDiploma->setEnabled(false);
-            ui->lineEditGetDiploma->setEnabled(false);
+            ui->lineEditSerialDiploma->setReadOnly(true);
+            ui->lineEditGetDiploma->setReadOnly(true);
             ui->spinBoxYearDiploma->setReadOnly(true);
-            ui->checkBoxDiploma->setEnabled(false);
+            ui->checkBoxDiploma->setCheckable(false);
         }
     });
 
@@ -32,10 +36,15 @@ ExtraDataDialog::ExtraDataDialog(QWidget *parent)
         parser->SaveJsonExtraData(this);
     });
 
+    ser->DataSerelizationExtra(this);
+
+
 }
 
 ExtraDataDialog::~ExtraDataDialog()
 {
+    ser->DataSerelizationExtra(this);
+
     delete ui;
 }
 

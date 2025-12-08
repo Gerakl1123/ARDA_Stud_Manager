@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include"../parserjson.h"
+#include"../Serializer.h"
+
 namespace Ui {
 class PassportDialog;
 }
@@ -18,6 +20,7 @@ public:
 private:
     Ui::PassportDialog *ui;
     std::unique_ptr<ParserJson> parser;
+    SerializerData* ser;
 };
 
 #endif // PASSPORTDIALOG_H

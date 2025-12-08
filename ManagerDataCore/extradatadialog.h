@@ -4,6 +4,7 @@
 #include <QDialog>
 #include"../parserjson.h"
 #include<QPushButton>
+#include"../Serializer.h"
 namespace Ui {
 class ExtraDataDialog;
 }
@@ -20,6 +21,7 @@ public:
 private:
     Ui::ExtraDataDialog *ui;
     std::unique_ptr<ParserJson> parser;
+    SerializerData* ser;
 };
 
 #endif // EXTRADATADIALOG_H

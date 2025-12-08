@@ -166,6 +166,15 @@ QCheckBox::indicator:checked {
      <height>29</height>
     </rect>
    </property>
+   <property name="minimum">
+    <number>2025</number>
+   </property>
+   <property name="maximum">
+    <number>2976</number>
+   </property>
+   <property name="stepType">
+    <enum>QAbstractSpinBox::StepType::AdaptiveDecimalStepType</enum>
+   </property>
   </widget>
   <widget class="QCheckBox" name="checkBoxAttestat">
    <property name="geometry">
@@ -289,6 +298,18 @@ QCheckBox::indicator:checked {
    <property name="readOnly">
     <bool>true</bool>
    </property>
+   <property name="minimum">
+    <number>2025</number>
+   </property>
+   <property name="maximum">
+    <number>2976</number>
+   </property>
+   <property name="singleStep">
+    <number>1</number>
+   </property>
+   <property name="stepType">
+    <enum>QAbstractSpinBox::StepType::AdaptiveDecimalStepType</enum>
+   </property>
   </widget>
   <widget class="QLineEdit" name="lineEditGetDiploma">
    <property name="geometry">
@@ -345,7 +366,7 @@ QCheckBox::indicator:checked {
     <string>Сведения о родителях(Фамилия, имя, отчество, почтовый адрес, место работы и должность)</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEditID">
+  <widget class="QLineEdit" name="lineEditIDExtra">
    <property name="geometry">
     <rect>
      <x>20</x>

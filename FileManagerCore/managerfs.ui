@@ -322,13 +322,6 @@ QCheckBox::indicator:checked:hover {
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QComboBox" name="comboBoxExtisions">
-      <property name="placeholderText">
-       <string>Расширение</string>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QTableView" name="tableView">
