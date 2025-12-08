@@ -21,6 +21,10 @@ public:
     void DataSerelizationMenuStudentRecords(QTableWidget* t,QWidget* p,ModeSerelization);
     void DataSerelizationCourse(QTableWidget* t,QWidget* p);
     void DataSerelizationDiploma(QTableWidget* t,QWidget* p);
+
+    void DataSerelizationExtra(QWidget* thisWidget);
+    void DataSerelizationPassport(QWidget* thisWidget);
+
     ~SerializerData() override;
 
 private:

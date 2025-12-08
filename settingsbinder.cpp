@@ -1,6 +1,10 @@
 #include "settingsbinder.h"
 #include"JsonKeys.h"
 #include"LogicOperation.h"
+#include<QCheckBox>
+#include<QSpinBox>
+#include<QComboBox>
+#include<QDateEdit>
 
 SettingsBinder::SettingsBinder(QObject *parent)
     : QObject{parent}
@@ -119,5 +123,88 @@ void SettingsBinder::ConnectionsDiploma(QTableWidget *t, const QString &org, con
 
     });
 
+}
+
+void SettingsBinder::ConnectionsExtra(QWidget *thisWidget, const QString &org, const QString &app)
+{
+
+
+    static QSettings mainS(org,app);
+
+    if(auto* LineEdit = dynamic_cast<QLineEdit*>(thisWidget))
+    {
+
+
+        QObject::connect(LineEdit,&QLineEdit::textChanged,[=](const QString& text){
+
+            mainS.setValue(LineEdit->objectName(),text);
+
+        });
+        mainS.sync();
+        return;
+    }else if(auto* CheckBox = dynamic_cast<QCheckBox*>(thisWidget))
+    {
+
+        QObject::connect(CheckBox,&QCheckBox::checkStateChanged,[=](Qt::CheckState state){
+
+
+            mainS.setValue(CheckBox->objectName(),static_cast<int>(state));
+
+        });
+        mainS.sync();
+        return;
+    }else if(auto* SpinBox = dynamic_cast<QSpinBox*>(thisWidget))
+    {
+
+
+        QObject::connect(SpinBox,&QSpinBox::valueChanged,[=](int value){
+
+            mainS.setValue(SpinBox->objectName(),value);
+
+        });
+        mainS.sync();
+        return;
+    }
+}
+
+void SettingsBinder::ConnectionsPassport(QWidget *thisWidget, const QString &org, const QString &app)
+{
+
+    static QSettings mainS(org,app);
+
+
+    if(auto* LineEdit = dynamic_cast<QLineEdit*>(thisWidget))
+    {
+
+
+        QObject::connect(LineEdit,&QLineEdit::textChanged,[=](const QString& text){
+
+            mainS.setValue(LineEdit->objectName(),text);
+
+        });
+        mainS.sync();
+        return;
+    }else if(auto *ComboBox = dynamic_cast<QComboBox*>(thisWidget))
+    {
+
+        QObject::connect(ComboBox,&QComboBox::currentTextChanged,[=](const QString& text){
+
+            mainS.setValue(ComboBox->objectName(),text);
+
+        });
+        mainS.sync();
+        return;
+    }
+    else if( auto* Date = dynamic_cast<QDateEdit*>(thisWidget))
+    {
+
+        QObject::connect(Date,&QDateEdit::dateChanged,[=](const QDate& date){
+
+            mainS.setValue(Date->objectName(),date);
+        });
+
+        mainS.sync();
+        return;
+    }
 }
 

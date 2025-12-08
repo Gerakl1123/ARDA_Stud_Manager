@@ -46,7 +46,7 @@ void ParserJson::SaveJsonPassport(QWidget *w)
 
     QString ID;
 
-    ID = w->findChild<QLineEdit*>("lineEditID")->text();
+    ID = w->findChild<QLineEdit*>("lineEditIDPassport")->text();
 
     bool unique_ID = Validator::validIDJson(fileName,ID);
 
@@ -120,7 +120,7 @@ void ParserJson::SaveJsonExtraData(QWidget *w)
     QList<QLineEdit*> lineEdits = w->findChildren<QLineEdit*>();
     QList<QCheckBox*> checkBoxes = w->findChildren<QCheckBox*>();
 
-    QString ID = w->findChild<QLineEdit*>("lineEditID")->text();
+    QString ID = w->findChild<QLineEdit*>("lineEditIDExtra")->text();
 
     bool unique_ID = Validator::validIDJson(FileName,ID);
 

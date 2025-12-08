@@ -19,6 +19,9 @@ public:
     void ConnectionsCourseWork(QTableWidget* t,const QString& org,const QString& app);
     void ConnectionsDiploma(QTableWidget* t,const QString& org,const QString& app);
 
+    void ConnectionsExtra(QWidget* thisWidget,const QString& org, const QString& app);
+    void ConnectionsPassport(QWidget* thisWidget,const QString& org, const QString& app);
+
 private:
     std::unique_ptr<LogicOperation> logicOperation;
 };

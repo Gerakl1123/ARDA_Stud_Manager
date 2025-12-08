@@ -9,6 +9,8 @@
 #include"Validator.h"
 #include"settingsbinder.h"
 #include"LogicOperation.h"
+#include<QSpinBox>
+#include<QCheckBox>
 
 SerializerData::SerializerData(QObject* parent = nullptr)
     : saveDataManager(std::make_unique<ImportSaveData>()),
@@ -126,5 +128,100 @@ void SerializerData::DataSerelizationDiploma(QTableWidget *t, QWidget *p)
 
    binder->ConnectionsDiploma(t,SerelizationData::ORG_NAME,app);
 
+
+}
+
+void SerializerData::DataSerelizationExtra(QWidget *thisWidget)
+{
+
+
+    binder = new SettingsBinder(thisWidget);
+
+    QString app = "DataStudentsExtra";
+    QSettings mainS(SerelizationData::ORG_NAME,app);
+
+    QList<QLineEdit*> lineEdits = thisWidget->findChildren<QLineEdit*>();
+    QList<QSpinBox*> SpinBoxes = thisWidget->findChildren<QSpinBox*>();
+    QList<QCheckBox*> CheckBoxes = thisWidget->findChildren<QCheckBox*>();
+
+    for(const auto& line : lineEdits)
+    {
+        QString key = line->objectName();
+
+
+        line->blockSignals(true);
+        line->setText(mainS.value(key).toString());
+        line->blockSignals(false);
+
+        binder->ConnectionsExtra(line,SerelizationData::ORG_NAME,app);
+    }
+    for(const auto& spins : SpinBoxes)
+    {
+        QString key = spins->objectName();
+
+        spins->blockSignals(true);
+        spins->setValue(mainS.value(key).toInt());
+        spins->blockSignals(false);
+
+        binder->ConnectionsExtra(spins,SerelizationData::ORG_NAME,app);
+    }
+    for(const auto& CheckBox : CheckBoxes)
+    {
+        QString key = CheckBox->objectName();
+
+        CheckBox->blockSignals(true);
+        CheckBox->setCheckState(mainS.value(key).toInt());
+        CheckBox->blockSignals(false);
+        binder->ConnectionsExtra(CheckBox,SerelizationData::ORG_NAME,app);
+    }
+
+
+}
+
+void SerializerData::DataSerelizationPassport(QWidget *thisWidget)
+{
+    binder = new SettingsBinder(thisWidget);
+
+    QString app = "DataStudentsPassport";
+    QSettings mainS(SerelizationData::ORG_NAME,app);
+
+    QList<QLineEdit*> lineEdits = thisWidget->findChildren<QLineEdit*>();
+    QList<QComboBox*> ComboBoxes = thisWidget->findChildren<QComboBox*>();
+    QList<QDateEdit*> dateEdits = thisWidget->findChildren<QDateEdit*>();
+
+
+    for(const auto& line : lineEdits)
+    {
+        QString key = line->objectName();
+
+
+        line->blockSignals(true);
+        line->setText(mainS.value(key).toString());
+        line->blockSignals(false);
+
+        binder->ConnectionsPassport(line,SerelizationData::ORG_NAME,app);
+    }
+    for(const auto& comboBox : ComboBoxes)
+    {
+        QString key = comboBox->objectName();
+
+
+        comboBox->blockSignals(true);
+        comboBox->setCurrentText(mainS.value(key).toString());
+        comboBox->blockSignals(false);
+
+        binder->ConnectionsPassport(comboBox,SerelizationData::ORG_NAME,app);
+    }
+    for(const auto& date : dateEdits)
+    {
+        QString key = date->objectName();
+
+
+        date->blockSignals(true);
+        date->setDate(mainS.value(key).toDate());
+        date->blockSignals(false);
+
+        binder->ConnectionsPassport(date,SerelizationData::ORG_NAME,app);
+    }
 
 }
