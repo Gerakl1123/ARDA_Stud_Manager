@@ -72,7 +72,7 @@ QPushButton:disabled {
   <widget class="QListWidget" name="listWidgetDeleter">
    <property name="geometry">
     <rect>
-     <x>750</x>
+     <x>740</x>
      <y>70</y>
      <width>141</width>
      <height>481</height>

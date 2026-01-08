@@ -20,19 +20,20 @@ LogicOperation operations;
 
 void ImportSaveData::loadFromFile(QTableWidget* t,QWidget* p)
 {
-    fileManager  = new FileManager(p);
-    QString path = fileManager->chooseFileJson();
-    QFile file(path);
 
-    try
-    {
-        Validator::isFileValid(file,ModeValidator::ReadFile);
-    }
-    catch(const std::logic_error& e)
-    {
-        QMessageBox::warning(p,"Error",e.what());
-        return;
-    }
+     QString path = fileManager.chooseFileJson();
+     QFile file(path);
+
+     try
+     {
+         Validator::isFileValid(file,ModeValidator::ReadFile);
+     }
+     catch(const std::logic_error& e)
+     {
+         QMessageBox::warning(p,"Error",e.what());
+         return;
+     }
+
 
     QByteArray data = file.readAll();
     QJsonDocument mainDoc = QJsonDocument::fromJson(data);
@@ -92,9 +93,8 @@ void ImportSaveData::loadFromFile(QTableWidget* t,QWidget* p)
 void ImportSaveData::SaveToJson(QTableWidget *table,QWidget *parent)
 {
 
-    fileManager  = new FileManager(parent);
 
-    QFile file(fileManager->saveFile());
+    QFile file(fileManager.saveFile());
 
 
     QJsonArray mainArray;
@@ -127,7 +127,7 @@ void ImportSaveData::SaveToJson(QTableWidget *table,QWidget *parent)
         QJsonObject currOBJ;
         QJsonArray grades;
         QJsonArray marks;
-        for(int j=0; j< 6 ;j++)
+        for(int j=0; j < 6 ;j++)
         {
             QTableWidgetItem* item = table->item(i,j);
 
@@ -164,9 +164,8 @@ void ImportSaveData::SaveToJson(QTableWidget *table,QWidget *parent)
 
 void ImportSaveData::loadFromRecordBook(QTableWidget *table, QWidget *p){
 
-    fileManager  = new FileManager(p);
 
-    QString path = fileManager->chooseFileJson();
+    QString path = fileManager.chooseFileJson();
 
     QFile file(path);
 
@@ -251,9 +250,8 @@ void ImportSaveData::loadFromRecordBook(QTableWidget *table, QWidget *p){
 void ImportSaveData::saveToJSonRecordBook(QTableWidget *table, QWidget *p)
 {
 
-    fileManager  = new FileManager(p);
 
-    QFile file(fileManager->saveFile());
+    QFile file(fileManager.saveFile());
 
     QJsonArray main;
 
@@ -344,9 +342,8 @@ void ImportSaveData::saveToJsonProject(QTableWidget *table, QWidget *p)
 {
 
 
-    fileManager  = new FileManager(p);
 
-    QFile file(fileManager->saveFile());
+    QFile file(fileManager.saveFile());
 
     QJsonArray mainArr;
 
@@ -408,9 +405,8 @@ void ImportSaveData::saveToJsonProject(QTableWidget *table, QWidget *p)
 void ImportSaveData::loadFromProject(QTableWidget *table, QWidget *p)
 {
 
-    fileManager  = new FileManager(p);
 
-    QFile file(fileManager->chooseFileJson());
+    QFile file(fileManager.chooseFileJson());
 
     try
     {
@@ -469,9 +465,8 @@ void ImportSaveData::saveToJsonCourseWork(QTableWidget *table, QWidget *p)
 {
 
 
-    fileManager  = new FileManager(p);
 
-    QFile file(fileManager->saveFile());
+    QFile file(fileManager.saveFile());
 
     QJsonArray arr ;
 
@@ -541,9 +536,8 @@ void ImportSaveData::saveToJsonCourseWork(QTableWidget *table, QWidget *p)
 void ImportSaveData::loadFromCourseWork(QTableWidget *table, QWidget *p)
 {
 
-    fileManager  = new FileManager(p);
 
-    QFile file(fileManager->chooseFileJson());
+    QFile file(fileManager.chooseFileJson());
 
     try
     {
@@ -639,9 +633,7 @@ void ImportSaveData::loadFromCourseWork(QTableWidget *table, QWidget *p)
 void ImportSaveData::saveToJsonDiploma(QTableWidget *table, QWidget *p)
 {
 
-    fileManager  = new FileManager(p);
-
-    QFile file(fileManager->saveFile());
+    QFile file(fileManager.saveFile());
 
     QJsonArray arr;
 
@@ -705,9 +697,7 @@ void ImportSaveData::saveToJsonDiploma(QTableWidget *table, QWidget *p)
 void ImportSaveData::loadFromDiploma(QTableWidget *table, QWidget *p)
 {
 
-    fileManager  = new FileManager(p);
-
-    QFile file(fileManager->chooseFileJson());
+    QFile file(fileManager.chooseFileJson());
 
     try
     {

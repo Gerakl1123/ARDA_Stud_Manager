@@ -37,7 +37,7 @@ public:
     void loadListInformationExtra(QStringListModel* model,QWidget*p,QJsonObject& obj);
 
 private:
-    FileManager* fileManager;
+    FileManager fileManager;
 };
 
 #endif // IODATAHANDLER_H

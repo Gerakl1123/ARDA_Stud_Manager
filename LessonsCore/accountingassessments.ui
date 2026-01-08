@@ -205,31 +205,10 @@ QScrollBar::sub-line:horizontal {
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="0" colspan="2">
-     <widget class="QCheckBox" name="checkBoxConfrimDelete">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="btnEditColmn">
       <property name="text">
-       <string>Подтверждение для удаления/очистки</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QPushButton" name="btnClear">
-      <property name="text">
-       <string>Очистить Группу</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="btnAdd">
-      <property name="text">
-       <string>Добавить</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="btnDelete">
-      <property name="text">
-       <string>Удалить</string>
+       <string>Изменить дату колонки</string>
       </property>
      </widget>
     </item>
@@ -240,10 +219,45 @@ QScrollBar::sub-line:horizontal {
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="btnDeleteDay">
+    <item row="7" column="0" colspan="2">
+     <widget class="QPushButton" name="btnClear">
       <property name="text">
-       <string>Удалить День</string>
+       <string>Очистить Группу</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="btnDelete">
+      <property name="text">
+       <string>Удалить</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0" colspan="2">
+     <widget class="QCheckBox" name="checkBoxConfrimDelete">
+      <property name="text">
+       <string>Подтверждение для удаления/очистки</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="btnAdd">
+      <property name="text">
+       <string>Добавить</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QPushButton" name="btnDeleteLastColumn">
+      <property name="text">
+       <string>Удалить колонку последнию</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="btnSet">
+      <property name="text">
+       <string>Сет колонок</string>
       </property>
      </widget>
     </item>

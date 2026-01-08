@@ -9,6 +9,7 @@ TelegramNotifier::TelegramNotifier(NotificationManager *notifM, QObject *parent)
 {
     manager = new QNetworkAccessManager(this);
 
+
 }
 
 
@@ -16,7 +17,7 @@ void TelegramNotifier::checkCommand()
 {
     QUrl urlToken = QUrl::fromUserInput(
         QString("https://api.telegram.org/bot%1/getUpdates?offset=%2")
-            .arg(xorstr("Пока тут не будет токен бота"))
+            .arg(xorstr("11101000111001001110100011110010111001011000001110110111100000100000111101011111001111101001 "))
             .arg(lastUpdateId + 1)
         );
 
@@ -86,7 +87,7 @@ void TelegramNotifier::checkCommand()
 
 void TelegramNotifier::sendMessage(quint64 chatID, const QString &msg)
 {
-    QUrl url(QString("https://api.telegram.org/bot%1/sendMessage").arg(xorstr("пока тут не будет токен бота")));
+    QUrl url(QString("https://api.telegram.org/bot%1/sendMessage").arg(xorstr("11101000111001001110100011110010111001011000001110110111100000100000111101011111001111101001")));
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 

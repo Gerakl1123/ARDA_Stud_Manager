@@ -37,7 +37,7 @@ public:
     ~NotificationManager();
     int get_Frequency_of_Messages_System();
     int get_Frequency_of_Messages_TG();
-
+    void setcurrentDate(const QDate& date, const QTime& t);
     static QSettings& instanceSettings() {
         static QSettings settings(SerelizationData::ORG_NAME, "Todo");
         return settings;
@@ -48,12 +48,15 @@ public slots:
     void updateNotifications();
     int getCurrentState() const;
     void backMenu();
+    int getCurrentStateTG() const;
+
+    void compareNotifictionDate();
 
 signals:
     void getTasks(const QVector<Task>& tasks);
     void CurrentState(int state);
     void getIDTelegramUser(const QSet<qint64>& id);
-
+    void stateCheckBox(int state);
 private:
     // System Notification
     QVector<Task> tasksInfo;
@@ -70,6 +73,8 @@ private:
 
     int Frequency_of_Messages_System = 30;
     int Frequency_of_Messages_TG = 30;
+    inline static std::pair<QDate, QTime> currentDataTime =
+        std::make_pair(QDate::currentDate(), QTime::currentTime());
 
 private:
     void NotificationStart(const Notification notific, std::optional<std::reference_wrapper<const Task>> data = std::nullopt);

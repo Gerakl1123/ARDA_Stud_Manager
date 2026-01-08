@@ -1,11 +1,11 @@
 #include "accountingassessments.h"
 #include "ui_accountingassessments.h"
-#include"../IOCore/IODataHandler.h"
-#include<memory>
-#include"academicrecordwindow.h"
-#include"../mainwindow.h"
-#include"../confrimdialog.h"
-#include"../Serializer.h"
+#include "../IOCore/IODataHandler.h"
+#include <memory>
+#include "academicrecordwindow.h"
+#include "../mainwindow.h"
+#include "../confrimdialog.h"
+#include "../Serializer.h"
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QPainter>
@@ -17,8 +17,8 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
-#include<QInputDialog>
-#include"../JsonKeys.h"
+#include <QInputDialog>
+#include "../JsonKeys.h"
 
 accountingassessments::accountingassessments(MainWindow* mainWindow,QWidget *parent)
     : QWidget(parent)
@@ -28,14 +28,16 @@ accountingassessments::accountingassessments(MainWindow* mainWindow,QWidget *par
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
 
-    QSettings settings(SerelizationData::ORG_NAME,"Lesson");
-
     obj= std::make_unique<ImportSaveData>();
     dbHandler = std::make_unique<IODataBaseHandler>();
     ser = std::make_unique<SerializerData>();
     fileManager = new FileManager(this);
     tabManager = std::make_unique<TableManager>(ui->tableWidget,this);
-    setWindowIcon(QIcon("C:/Users/Gera/Desktop/JSONS/Lesson.png"));
+
+
+    QSettings settings(SerelizationData::ORG_NAME,"Lesson");
+
+
     setWindowTitle("Учет Оценок");
 
 
@@ -101,6 +103,7 @@ accountingassessments::accountingassessments(MainWindow* mainWindow,QWidget *par
 
     ser->DataSerelizationMenuStudentRecords(ui->tableWidget,this,ModeSerelization::Lessons);
 
+    // Десерилезация дней
     days = settings.value("count_day", 0).toInt();
     column_day = settings.value("count_column_day", 6).toInt();
 
@@ -109,13 +112,15 @@ accountingassessments::accountingassessments(MainWindow* mainWindow,QWidget *par
         ui->tableWidget->setColumnCount(totalColumns);
 
         for (int day = 1; day <= days; day++) {
-            int columnIndex = 5 + day;
+            int columnIndex = 6 + day - 1;
             QString header = settings.value(QString("column_day_%1").arg(day)).toString();
+
             ui->tableWidget->setHorizontalHeaderItem(columnIndex, new QTableWidgetItem(header));
 
             qDebug() << "col " << columnIndex << " name " << header;
         }
     }
+    // Конец
     setupConnections();
 
 
@@ -130,7 +135,10 @@ accountingassessments::accountingassessments(MainWindow* mainWindow,QWidget *par
 
     });
 
+
+
 }
+
 void accountingassessments::Back()
 {
 
@@ -142,8 +150,10 @@ accountingassessments::~accountingassessments()
 {
 
     obj->SaveDateWidget(ui->tableWidget);
+
     delete ui;
 }
+
 
 void accountingassessments::DeleteRow()
 {
@@ -225,12 +235,11 @@ void accountingassessments::ClearTabl()
 
     }else
     {
-
         ui->tableWidget->setRowCount(0);
     }
 
 }
-
+// Рефакторинг сделать
 void accountingassessments::Printer()
 {
 
@@ -305,16 +314,28 @@ void accountingassessments::Printer()
 
 void accountingassessments::setupConnections()
 {
+
+    ui->lineEditFindName->setPlaceholderText("Поиск по имени...");
+
     connect(Print,&QAction::triggered,this,&accountingassessments::Printer);
+
+    connect(Quit,&QAction::triggered,this,&accountingassessments::Back);
+
+    connect(ui->btnDelete,&QPushButton::clicked,this,&accountingassessments::DeleteRow);
+
+    connect(ui->lineEditFindName, &QLineEdit::textChanged, this, &accountingassessments::Find);
+
+    connect(ui->btnClear,&QPushButton::clicked,this,&accountingassessments::ClearTabl);
+
+
     connect(Help,&QAction::triggered,this,[=](){
         QMessageBox::information(this,"Помощь", " При случайной очистке группы или удаление строки просто перезайдите в приложение или нажмите кнопку выйти и пройдите заново в меню совет всегда включайте подтверждение когда работаете пару секунд это не пару часов:)\n"
                                                  "При работе в меню зачеты подгружаем данные с меню оценок");
     });
 
-    connect(Quit,&QAction::triggered,this,&accountingassessments::Back);
 
     connect(SaveDB,&QAction::triggered,this,[=](){
-        dbHandler->saveDataLesson(ui->tableWidget,"600");
+        dbHandler->saveDataLesson(ui->tableWidget,DEFAULT_TABLE_ID);
     });
 
     connect(UploadDB,&QAction::triggered,this,[=](){
@@ -341,11 +362,6 @@ void accountingassessments::setupConnections()
     });
 
 
-    connect(ui->btnDelete,&QPushButton::clicked,this,&accountingassessments::DeleteRow);
-    ui->lineEditFindName->setPlaceholderText("Поиск по имени...");
-    connect(ui->lineEditFindName, &QLineEdit::textChanged, this, &accountingassessments::Find);
-    connect(ui->btnClear,&QPushButton::clicked,this,&accountingassessments::ClearTabl);
-
 }
 
 void accountingassessments::on_btnAddDay_clicked()
@@ -371,84 +387,72 @@ void accountingassessments::on_btnAddDay_clicked()
     ui->btnAddDay->setEnabled(true);
 }
 
+void accountingassessments::on_btnEditColmn_clicked()
+{
+    int selectedСol = ui->tableWidget->currentColumn();
+    QDialog dialog(this);
+    dialog.setWindowTitle("Выбор новой даты");
 
-void accountingassessments::on_btnDeleteDay_clicked()
+    QDateEdit *dateEdit = new QDateEdit(QDate::currentDate(), &dialog);
+    dateEdit->setCalendarPopup(true);
+
+
+    QPushButton *ok = new QPushButton("OK", &dialog);
+    QPushButton *cancel = new QPushButton("Отмена", &dialog);
+
+
+    QHBoxLayout *buttons = new QHBoxLayout;
+    buttons->addStretch();
+    buttons->addWidget(ok);
+    buttons->addWidget(cancel);
+
+    QVBoxLayout *layout = new QVBoxLayout(&dialog);
+    layout->addWidget(dateEdit);
+    layout->addLayout(buttons);
+
+    connect(ok, &QPushButton::clicked, &dialog, &QDialog::accept);
+    connect(cancel, &QPushButton::clicked, &dialog, &QDialog::reject);
+
+    if (dialog.exec() == QDialog::Accepted) {
+        QDate date = dateEdit->date();
+        if(date < QDate::currentDate())
+        {
+            QMessageBox::information(this,"Ошибка","Прошлое уже не вернуть.");
+            return;
+        }
+        QSettings settings(SerelizationData::ORG_NAME,"Lesson");
+        settings.setValue(QString("column_day_%1").arg(days),date.toString("dd.MM.yyyy"));
+
+        ui->tableWidget->setHorizontalHeaderItem(selectedСol, new QTableWidgetItem(date.toString("dd.MM.yyyy")));
+
+    }
+
+}
+
+
+void accountingassessments::on_btnSet_clicked()
 {
 
-    QSettings settings(SerelizationData::ORG_NAME,"Lesson");
+}
 
-    QSettings settings2(SerelizationData::ORG_NAME,"Lessons");
-    if(ui->tableWidget->columnCount() >= 6)
-    {
-        if(ui->checkBoxConfrimDelete->isChecked())
-        {
-            ConfrimDialog dlg(this);
-            if(dlg.exec() == QDialog::Accepted)
-            {
-                int selectedCol = ui->tableWidget->currentColumn();
-                if (selectedCol >= 6) {
-                    ui->tableWidget->removeColumn(selectedCol);
-                    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-                    int newDatadays = --days;
-                    int newColumnDays = --column_day;
-                    int CountColumnTable = ui->tableWidget->columnCount();
-                    settings.setValue("count_day",newDatadays);
-                    settings.setValue("count_column_day",newColumnDays);
+void accountingassessments::on_btnDeleteLastColumn_clicked()
+{
 
-                   // tabManager->deleteDataTable();
+    if(ui->tableWidget->columnCount()<=6) return;
 
-                    settings.remove(QString("column_day_%1").arg(days));
-                    int countColumn = settings2.value("columnCount").toInt(nullptr);
+    QSettings Main(SerelizationData::ORG_NAME,"Lessons");
 
-                    --countColumn;
-                    ui->tableWidget->setColumnCount(countColumn);
+    QSettings otherL(SerelizationData::ORG_NAME,"Lesson");
+    ui->tableWidget->setColumnCount(ui->tableWidget->columnCount() - 1);
+    Main.setValue("columnCount",ui->tableWidget->columnCount() - 1);
+    otherL.remove(QString("column_day_%1").arg(ui->tableWidget->columnCount() - 1));
+    otherL.setValue("count_column_day",ui->tableWidget->columnCount() - 1);
+    otherL.setValue("count_day",--days);
+    Main.sync();
+    otherL.sync();
+    ui->tableWidget->reset();
 
-                    settings2.setValue("columnCount",countColumn);
 
-                    settings.remove(QString("row_%1_col_%2").arg(ui->tableWidget->currentRow()).arg(selectedCol));
-                    settings.sync();
-                }
-                else
-                {
-                    QMessageBox::information(this,"Удаление дня","Удалить системный столбик нельзя :(");
-                }
-            }
-            else
-            {
-                return;
-            }
-        }
-        else
-        {
-            int selectedCol = ui->tableWidget->currentColumn();
-            if (selectedCol >= 6) {
-                ui->tableWidget->removeColumn(selectedCol);
-                ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
-                int newDatadays = --days;
-                int newColumnDays = --column_day;
-                int CountColumnTable = ui->tableWidget->columnCount();
-                settings.setValue("count_day",newDatadays);
-                settings.setValue("count_column_day",newColumnDays);
-
-                //tabManager->deleteDataTable();
-
-                settings.remove(QString("column_day_%1").arg(days));
-                int countColumn = settings2.value("columnCount").toInt(nullptr);
-
-                --countColumn;
-                ui->tableWidget->setColumnCount(countColumn);
-
-                settings2.setValue("columnCount",countColumn);
-                settings.remove(QString("row_%1_col_%2").arg(ui->tableWidget->currentRow()).arg(selectedCol));
-                settings.sync();
-            }
-            else
-            {
-                QMessageBox::information(this,"Удаление дня","Удалить системный столбик нельзя :(");
-            }
-        }
-    }
 }
 

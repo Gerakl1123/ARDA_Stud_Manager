@@ -27,7 +27,8 @@ PassportDialog::PassportDialog(QWidget *parent)
     ui->comboBoxGender->addItems(Passport::gender);
     ui->comboBoxGrazdanstvo->addItems(Passport::citizenship);
 
-    parser = std::make_unique<ParserJson>();
+    setLayout(ui->gridLayout);
+    parser = std::make_unique<PassportDataJSONParser>();
 
     connect(ui->buttonBox->button(QDialogButtonBox::Ok), &QPushButton::clicked, this, [=]() {
         parser->SaveJsonPassport(this);

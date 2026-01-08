@@ -2,17 +2,16 @@
 #include "ui_extradatadialog.h"
 #include<QDate>
 
-
-
 ExtraDataDialog::ExtraDataDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ExtraDataDialog)
 {
     ui->setupUi(this);
-    parser = std::make_unique<ParserJson>();
+    parser = std::make_unique<PassportDataJSONParser>();
     ui->spinBoxYearGraduationAttestat->setValue(QDate::currentDate().year());
     ui->spinBoxYearDiploma->setValue(QDate::currentDate().year());
 
+    setLayout(ui->gridLayout);
     ser = new SerializerData(this);
 
     connect(ui->checkBoxPreviousPlace,&QCheckBox::checkStateChanged,this,[=](Qt::CheckState state){

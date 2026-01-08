@@ -26,6 +26,7 @@ private slots:
     void openAdder();
     void openPriviewWorks();
     void openSettingsNotification();
+    void BackMenu();
 private:
     Ui::AssignmentPlanner *ui;
     AddWork* add;

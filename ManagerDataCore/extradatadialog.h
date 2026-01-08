@@ -2,7 +2,7 @@
 #define EXTRADATADIALOG_H
 
 #include <QDialog>
-#include"../parserjson.h"
+#include"../passportdatajsonparser.h"
 #include<QPushButton>
 #include"../Serializer.h"
 namespace Ui {
@@ -20,7 +20,7 @@ public:
 
 private:
     Ui::ExtraDataDialog *ui;
-    std::unique_ptr<ParserJson> parser;
+    std::unique_ptr<PassportDataJSONParser> parser;
     SerializerData* ser;
 };
 

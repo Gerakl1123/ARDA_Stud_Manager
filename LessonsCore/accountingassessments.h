@@ -9,6 +9,9 @@
 #include<QComboBox>
 #include"../IOCore/iodatabasehandler.h"
 #include"../tablemanager.h"
+
+#define DEFAULT_TABLE_ID "600"
+
 class academicrecordwindow;
 class MainWindow;
 
@@ -36,10 +39,12 @@ private slots:
 
 
     void on_btnAddDay_clicked();
-
-    void on_btnDeleteDay_clicked();
+    void on_btnEditColmn_clicked();
+    void on_btnSet_clicked();
+    void on_btnDeleteLastColumn_clicked();
 
 private:
+
     void setupConnections();
     Ui::accountingassessments *ui;
     std::unique_ptr<ImportSaveData> obj;

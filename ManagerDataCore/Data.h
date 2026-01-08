@@ -17,7 +17,7 @@ private:
     QString address_;
     QString ID_;
 
-public:
+protected:
     Data(const QString& ID,
          const QString& firstName,
          const QString& middleName,

@@ -23,7 +23,7 @@ void IODataBaseHandler::InsertDataInDB(const QString& name,QStringList& keys,QSt
 {
     if(!keys.isEmpty()){
         QString placeholders = "?" + QString(", ?").repeated(keys.size() - 1);
-        QString sql = QString("INSERT INTO " + name +" (%1) VALUES (%2)")
+        QString sql = QString("INSERT INTO " + name + " (%1) VALUES (%2)")
                           .arg(keys.join(", "))
                           .arg(placeholders);
 

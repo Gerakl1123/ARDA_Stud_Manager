@@ -2,7 +2,7 @@
 #define PASSPORTDIALOG_H
 
 #include <QDialog>
-#include"../parserjson.h"
+#include"../passportdatajsonparser.h"
 #include"../Serializer.h"
 
 namespace Ui {
@@ -19,7 +19,7 @@ public:
 
 private:
     Ui::PassportDialog *ui;
-    std::unique_ptr<ParserJson> parser;
+    std::unique_ptr<PassportDataJSONParser> parser;
     SerializerData* ser;
 };
 

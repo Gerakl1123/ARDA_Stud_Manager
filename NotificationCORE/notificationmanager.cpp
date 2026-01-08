@@ -32,15 +32,22 @@ void NotificationManager::backMenu()
     planner_->show();
 }
 
+
 void NotificationManager::updateNotifications()
 {
     QTimer::singleShot(500, this, [this]() {
+        QSettings& settings = NotificationManager::instanceSettings();
         tasksInfo.clear();
         chatIDs.clear();
         SetChtsInfo();
         SetTaskInfo();
+        Qt::CheckState  stateTg =     static_cast<Qt::CheckState>(settings.value("Checkboxtelegramm").toInt());
+        Qt::CheckState  stateSystem = static_cast<Qt::CheckState>(settings.value("Notification").toInt());
 
-        QSettings& settings = NotificationManager::instanceSettings();
+
+        ui->checkBoxEnableNotification->setCheckState(stateTg);
+        ui->checkBox->setCheckState(stateSystem);
+
         int count = settings.value("Count").toInt();
 
         if (count > 0) {
@@ -122,6 +129,8 @@ void NotificationManager::instance()
     Frequency_of_Messages_TG = settings.value("SpinBoxTG").toInt();
     ui->spinBoxSystemNotification->setValue(Frequency_of_Messages_System);
     ui->spinBoxTelegramNotification->setValue(Frequency_of_Messages_TG);
+    ui->checkBoxEnableNotification->setCheckState(static_cast<Qt::CheckState>(settings.value("Checkboxtelegramm").toInt()));
+
 
     int count = settings.value("Count").toInt();
 
@@ -173,12 +182,6 @@ void NotificationManager::setupConnections()
         }
     });
 
-    connect(ui->checkBox, &QCheckBox::checkStateChanged, this, [this](int state) {
-        QSettings& settings = NotificationManager::instanceSettings();
-        settings.setValue("Notification", state);
-        emit CurrentState(state);
-    });
-
     connect(ui->spinBoxSystemNotification, &QSpinBox::valueChanged, this, [this](int val) {
         QSettings& settings = NotificationManager::instanceSettings();
         settings.setValue("SpinBoxSystem", val);
@@ -199,6 +202,21 @@ void NotificationManager::setupConnections()
     });
 
     connect(ui->btnQuit, &QPushButton::clicked, this, &NotificationManager::backMenu);
+    connect(ui->checkBoxEnableNotification,&QCheckBox::checkStateChanged,this,[this](Qt::CheckState st){
+        QSettings& settings = instanceSettings();
+        settings.setValue("Checkboxtelegramm",st);
+
+        emit stateCheckBox(st);
+
+    });
+
+    connect(ui->checkBox, &QCheckBox::checkStateChanged, this, [this](int state) {
+        QSettings& settings = NotificationManager::instanceSettings();
+        settings.setValue("Notification", state);
+
+        emit CurrentState(state);
+    });
+
 }
 
 void NotificationManager::NotificationStart(Notification notific, std::optional<std::reference_wrapper<const Task>> data)
@@ -227,7 +245,7 @@ void NotificationManager::NotificationStart(Notification notific, std::optional<
             "📋 У вас есть активная задача",
             "Задача: " + task.nameT + "\n"
             "📅 Срок: " + task.dateT.toString("dd.MM.yyyy") + "\n"
-            "⏰ Время: " + task.timeT.toString("hh:mm") + "\n"
+            "⏰ Время: " + task.timeT.toString("HH:mm") + "\n"
             "⚡ Приоритет: " + task.priorityT,
             QSystemTrayIcon::Information,
             getInt(std::move(notific))
@@ -275,7 +293,45 @@ int NotificationManager::get_Frequency_of_Messages_TG()
     return Frequency_of_Messages_TG;
 }
 
+void NotificationManager::setcurrentDate(const QDate &date, const QTime &t)
+{
+    currentDataTime = std::make_pair(date,t);
+}
+
 int NotificationManager::getCurrentState() const
 {
     return static_cast<int>(ui->checkBox->checkState());
+}
+int NotificationManager::getCurrentStateTG() const
+{
+
+    return static_cast<int>(ui->checkBoxEnableNotification->checkState());
+}
+
+
+void NotificationManager::compareNotifictionDate()
+{
+    SetTaskInfo();
+
+    int local = 0;
+    for (const Task& task : tasksInfo)
+    {
+        if(currentDataTime.first > task.dateT ||
+            (currentDataTime.first == task.dateT && currentDataTime.second >= task.timeT))
+        {
+            bool succes = parser->DeleteObjectInArrayWorks(local);
+            if(succes)
+            {
+                qDebug() << "удален";
+            }
+            else
+            {
+
+                qDebug() << "Не удален";
+            }
+        }
+
+        ++local;
+    }
+
 }

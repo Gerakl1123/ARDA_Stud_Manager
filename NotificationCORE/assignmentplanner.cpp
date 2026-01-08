@@ -17,14 +17,12 @@ AssignmentPlanner::AssignmentPlanner(MainWindow *qMain, QWidget *parent)
     connect(ui->btnAdd,&QPushButton::clicked,this,&AssignmentPlanner::openAdder);
     connect(ui->btnPriview,&QPushButton::clicked,this,&AssignmentPlanner::openPriviewWorks);
     connect(ui->btnNotificationSettenings,&QPushButton::clicked,this,&AssignmentPlanner::openSettingsNotification);
-    connect(ui->btnLeave,&QPushButton::clicked,this,[this](){
-        this->close();
-        main_->show();
-    });
+    connect(ui->btnLeave,&QPushButton::clicked,this,&AssignmentPlanner::BackMenu);
 }
 
 AssignmentPlanner::~AssignmentPlanner()
 {
+
     delete ui;
 }
 
@@ -50,7 +48,14 @@ void AssignmentPlanner::openSettingsNotification()
 
     notific = new NotificationManager(this,nullptr);
     notific->setAttribute(Qt::WA_DeleteOnClose);
-   // this->hide();
+    this->hide();
     notific->show();
+}
+
+void AssignmentPlanner::BackMenu()
+{
+
+    main_->show();
+    this->close();
 }
 
