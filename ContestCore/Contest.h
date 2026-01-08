@@ -34,7 +34,7 @@ public:
 
     virtual ContestResult MaxScore() =0;
 
-    virtual ~IMaxContest() = default;
+     ~IMaxContest() override = default;
 };
 
 class IAttestatContest : public ContestBase
@@ -42,7 +42,7 @@ class IAttestatContest : public ContestBase
 public:
     virtual ContestResult evaluate(double budgetThreshold,double contractThreshold,int budgetSlots,int contractSlots)=0;
 
-    virtual ~IAttestatContest() = default;
+     ~IAttestatContest() override = default;
 };
 
 

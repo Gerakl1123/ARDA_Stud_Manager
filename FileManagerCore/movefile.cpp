@@ -129,7 +129,6 @@ MoveFile::MoveFile(filemanagerdialog* FMD, QWidget *parent)
 MoveFile::~MoveFile()
 {
     threadWorker->quit();
-    threadWorker->wait();
     worker->deleteLater();
     delete ui;
 }

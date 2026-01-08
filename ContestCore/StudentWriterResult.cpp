@@ -26,7 +26,7 @@ void StudentWritter::writeResultContestAttestat(const QString &file,
 
     QTextStream out(&ofile);
 
-    out << "[" << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss") << "] " << "\n";
+    out << "[" << QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss") << "] " << "\n";
 
     out<< "Факультет - " << faculty << " !!!\n";
 

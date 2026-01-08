@@ -24,8 +24,8 @@ BackUp::BackUp(filemanagerdialog* fmd,QWidget *parent)
     ui->sourceB->setSelectionModel(selectModel);
     ui->sourceB->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-    worker = new BackupWorker;
-    thread = new QThread(this);
+    worker = new BackupWorker();
+    thread = new QThread();
     ui->progressBar->setRange(0, 100);
     ui->progressBar->setValue(0);
     ui->progressBar->setTextVisible(true);
@@ -33,6 +33,7 @@ BackUp::BackUp(filemanagerdialog* fmd,QWidget *parent)
 
 
     connect(ui->BackUpB,&QListView::doubleClicked,this,&BackUp::on_sourceB_doubleClicked);
+
     connect(ui->bntBckUp,&QPushButton::clicked,this,[this](){
         ui->bntBckUp->setEnabled(false);
         QMessageBox::StandardButton confrim = QMessageBox::question(
@@ -86,7 +87,6 @@ BackUp::~BackUp()
 {
 
     thread->quit();
-    thread->wait();
     worker->deleteLater();
     delete ui;
 }

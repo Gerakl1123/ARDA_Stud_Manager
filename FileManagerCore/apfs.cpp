@@ -30,14 +30,16 @@ APFS::APFS(filemanagerdialog* fmd,QWidget *parent)
 
 
     worker = new APFSworker;
-    thread = new QThread(this);
+    thread = new QThread();
 
     ui->progressBar->setRange(0, 100);
     ui->progressBar->setValue(0);
     ui->progressBar->setTextVisible(true);
 
     ui->tableView->setModel(model);
+
     connect(ui->btnStart, &QPushButton::clicked, this, &APFS::onCountFilesClicked);
+
     connect(ui->tableView,&QTableView::clicked,this,[&](const QModelIndex& CurrIndex){
         index = CurrIndex;
     });
@@ -57,7 +59,11 @@ APFS::APFS(filemanagerdialog* fmd,QWidget *parent)
     });
 
     connect(worker,&APFSworker::progressValuer,ui->progressBar,&QProgressBar::setValue);
+
     connect(ui->btnQuit,&QPushButton::clicked,this,&APFS::Back);
+
+
+
     worker->moveToThread(thread);
     thread->start();
 }
@@ -66,7 +72,7 @@ APFS::APFS(filemanagerdialog* fmd,QWidget *parent)
 APFS::~APFS()
 {
     thread->quit();
-    thread->wait();
+    thread->wait(3000);
     worker->deleteLater();
     delete ui;
 }
@@ -145,7 +151,7 @@ QString APFSworker::getFullPath(const QString &path)
                          .arg(info.fileName())
                          .arg(info.filePath())
                          .arg(info.baseName())
-                         .arg(info.birthTime().toString("yyyy-MM-dd hh:mm:ss"))
+                         .arg(info.birthTime().toString("yyyy-MM-dd HH:mm:ss"))
                          .arg(info.bundleName());
 
     return result;
@@ -156,13 +162,14 @@ FileStats APFSworker::recursiveDirTraversal(const QString& path)
 {
     FileStats stats = {0, 0};
     int counter = 0;
+
     QStack<QDir> stack;
     QSet<QString> visited;
     stack.push(QDir(path));
     visited.insert(QDir(path).absolutePath());
 
 
-    qint64 totalFiles = getRecursiveMKpath(path);
+    qint64 totalFiles = getRecursiveMKpath(path); // 100
 
     while (!stack.isEmpty())
     {
@@ -200,7 +207,9 @@ FileStats APFSworker::recursiveDirTraversal(const QString& path)
 
 
     }
+
     emit finished();
+
     return stats;
 }
 
@@ -208,8 +217,10 @@ qint64 APFSworker::getRecursiveMKpath(const QString &path)
 {
     QStack<QDir> stack;
     QSet<QString> visited;
+
     stack.push(QDir(path));
     visited.insert(QDir(path).absolutePath());
+
     qint64 fileCount = 0;
 
 

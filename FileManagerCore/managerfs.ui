@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>665</width>
-    <height>696</height>
+    <width>790</width>
+    <height>766</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -244,66 +244,12 @@ QCheckBox::indicator:checked:hover {
     background-color: #106ebe;
 }</string>
   </property>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>470</y>
-     <width>541</width>
-     <height>217</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="1" column="0">
-     <widget class="QPushButton" name="btnCreateFile">
-      <property name="text">
-       <string>Создать Файл</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="btnCreate">
-      <property name="text">
-       <string>Создать Директорию</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QPushButton" name="btnQuit">
-      <property name="text">
-       <string>Выйти</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="btnDelete">
-      <property name="text">
-       <string>Удалить(Delete)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="statusLabel">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QPushButton" name="btnRename">
-      <property name="text">
-       <string>Переименовать</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>13</x>
      <y>30</y>
-     <width>641</width>
+     <width>771</width>
      <height>51</height>
     </rect>
    </property>
@@ -329,7 +275,7 @@ QCheckBox::indicator:checked:hover {
     <rect>
      <x>10</x>
      <y>80</y>
-     <width>641</width>
+     <width>771</width>
      <height>381</height>
     </rect>
    </property>
@@ -341,6 +287,60 @@ QCheckBox::indicator:checked:hover {
 
 </string>
    </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>460</y>
+     <width>771</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="2" column="0">
+       <widget class="QPushButton" name="btnCreate">
+        <property name="text">
+         <string>Создать Директорию</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="btnQuit">
+        <property name="text">
+         <string>Выйти</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="btnCreateFile">
+        <property name="text">
+         <string>Создать Файл</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="btnDelete">
+        <property name="text">
+         <string>Удалить(Delete)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="btnRename">
+        <property name="text">
+         <string>Переименовать</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <widget class="QTextEdit" name="textEdit"/>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

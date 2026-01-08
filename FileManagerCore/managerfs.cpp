@@ -32,7 +32,7 @@ ManagerFS::ManagerFS(filemanagerdialog* dlg, QWidget *parent)
     defaultExtesions->setText("Применить свое расширение");
 
     QSettings settings(SerelizationData::ORG_NAME,"FileManager");
-    defaultExtesions->setCheckState(settings.value("Extesions").toInt());
+    defaultExtesions->setCheckState(static_cast<Qt::CheckState>(settings.value("Extesions").toInt()));
 
     QMenuBar* menuBar = new QMenuBar(this);
     QMenu* menu = new QMenu("Дополнительно", menuBar);
@@ -185,7 +185,9 @@ ManagerFS::ManagerFS(filemanagerdialog* dlg, QWidget *parent)
         ui->tableView->setRootIndex(index);
     });
 
-
+    connect(worker,&ManagerWorker::getMessageLogDeleted,[this](const QString& msg){
+        ui->textEdit->append(msg);
+    });
     worker->moveToThread(threadWorker);
     threadWorker->start();
 }
@@ -200,7 +202,6 @@ ManagerFS::~ManagerFS()
 {
 
     threadWorker->quit();
-    threadWorker->wait();
     worker->deleteLater();
     delete ui;
 }
@@ -395,20 +396,6 @@ void ManagerWorker::setFiles(QFileInfoList list)
     files = list;
 }
 
-bool ManagerWorker::removeDir(const QString &path)
-{
-    QDir remDir(path);
-
-    return remDir.exists() ? remDir.removeRecursively() : false;
-}
-
-bool ManagerWorker::removeFile(const QString &path)
-{
-    QFile remFile(path);
-    if(!remFile.exists()) return false;
-
-    return remFile.exists() ? remFile.remove() : false;
-}
 
 
 
@@ -513,15 +500,38 @@ void ManagerWorker::RemoveSelecteFilesObjects(const QFileInfoList &files)
         if (info.isDir() && !info.isSymLink()) {
             if (!removeDir(info.absoluteFilePath())) {
                 logger->write( "Ошибка при удалении директории: " +  info.absoluteFilePath().toStdString());
+            }else
+            {
+                emit getMessageLogDeleted("Директория: "+ info.absoluteFilePath()+" удалена");
             }
         } else if (info.isFile() && !info.isSymLink()) {
             if (!removeFile(info.absoluteFilePath())) {
                 logger->write("Ошибка при удалении файла:" + info.absoluteFilePath().toStdString());
+            }
+            else
+            {
+
+                emit getMessageLogDeleted("Файл: "+ info.absoluteFilePath()+" удален");
             }
         } else {
             logger->write("Пропущена символьческая ссылка:" + info.absoluteFilePath().toStdString());
         }
     }
 
+}
+
+bool ManagerWorker::removeDir(const QString &path)
+{
+    QDir remDir(path);
+
+    return remDir.exists() ? remDir.removeRecursively() : false;
+}
+
+bool ManagerWorker::removeFile(const QString &path)
+{
+    QFile remFile(path);
+    if(!remFile.exists()) return false;
+
+    return remFile.exists() ? remFile.remove() : false;
 }
 

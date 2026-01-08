@@ -86,6 +86,9 @@ public slots:
 signals:
     void succesMessageCreateDir(OperationState state,const QString& msg);
     void succesMessageCreateFile(OperationState state,const QString& msg);
+
+    void getMessageLogDeleted(const QString& msg);
+        void finished(bool state);
 private:
     QString nameFile;
     QFileInfoList files;
