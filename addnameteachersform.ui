@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddNameTeachersForm</class>
+ <widget class="QWidget" name="AddNameTeachersForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* ===== Общая база ===== */
+QWidget {
+    background-color: #2B2E34;
+    color: #D8DEE9;
+    font-family: &quot;Segoe UI&quot;, &quot;Inter&quot;, &quot;Arial&quot;;
+    font-size: 14px;
+}
+
+/* ===== QLabel ===== */
+QLabel {
+    color: #D8DEE9;
+}
+
+QLabel#titleLabel {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ECEFF4;
+}
+
+/* ===== QFrame ===== */
+QFrame {
+    background-color: #32363D;
+    border-radius: 8px;
+}
+
+/* Карточки */
+QFrame#cardFrame {
+    background-color: #32363D;
+    border: 1px solid #3B4048;
+    padding: 10px;
+}
+
+/* Боковая панель */
+QFrame#sidePanel {
+    background-color: #26292E;
+    border-radius: 0px;
+}
+
+/* Инфо-блок */
+QFrame#infoFrame {
+    background-color: #2F333A;
+    border: 1px solid #3B4048;
+}
+
+/* ===== QPushButton ===== */
+QPushButton {
+    background-color: #3A3F47;
+    color: #D8DEE9;
+    border: 1px solid #4C566A;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #434955;
+}
+
+QPushButton:pressed {
+    background-color: #4C566A;
+}
+
+QPushButton:disabled {
+    background-color: #2E3238;
+    color: #6C7280;
+    border: 1px solid #2E3238;
+}
+
+/* ===== QLineEdit ===== */
+QLineEdit {
+    background-color: #2E3238;
+    color: #ECEFF4;
+    border: 1px solid #4C566A;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QLineEdit:focus {
+    border: 1px solid #81A1C1;
+    background-color: #32363D;
+}
+
+/* ===== QTableWidget ===== */
+QTableWidget {
+    background-color: #2E3238;
+    border: 1px solid #3B4048;
+    gridline-color: #3B4048;
+    selection-background-color: #3E4451;
+    selection-color: #ECEFF4;
+}
+
+QTableWidget::item {
+    padding: 6px;
+}
+
+/* Заголовки таблицы */
+QHeaderView::section {
+    background-color: #26292E;
+    color: #AEB6C2;
+    padding: 6px;
+    border: none;
+    font-weight: 500;
+}
+
+/* ===== ScrollBar ===== */
+QScrollBar:vertical {
+    background: #2B2E34;
+    width: 8px;
+}
+
+QScrollBar::handle:vertical {
+    background: #4C566A;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #5E677A;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>621</width>
+     <height>451</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="1" rowspan="2">
+     <widget class="QPushButton" name="pushButtonSave">
+      <property name="text">
+       <string>Сохранить</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLineEdit" name="lineEditName">
+      <property name="placeholderText">
+       <string>Имя</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QTableWidget" name="tableWidget">
+      <column>
+       <property name="text">
+        <string>Имя</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Фамилия</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Отчество</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLineEdit" name="lineEditMiddleName">
+      <property name="placeholderText">
+       <string>Фамилия</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLineEdit" name="lineEditLastName">
+      <property name="placeholderText">
+       <string>Отчество</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QPushButton" name="pushButtonDeleteRow">
+      <property name="text">
+       <string> Удалить последнию строку</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QPushButton" name="pushButtonDeleteCurrRow">
+      <property name="text">
+       <string>Удалить текущую строку</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0" colspan="2">
+     <widget class="QPushButton" name="pushButtonGo">
+      <property name="text">
+       <string>Отправить</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

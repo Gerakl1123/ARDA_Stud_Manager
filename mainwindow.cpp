@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->labelVersion->setText("Версия ПО: " + Version::CURRENT_VERSION);
+    ui->labelVersion->setText("Версия ARDA: " + Version::CURRENT_VERSION);
 
 
 
@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer* updateNotific = new QTimer(this);
 
     connect(updateNotific,&QTimer::timeout,manager,&NotificationManager::updateNotifications);
-    updateNotific->start(5000);
+        updateNotific->start(5000);
 
         connect(manager,&NotificationManager::getIDTelegramUser,this,&MainWindow::setChats);
         connect(manager,&NotificationManager::getTasks,this,&MainWindow::setTasks);
@@ -62,7 +62,24 @@ MainWindow::MainWindow(QWidget *parent)
              emit manager->CurrentState(currentState);
 
          });
+         QTimer::singleShot(100, [manager]() {
+             int currentState = manager->getCurrentStateTG();
+             qDebug() << "Состояние: " << currentState;
+             emit manager->stateCheckBox(currentState);
 
+         });
+
+
+         QTimer* timerCheckCompareNotification = new QTimer(this);
+         connect(timerCheckCompareNotification,&QTimer::timeout,[manager](){
+             manager->setcurrentDate(QDate::currentDate(),QTime::currentTime());
+             qDebug() <<"set current dateTime" << QDate::currentDate().toString("dd.MM.yyyy")
+                      << QTime::currentTime().toString("HH:mm");
+             manager->compareNotifictionDate();
+
+
+         });
+            timerCheckCompareNotification->start(10000);
          // Проверка на ввод команд в боте
         QTimer* timerCheckCommand = new QTimer(this);
         connect(timerCheckCommand,&QTimer::timeout,tg,&TelegramNotifier::checkCommand);
@@ -71,12 +88,25 @@ MainWindow::MainWindow(QWidget *parent)
         //Отправка сообщений в тг
         QTimer* timerSendNotificationTG = new QTimer(this);
 
-         connect(timerSendNotificationTG,&QTimer::timeout,[tg,this](){
-             LogicOperation l;
-             l.sendNotificationWorksTG(tg,NotificationChatsIDTG,tasks);
-        });
+        connect(manager,&NotificationManager::stateCheckBox,this,[timerSendNotificationTG,tg,manager,this](int state){
 
-        timerSendNotificationTG->start((manager->get_Frequency_of_Messages_TG() * 60 * 1000));
+            if(state == 2)
+            {
+                connect(timerSendNotificationTG,&QTimer::timeout,[tg,this](){
+
+                    LogicOperation l;
+                    l.sendNotificationWorksTG(tg,NotificationChatsIDTG,tasks);
+                });
+
+                timerSendNotificationTG->start((manager->get_Frequency_of_Messages_TG() * 60 * 1000));
+
+            }else if(state == 0)
+                {
+                QMessageBox::information(nullptr, "Уведомления",
+                                         "ТГ уведомления выключены для их включения передите\n"
+                                         "Планировщик Задач-> Оповещения->Тг Уведомления-> и нажмити на чекбокс");
+            }
+        });
 
     setupMenu();
 
@@ -92,13 +122,13 @@ MainWindow::~MainWindow()
 void MainWindow::setChats(const QSet<qint64> &chats)
 {
     NotificationChatsIDTG = chats;
-    qDebug() << "setChats вызван! Получено чатов:" << chats.size();
+    qDebug() << "Получено чатов из мейнв" << chats.size();
 }
 
 void MainWindow::setTasks(const QVector<Task> &task)
 {
     tasks = task;
-    qDebug() << "setTasks вызван! Получено задач:" << tasks.size();
+    qDebug() << "Получено задач из мейнв" << tasks.size();
 }
 
 void MainWindow::setupMenu()
@@ -136,6 +166,7 @@ void MainWindow::setupConnections()
     connect(ui->ButtonFileManag,    &QPushButton::clicked, this, &MainWindow::openFileManger);
     connect(ui->btnTextEditor,      &QPushButton::clicked, this, &MainWindow::openTextEditor);
     connect(ui->btnToDo,            &QPushButton::clicked, this, &MainWindow::openAssigmentPlanner);
+    connect(ui->btnEditorData,      &QPushButton::clicked, this, &MainWindow::openEditorData);
 
 }
 
@@ -183,6 +214,11 @@ void MainWindow::onNetworkError(const QString &err)
     QMetaObject::invokeMethod(this, [this, err]() {
         QMessageBox::information(this, "Обновление", err);
     }, Qt::QueuedConnection);
+}
+
+void MainWindow::TelegrammNotifications()
+{
+
 }
 
 
@@ -256,4 +292,12 @@ void MainWindow::openAssigmentPlanner()
     planner->setAttribute(Qt::WA_DeleteOnClose);
     hide();
     planner->show();
+}
+
+void MainWindow::openEditorData()
+{
+    DataEditor* editor = new DataEditor(this);
+    editor->setAttribute(Qt::WA_DeleteOnClose);
+    hide();
+    editor->show();
 }

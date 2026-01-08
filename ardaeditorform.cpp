@@ -15,6 +15,8 @@
 #include"JsonKeys.h"
 #include<QInputDialog>
 #include"mainwindow.h"
+#include<QtConcurrent/QtConcurrent>
+
 ArdaEditorForm::ArdaEditorForm(MainWindow* main, QWidget *parent)
     : QWidget(parent)
     , mainWindow(main)
@@ -24,53 +26,20 @@ ArdaEditorForm::ArdaEditorForm(MainWindow* main, QWidget *parent)
     setAcceptDrops(true);
 
     setAttribute(Qt::WA_DeleteOnClose);
-
-    QSettings settings(SerelizationData::ORG_NAME,"Editor");
-    setWindowTitle(settings.value("Path").toString());
-    path_ = (settings.value("Path").toString());
-    ui->fontComboBox->setCurrentFont(settings.value("font").toString());
-    bool ok = false;
-    int size = settings.value("sizeFont").toInt(&ok);
-    if(ok)
-    {
-        ui->horizontalSlider->setValue(size);
-        QFont font(ui->fontComboBox->currentFont());
-        font.setPointSize(size);
-        ui->textEdit->setFont(font);
-    }else
-    {
-        return;
-    }
-    ui->textEdit->setText(settings.value("textEdit").toString());
-    SourceText_ = ui->textEdit->toPlainText();
-
-    fileManager_ = std::make_unique<FileManager>();
-    connect(ui->lineEdit,&QLineEdit::textChanged,this,[this](const QString& text){
-        this->FindText(text);
-
-    });
-
-
-
-    QCheckBox* bold = new QCheckBox("Жирный", this);
-    QCheckBox* italic = new QCheckBox("Курсив", this);
-
-    QMenuBar* menuBar = new QMenuBar(this);
-    QMenu* More = new QMenu("Помощник", menuBar);
-
-    QAction* printerAction = new QAction("Распечатать",More);
-    QAction* openAction = new QAction("Открыть Файл", More);
-    QAction* saveAction = new QAction("Сохранить", More);
-    QAction* saveAsAction = new QAction("Сохранить как", More);
-
-    QWidgetAction *checkBoxAction = new QWidgetAction(More);
-    QWidgetAction* checkBoxSerAction = new QWidgetAction(More);
+    bold = new QCheckBox("Жирный", this);
+    italic = new QCheckBox("Курсив", this);
+    menuBar = new QMenuBar(this);
+    More = new QMenu("Помощник", menuBar);
+    printerAction = new QAction("Распечатать",More);
+    openAction = new QAction("Открыть Файл", More);
+    saveAction = new QAction("Сохранить", More);
+    saveAsAction = new QAction("Сохранить как", More);
+    checkBoxAction = new QWidgetAction(More);
+    checkBoxSerAction = new QWidgetAction(More);
+    exitAction = new QAction("Выход", More);
 
     checkBoxAction->setDefaultWidget(bold);
     checkBoxSerAction->setDefaultWidget(italic);
-
-    QAction* exitAction = new QAction("Выход", More);
-
     More->addAction(openAction);
     More->addAction(saveAction);
     More->addAction(saveAsAction);
@@ -81,89 +50,8 @@ ArdaEditorForm::ArdaEditorForm(MainWindow* main, QWidget *parent)
     More->addAction(printerAction);
     menuBar->addMenu(More);
 
-    connect(ui->btnCancel,&QPushButton::clicked,this,[this]()
-            {
-        this->Cancel(EditorCancel::CancelBack);
-    });
 
-    connect(ui->btnSourceText,&QPushButton::clicked,this,[this](){
-        this->Cancel(EditorCancel::CancelSource);
-    });
-
-    connect(exitAction,&QAction::triggered,this,[this](){
-        this->close();
-        mainWindow->show();
-    });
-    connect(ui->horizontalSlider,&QSlider::valueChanged,this,[this](int value)
-    {
-        QFont font = ui->textEdit->font();
-        font.setPointSize(value);
-        ui->textEdit->setFont(font);
-        QSettings settings(SerelizationData::ORG_NAME,"Editor");
-        settings.setValue("sizeFont",ui->horizontalSlider->value());
-    });
-    connect(ui->fontComboBox,&QFontComboBox::currentFontChanged,this,[this](const QFont& f){
-        ui->textEdit->setFont(f);
-        QSettings settings(SerelizationData::ORG_NAME,"Editor");
-        settings.setValue("font",ui->fontComboBox->currentFont());
-    });
-
-    connect(bold,&QCheckBox::checkStateChanged,this,[this](){
-        QFont font = ui->textEdit->font();
-        font.setBold(true);
-        ui->textEdit->setFont(font);
-    });
-    connect(italic,&QCheckBox::checkStateChanged,this,[this](){
-        QFont font = ui->textEdit->font();
-        font.setItalic(true);
-        ui->textEdit->setFont(font);
-    });
-
-    connect(openAction,&QAction::triggered,this,[this]()
-        {
-        this->openDocument();
-
-        QSettings settings(SerelizationData::ORG_NAME,"Editor");
-        settings.setValue("Path",path_);
-
-    });
-    connect(saveAction,&QAction::triggered,this,&ArdaEditorForm::saveDocument);
-    connect(printerAction,&QAction::triggered,this,&ArdaEditorForm::PrinterDocumentNative);
-    connect(saveAsAction,&QAction::triggered,this,&ArdaEditorForm::SaveAsDocument);
-
-    connect(ui->btnReplace,&QPushButton::clicked,this,[this](){
-        bool ok;
-        QString textFinder = QInputDialog::getText(this,
-            "Замена",
-            "Введите текст дя замены:",
-            QLineEdit::Normal,
-            "",
-            &ok
-        );
-
-        if (ok && !textFinder.isEmpty()) {
-            bool ok2;
-            QString textReplace = QInputDialog::getText(this,
-                "Замена",
-                "Введите текст на который заменить:",
-                QLineEdit::Normal,
-                "",
-                &ok2
-            );
-
-            if(ok2 && !textReplace.isEmpty())
-            {
-                this->replaceText(textFinder,textReplace);
-                QMessageBox::information(this,"Замена","Успешно!");
-            }
-
-        }
-    });
-    connect(ui->textEdit,&QTextEdit::textChanged,this,[this](){
-        QSettings settings(SerelizationData::ORG_NAME,"Editor");
-        settings.setValue("textEdit",ui->textEdit->toPlainText());
-
-    });
+    QTimer::singleShot(100,this,&ArdaEditorForm::loadSettings);
 
 
 }
@@ -279,6 +167,8 @@ void ArdaEditorForm::FindText(const QString &findValue)
 
 void ArdaEditorForm::replaceText(const QString &textReplaced,const QString& readyReplaceText)
 {
+    if(textReplaced.isEmpty() && readyReplaceText.isEmpty()) return;
+
     QString readyText = ui->textEdit->toPlainText();
     int index = 0;
 
@@ -315,6 +205,7 @@ void ArdaEditorForm::Cancel(const EditorCancel cancel)
 
 void ArdaEditorForm::BackText()
 {
+    qDebug() << currChangedText_ << CurrBackText_;
     replaceText(currChangedText_,CurrBackText_);
 }
 
@@ -347,6 +238,156 @@ void ArdaEditorForm::dropEvent(QDropEvent *dEvent)
 
     }
 
+}
+void ArdaEditorForm::loadSettings()
+{
+    QtConcurrent::run([this]() {
+        QSettings settings(SerelizationData::ORG_NAME, "Editor");
+
+        QString title = settings.value("Path").toString();
+        QString path = title;
+        QString fontName = settings.value("font").toString();
+        QString text = settings.value("textEdit").toString();
+
+        if (fontName == "MS Sans Serif" || fontName.isEmpty()) {
+            fontName = "Microsoft Sans Serif";
+        }
+
+        bool ok = false;
+        int size = settings.value("sizeFont").toInt(&ok);
+        if (!ok) {
+            size = 12;
+        }
+
+        QMetaObject::invokeMethod(this, [this, title, path, fontName, size, text]() {
+
+            if (!title.isEmpty()) {
+                setWindowTitle(title);
+            }
+
+            path_ = path;
+
+            if (!fontName.isEmpty()) {
+                ui->fontComboBox->setCurrentFont(QFont(fontName));
+                ui->horizontalSlider->setValue(size);
+
+                QFont font(fontName);
+                font.setPointSize(size);
+                ui->textEdit->setFont(font);
+            }
+
+            if (!text.isEmpty()) {
+                ui->textEdit->setText(text);
+                SourceText_ = text;
+            }
+
+
+            Connections();
+        });
+    });
+}
+
+void ArdaEditorForm::Connections()
+{
+
+    fileManager_ = std::make_unique<FileManager>();
+
+    connect(ui->btnCancel,&QPushButton::clicked,this,[this]()
+    {
+        this->Cancel(EditorCancel::CancelBack);
+    });
+
+    connect(ui->btnSourceText,&QPushButton::clicked,this,[this](){
+        this->Cancel(EditorCancel::CancelSource);
+    });
+
+    connect(exitAction,&QAction::triggered,this,[this](){
+        this->close();
+        mainWindow->show();
+    });
+
+    connect(ui->horizontalSlider,&QSlider::valueChanged,this,[this](int value)
+    {
+        QFont font = ui->textEdit->font();
+        font.setPointSize(value);
+        ui->textEdit->setFont(font);
+        QSettings settings(SerelizationData::ORG_NAME,"Editor");
+        settings.setValue("sizeFont",ui->horizontalSlider->value());
+
+    });
+
+    connect(ui->fontComboBox,&QFontComboBox::currentFontChanged,this,[this](const QFont& f){
+        ui->textEdit->setFont(f);
+        QSettings settings(SerelizationData::ORG_NAME,"Editor");
+        settings.setValue("font",ui->fontComboBox->currentFont());
+    });
+
+    connect(bold,&QCheckBox::checkStateChanged,this,[this](){
+        QFont font = ui->textEdit->font();
+        font.setBold(true);
+        ui->textEdit->setFont(font);
+    });
+
+    connect(italic,&QCheckBox::checkStateChanged,this,[this](){
+        QFont font = ui->textEdit->font();
+        font.setItalic(true);
+        ui->textEdit->setFont(font);
+    });
+
+    connect(ui->lineEdit,&QLineEdit::textChanged,this,[this](const QString& text){
+        this->FindText(text);
+
+    });
+
+    connect(openAction,&QAction::triggered,this,[this]()
+    {
+        this->openDocument();
+
+        QSettings settings(SerelizationData::ORG_NAME,"Editor");
+        settings.setValue("Path",path_);
+
+    });
+
+    connect(saveAction,&QAction::triggered,this,&ArdaEditorForm::saveDocument);
+    connect(printerAction,&QAction::triggered,this,&ArdaEditorForm::PrinterDocumentNative);
+    connect(saveAsAction,&QAction::triggered,this,&ArdaEditorForm::SaveAsDocument);
+
+    connect(ui->btnReplace,&QPushButton::clicked,this,[this](){
+        bool ok;
+        QString textFinder = QInputDialog::getText(this,
+        "Замена",
+        "Введите текст дя замены:",
+        QLineEdit::Normal,
+        "",
+        &ok
+    );
+
+    if (ok && !textFinder.isEmpty()) {
+        bool ok2;
+        QString textReplace = QInputDialog::getText(this,
+        "Замена",
+        "Введите текст на который заменить:",
+        QLineEdit::Normal,
+        "",
+        &ok2
+    );
+
+    if(ok2 && !textReplace.isEmpty())
+    {
+        this->replaceText(textFinder,textReplace);
+        QMessageBox::information(this,"Замена","Успешно!");
+    }
+
+
+    }
+    });
+
+
+    connect(ui->textEdit,&QTextEdit::textChanged,this,[this](){
+        QSettings settings(SerelizationData::ORG_NAME,"Editor");
+        settings.setValue("textEdit",ui->textEdit->toPlainText());
+
+    });
 }
 
 void ArdaEditorForm::openFile(QFile &file, ModeValidator validator)

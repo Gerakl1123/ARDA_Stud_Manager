@@ -22,6 +22,7 @@
 #include"clearcash.h"
 #include"FileManagerCore/filemanagerdialog.h"
 #include"NotificationCORE/assignmentplanner.h"
+#include"dataeditor.h"
 class academicrecordwindow;
 
 QT_BEGIN_NAMESPACE
@@ -73,10 +74,14 @@ private:
     void openTextEditor();
     void openDoc();
     void openAssigmentPlanner();
+    void openEditorData();
+
 private slots:
     void onUpdateAvailable(const QString &ver);
     void onNoUpdate();
     void onNetworkError(const QString &err);
+
+    void TelegrammNotifications();
 };
 
 #endif // MAINWINDOW_H

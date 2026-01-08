@@ -485,7 +485,7 @@ bool LogicOperation::sendNotificationWorksTG(TelegramNotifier *tg, const QSet<qi
                     "──────────────────\n"
                     "📝 *Задача:* " + task.nameT + "\n"
                     "📅 *Срок:* " + task.dateT.toString("dd.MM.yyyy") + "\n"
-                    "⏰ *Время:* " + task.timeT.toString("hh:mm") + "\n"
+                    "⏰ *Время:* " + task.timeT.toString("HH:mm") + "\n"
                     "⚡ *Приоритет:* " + task.priorityT + "\n"
                     "──────────────────\n"
                     "📋 *Описание:* " + (task.descT.isEmpty() ? "нет описания" : task.descT);
@@ -534,5 +534,32 @@ bool LogicOperation::DeleteKeyFromRegEdit(const QString &value, const QString &A
 
     }
     return false;
+}
+
+bool LogicOperation::setDataTableViewEditorForm(QStandardItemModel *model, QList<QHash<QString, QString>> data)
+{
+
+    model->clear();
+
+    QStringList headers = data.first().keys();
+    model->setHorizontalHeaderLabels(headers);
+
+
+    for(const auto& row : data)
+    {
+        QList<QStandardItem*> items;
+
+        for(const auto& header : headers)
+        {
+            QString v = row.value(header,"");
+
+            items.append(new QStandardItem(v));
+        }
+        model->appendRow(items);
+
+    }
+
+
+    return true;
 }
 

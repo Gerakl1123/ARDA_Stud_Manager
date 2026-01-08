@@ -30,8 +30,8 @@ ADMIN::ADMIN(MainWindow* main, QWidget *parent)
         auto objOpt = parser->findObject(FileName_,ID_);
         if (objOpt.has_value()) {
             qDebug() << "has value";
-            object = objOpt.value();
-           isd->loadListInformationPassport(modelPassport,this,object);
+            objectPass = objOpt.value();
+           isd->loadListInformationPassport(modelPassport,this,objectPass);
         }
 
     });
@@ -39,8 +39,8 @@ ADMIN::ADMIN(MainWindow* main, QWidget *parent)
         auto objOpt = parser->findObject(FileNameExtra_,ID_);
         if (objOpt.has_value()) {
             qDebug() << "has value";
-            object = objOpt.value();
-            isd->loadListInformationExtra(modelExtra,this,object);
+            objectExtra = objOpt.value();
+            isd->loadListInformationExtra(modelExtra,this,objectExtra);
         }
 
     });

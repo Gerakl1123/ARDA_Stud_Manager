@@ -9,7 +9,9 @@ enum class ModeSerelization
     Lessons,
     Records=9,
     Projects = 6,
-    CourseWork
+    CourseWork,
+    PassportData,
+    ExtraData
 };
 
 #endif // MODESERELIZATION_H

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ScheduleBuilderForm</class>
+ <widget class="QWidget" name="ScheduleBuilderForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>509</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>601</width>
+     <height>485</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="7" column="1">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Кабинет</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Тип пары</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="btnRemove">
+      <property name="text">
+       <string>Удалить</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QComboBox" name="comboBoxLessonName"/>
+    </item>
+    <item row="8" column="1">
+     <widget class="QComboBox" name="comboBoxCabinet"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="text">
+       <string>К прочьтению</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Пара</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QComboBox" name="comboBoxLessonTime"/>
+    </item>
+    <item row="14" column="1">
+     <widget class="QPushButton" name="btnCreateSheudle">
+      <property name="text">
+       <string>Сконструировать</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QComboBox" name="comboBoxTeacher"/>
+    </item>
+    <item row="12" column="1">
+     <widget class="QDateEdit" name="dateEditPair"/>
+    </item>
+    <item row="13" column="1">
+     <widget class="QPushButton" name="btnSave">
+      <property name="text">
+       <string>Сохранить</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Название пары</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QComboBox" name="comboBoxTypeLesson"/>
+    </item>
+    <item row="2" column="0" rowspan="13">
+     <widget class="QListWidget" name="listWidget"/>
+    </item>
+    <item row="0" column="1" rowspan="2">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Учитель</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string>Дата</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

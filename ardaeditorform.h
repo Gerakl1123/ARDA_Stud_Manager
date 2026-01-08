@@ -13,6 +13,8 @@
 #include <QPrintDialog>
 #include<QSettings>
 #include<QFileSystemModel>
+#include<QWidgetAction>
+#include<QMenuBar>
 
 enum class EditorCancel
 {
@@ -49,12 +51,28 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dropEvent(QDropEvent *event) override;
 private:
+    void loadSettings();
+    void Connections();
     QString path_;
     QString currChangedText_,CurrBackText_,SourceText_;
     MainWindow* mainWindow;
     std::unique_ptr<FileManager> fileManager_;
     void openFile(QFile&file, ModeValidator validator);
     Ui::ArdaEditorForm *ui;
+
+private:
+    QCheckBox* bold;
+    QCheckBox* italic;
+    QMenuBar* menuBar;
+    QMenu* More;
+    QAction* printerAction;
+    QAction* openAction;
+    QAction* saveAction;
+    QAction* saveAsAction;
+    QWidgetAction* checkBoxAction;
+    QWidgetAction* checkBoxSerAction;
+    QAction* exitAction;
+
 };
 
 #endif // ARDAEDITORFORM_H

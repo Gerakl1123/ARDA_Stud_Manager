@@ -16,6 +16,7 @@ void TableManager::processCellData(QTableWidgetItem *item)
     QString grades;
     QString marks;
     int row = item->row();
+
     for(const QChar& c : text)
     {
         if(c.isDigit())
@@ -90,5 +91,5 @@ bool TableManager::deleteDataTable()
         settings.sync();
     }
 
-
+    return true;
 }

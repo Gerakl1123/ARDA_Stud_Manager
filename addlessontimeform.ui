@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddLessonTimeForm</class>
+ <widget class="QWidget" name="AddLessonTimeForm">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1018</width>
+    <height>541</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* ===== База ===== */
+QWidget {
+    background-color: #2B2E34;
+    color: #D8DEE9;
+    font-family: &quot;Segoe UI&quot;, &quot;Inter&quot;, &quot;Arial&quot;;
+    font-size: 14px;
+}
+
+/* ===== QLabel ===== */
+QLabel {
+    color: #D8DEE9;
+}
+
+QLabel#titleLabel {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ECEFF4;
+}
+
+QLabel#secondaryLabel {
+    color: #AEB6C2;
+    font-size: 13px;
+}
+
+/* ===== QPushButton ===== */
+QPushButton {
+    background-color: #3A3F47;
+    color: #D8DEE9;
+    border: 1px solid #4C566A;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #434955;
+}
+
+QPushButton:pressed {
+    background-color: #4C566A;
+}
+
+QPushButton:disabled {
+    background-color: #2E3238;
+    color: #6C7280;
+    border: 1px solid #2E3238;
+}
+
+/* ===== QTreeWidget ===== */
+QTreeWidget {
+    background-color: #2E3238;
+    border: 1px solid #3B4048;
+    border-radius: 8px;
+    outline: none;
+}
+
+QTreeWidget::item {
+    padding: 6px 8px;
+    color: #D8DEE9;
+    border-radius: 4px;
+}
+
+/* Hover */
+QTreeWidget::item:hover {
+    background-color: #3A3F47;
+}
+
+/* Selected */
+QTreeWidget::item:selected {
+    background-color: #3E4451;
+    color: #ECEFF4;
+}
+
+/* Заголовки */
+QHeaderView::section {
+    background-color: #26292E;
+    color: #AEB6C2;
+    padding: 6px;
+    border: none;
+    font-weight: 500;
+}
+
+/* ===== QComboBox ===== */
+QComboBox {
+    background-color: #2E3238;
+    color: #ECEFF4;
+    border: 1px solid #4C566A;
+    border-radius: 6px;
+    padding: 5px 10px;
+}
+
+QComboBox:hover {
+    background-color: #32363D;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 24px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #2E3238;
+    border: 1px solid #3B4048;
+    selection-background-color: #3E4451;
+    selection-color: #ECEFF4;
+    outline: none;
+}
+
+/* ===== QTimeEdit ===== */
+QTimeEdit {
+    background-color: #2E3238;
+    color: #ECEFF4;
+    border: 1px solid #4C566A;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QTimeEdit:focus {
+    border: 1px solid #81A1C1;
+    background-color: #32363D;
+}
+
+QTimeEdit::up-button,
+QTimeEdit::down-button {
+    width: 16px;
+    background-color: #3A3F47;
+    border: none;
+}
+
+QTimeEdit::up-button:hover,
+QTimeEdit::down-button:hover {
+    background-color: #434955;
+}
+
+/* ===== ScrollBar ===== */
+QScrollBar:vertical {
+    background: #2B2E34;
+    width: 8px;
+}
+
+QScrollBar::handle:vertical {
+    background: #4C566A;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #5E677A;
+}
+</string>
+  </property>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>379</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Выберите пару</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>379</width>
+     <height>39</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>250</y>
+     <width>316</width>
+     <height>99</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Конец пары</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>2</x>
+     <y>160</y>
+     <width>316</width>
+     <height>99</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Начало пары</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>110</y>
+     <width>316</width>
+     <height>37</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Время пары</string>
+   </property>
+  </widget>
+  <widget class="QTimeEdit" name="timeEdit_Start">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>160</y>
+     <width>361</width>
+     <height>99</height>
+    </rect>
+   </property>
+   <property name="displayFormat">
+    <string>HH:mm</string>
+   </property>
+  </widget>
+  <widget class="QTimeEdit" name="timeEdit_End">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>260</y>
+     <width>361</width>
+     <height>99</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>-1</pointsize>
+     <fontweight>Medium</fontweight>
+    </font>
+   </property>
+   <property name="displayFormat">
+    <string>HH:mm</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnGo">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>470</y>
+     <width>286</width>
+     <height>64</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Отправить</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSave">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>370</y>
+     <width>311</width>
+     <height>64</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </widget>
+  <widget class="QTreeWidget" name="treeWidget">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>0</y>
+     <width>361</width>
+     <height>541</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <column>
+    <property name="text">
+     <string notr="true">1</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="btnDefault">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>470</y>
+     <width>261</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Использовать по умолчанию</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

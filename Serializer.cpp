@@ -170,7 +170,7 @@ void SerializerData::DataSerelizationExtra(QWidget *thisWidget)
         QString key = CheckBox->objectName();
 
         CheckBox->blockSignals(true);
-        CheckBox->setCheckState(mainS.value(key).toInt());
+        CheckBox->setCheckState(static_cast<Qt::CheckState>(mainS.value(key).toInt()));
         CheckBox->blockSignals(false);
         binder->ConnectionsExtra(CheckBox,SerelizationData::ORG_NAME,app);
     }

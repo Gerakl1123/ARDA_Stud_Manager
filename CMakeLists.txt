@@ -25,6 +25,9 @@ find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Sql)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
 set(PROJECT_SOURCES
     main.cpp
@@ -271,6 +274,24 @@ set(PROJECT_SOURCES
 qt_add_executable(ARDA
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
+    Delete.png
+    dataeditor.h dataeditor.cpp dataeditor.ui
+    dynamiccreateformeditordatajson.h dynamiccreateformeditordatajson.cpp
+    add_lesson_schedule_dialog.h add_lesson_schedule_dialog.cpp add_lesson_schedule_dialog.ui
+
+    dataschedule.h dataschedule.cpp
+    addlessontimeform.h addlessontimeform.cpp addlessontimeform.ui
+    addcabinetsdialog.h addcabinetsdialog.cpp addcabinetsdialog.ui
+    addnameteachersform.h addnameteachersform.cpp addnameteachersform.ui
+    schedulebuilderform.h schedulebuilderform.cpp schedulebuilderform.ui
+    primarydatascheudlemanagerform.h primarydatascheudlemanagerform.cpp primarydatascheudlemanagerform.ui
+    addlessonnameform.h addlessonnameform.cpp addlessonnameform.ui
+    scheduledataservice.h scheduledataservice.cpp
+    schedulejsonparser.h schedulejsonparser.cpp
+    passportdatajsonparser.h passportdatajsonparser.cpp
+
+
+
 
 
 )
@@ -289,6 +310,9 @@ target_link_libraries(ARDA
 
 qt_import_plugins(ARDA)
 
+target_link_libraries(ARDA PRIVATE Qt6::Core)
+target_link_libraries(ARDA PRIVATE Qt6::Core)
+target_link_libraries(ARDA PRIVATE Qt6::Core)
 target_link_libraries(ARDA PRIVATE Qt6::Core)
 target_link_libraries(ARDA PRIVATE Qt6::Core)
 target_compile_options(ARDA PRIVATE -fpermissive)
@@ -312,6 +336,7 @@ if(WIN32)
     add_compile_definitions(_WIN32_WINNT=0x0A00)
     add_compile_definitions(NTDDI_VERSION=0x0A000006)
 endif()
+
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(ARDA)
 endif()

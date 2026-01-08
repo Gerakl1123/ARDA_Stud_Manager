@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddLessonNameForm</class>
+ <widget class="QWidget" name="AddLessonNameForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* ===== QWidget (база) ===== */
+QWidget {
+    background-color: #2B2E34;
+    color: #D8DEE9;
+    font-family: &quot;Segoe UI&quot;, &quot;Inter&quot;, &quot;Arial&quot;;
+    font-size: 14px;
+}
+
+/* ===== QLabel ===== */
+QLabel {
+    color: #D8DEE9;
+}
+
+QLabel#titleLabel {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ECEFF4;
+}
+
+QLabel#secondaryLabel {
+    color: #AEB6C2;
+    font-size: 13px;
+}
+
+/* ===== QPushButton ===== */
+QPushButton {
+    background-color: #3A3F47;
+    color: #D8DEE9;
+    border: 1px solid #4C566A;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #434955;
+}
+
+QPushButton:pressed {
+    background-color: #4C566A;
+}
+
+QPushButton:disabled {
+    background-color: #2E3238;
+    color: #6C7280;
+    border: 1px solid #2E3238;
+}
+
+/* ===== QLineEdit ===== */
+QLineEdit {
+    background-color: #2E3238;
+    color: #ECEFF4;
+    border: 1px solid #4C566A;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QLineEdit:focus {
+    border: 1px solid #81A1C1;
+    background-color: #32363D;
+}
+
+/* Placeholder текст */
+QLineEdit::placeholder {
+    color: #7A8190;
+}
+
+/* ===== QListWidget ===== */
+QListWidget {
+    background-color: #2E3238;
+    border: 1px solid #3B4048;
+    border-radius: 8px;
+    padding: 4px;
+    outline: none;
+}
+
+QListWidget::item {
+    padding: 8px 10px;
+    margin: 2px;
+    border-radius: 6px;
+    color: #D8DEE9;
+}
+
+/* Hover по элементу */
+QListWidget::item:hover {
+    background-color: #3A3F47;
+}
+
+/* Выбранный элемент */
+QListWidget::item:selected {
+    background-color: #3E4451;
+    color: #ECEFF4;
+}
+
+/* Выбранный, но без фокуса */
+QListWidget::item:selected:!active {
+    background-color: #363B44;
+}
+
+/* ===== ScrollBar ===== */
+QScrollBar:vertical {
+    background: #2B2E34;
+    width: 8px;
+}
+
+QScrollBar::handle:vertical {
+    background: #4C566A;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #5E677A;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>641</width>
+     <height>481</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="3">
+     <widget class="QPushButton" name="btnHelp">
+      <property name="text">
+       <string>Подсказка</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="btnGo">
+      <property name="text">
+       <string>Отправить данные</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" rowspan="4">
+     <widget class="QListWidget" name="listWidget"/>
+    </item>
+    <item row="2" column="3">
+     <widget class="QPushButton" name="btnSave">
+      <property name="text">
+       <string>Сохранить</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLineEdit" name="lineEditNamePair">
+      <property name="placeholderText">
+       <string>Название Пары</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -13,13 +13,15 @@
 #include<QDir>
 #include<QtSql/QSqlQuery>
 #include"JsonKeys.h"
+#include<QStandardItemModel>
 
 class TelegramNotifier;
 struct Task;
 class SerializerData;
 
-class LogicOperation
+class LogicOperation : public QObject
 {
+    Q_OBJECT
 public:
     bool handleAddStudent(const QString& file, const QString& data,QLineEdit* LineEditClear,QWidget* parent);
     QString handlePriviewFile(const QString& file,QTextEdit* display,QWidget* parent);
@@ -58,9 +60,14 @@ public:
 
 
     //  void LoadTableHeaders(QSettings &settings, QTableWidget *t);
-    // void SaveTableHeaders(QSettings &settings, QTableWidget *t);
+    // void SaveTableHeaders(QSettings &settings, QTableWidget *t);g
+
+     //QList<QHash<QString,QWidget*> getWidgetsInfoToEditorForm();
+ public slots:
+       bool setDataTableViewEditorForm(QStandardItemModel* model, QList<QHash<QString, QString> >);
 
 };
+
 
 
 #endif // LOGICOPERATION_H

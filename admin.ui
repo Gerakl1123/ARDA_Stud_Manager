@@ -54,30 +54,7 @@ QLineEdit, QTextEdit {
     color: #FFFFFF;
 }
 
-/* QComboBox */
-QComboBox {
-    background-color: #3A3F44;
-    border: 1px solid #555555;
-    border-radius: 4px;
-    padding: 5px;
-    color: #FFFFFF;
-}
 
-QComboBox QAbstractItemView {
-    background-color: #3A3F44;
-    selection-background-color: #1E90FF;
-    color: #FFFFFF;
-}
-
-/* QTableView */
-QTableView {
-    background-color: #323232;
-    gridline-color: #555555;
-    color: #FFFFFF;
-    selection-background-color: #1E90FF;
-    selection-color: #FFFFFF;
-    font-size: 13px;
-}
 
 QHeaderView::section {
     background-color: #3A3F44;
@@ -86,55 +63,33 @@ QHeaderView::section {
     border: 1px solid #555555;
     font-weight: bold;
 }
-
-/* QCheckBox */
-QCheckBox {
-    color: #E0E0E0;
-}
-
-/* QTabWidget */
-QTabWidget::pane {
-    border: 1px solid #555555;
-}
-
-QTabBar::tab {
+QListView {
     background-color: #3A3F44;
-    color: #FFFFFF;
-    padding: 8px 16px;
-    border: 1px solid #555555;
-    border-bottom-color: #2B2B2B;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 5px;
+    selection-background-color: #e3f2fd;
+    selection-color: #1976d2;
+    outline: none; /* Убираем пунктирную рамку при фокусе */
 }
 
-QTabBar::tab:selected {
-    background-color: #1E90FF;
-    color: #FFFFFF;
-    border-bottom-color: #1E90FF;
+QListView::item {
+    height: 30px;
+    padding: 5px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
-/* ScrollBar */
-QScrollBar:vertical {
-    border: none;
-    background: #2B2B2B;
-    width: 12px;
-    margin: 0px 0px 0px 0px;
+QListView::item:hover {
+    background-color: #f8f9fa;
 }
 
-QScrollBar::handle:vertical {
-    background: #50555A;
-    min-height: 20px;
-    border-radius: 5px;
+QListView::item:selected {
+    background-color: #2196f3;
+    color: white;
+    border-radius: 3px;
 }
 
-QScrollBar::handle:vertical:hover {
-    background: #1E90FF;
-}
-
-QScrollBar::add-line:vertical,
-QScrollBar::sub-line:vertical {
-    height: 0px;
-}</string>
+</string>
   </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">

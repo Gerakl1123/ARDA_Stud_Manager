@@ -29,7 +29,9 @@ private:
     QString FileNameExtra_;
 
     std::unique_ptr<ImportSaveData> isd;
-    QJsonObject object;
+    QJsonObject objectPass;
+    QJsonObject objectExtra;
+
     FindObjectJson* findObject;
     std::unique_ptr<ParserJson> parser;
     QStringListModel* modelPassport;

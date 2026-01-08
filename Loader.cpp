@@ -58,6 +58,7 @@ std::vector<std::shared_ptr<Student>> StudentLoader::fromFile(const QString &fil
 
         QString name = parts[0];
         vecStudentTemp.push_back(std::make_shared<Student>(name, ball));
+
     }
 
     file.close();
@@ -120,7 +121,7 @@ bool StudentLoader::saveLoginPassword(const QString& login, const QString& hashe
     }
 
     QTextStream out(&file);
-    out << login << " " << hashedPassword <<  " [" << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss") << "] ""\n";
+    out << login << " " << hashedPassword <<  " [" << QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss") << "] ""\n";
 
     file.close();
 
