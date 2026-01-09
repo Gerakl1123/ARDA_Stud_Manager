@@ -54,7 +54,7 @@ public:
 
 
     template<typename T>
-    inline static std::shared_ptr<Log> create(const T& nameFile)
+   [[nodiscard]] inline static std::shared_ptr<Log> create(const T& nameFile)
     {
         constexpr bool is_type =
             std::is_constructible_v<std::string, T> ||

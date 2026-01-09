@@ -7,6 +7,8 @@
 #include<QPair>
 #include<QSet>
 #include"dataschedule.h"
+#include<QFile>
+
 class ScheduleJsonParser
 {
 public:
@@ -18,6 +20,16 @@ public:
     bool setLessonNameCabinets(const QString& filename,const QSet<QString>& data);
 
     QJsonObject parseScheudleToJson(const DataSchedule* scheudle);
+
+    /**
+ * Извлекает массив из JSON файла
+ * Читает файл парсит JSON ищет первый массив (он и так 1)
+ * Его данные сохраняет в массив
+ * Если файл не существует или нет массива возвращает пустой массив
+ * Удаляет оригинальный файл после чтения
+ */
+    static QJsonArray getArrayFromJsonFile(QFile& file);
+
 };
 
 #endif // SCHEDULEJSONPARSER_H

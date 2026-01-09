@@ -5,9 +5,11 @@
 #include"FileChooicer.h"
 #include"LogicOperation.h"
 #include<QTextStream>
-
-ScheduleBuilderForm::ScheduleBuilderForm(QWidget *parent)
+#include"add_lesson_schedule_dialog.h"
+#include"confrimdialog.h"
+ScheduleBuilderForm::ScheduleBuilderForm(Add_Lesson_Schedule_Dialog *ALSD, QWidget *parent)
     : QWidget(parent)
+    , MainMenu(ALSD)
     , scheudle(std::make_unique<DataSchedule>())
     , scheudleDataService(std::make_unique<ScheduleDataService>())
     , parseScheudle(std::make_unique<ScheduleJsonParser>())
@@ -15,6 +17,11 @@ ScheduleBuilderForm::ScheduleBuilderForm(QWidget *parent)
 {
     ui->setupUi(this);
     this->setLayout(ui->gridLayout);
+    setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint);
+    // Или для более точного контроля:
+    setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
+    setWindowFlags(windowFlags() & ~Qt::WindowCloseButtonHint);
+    setAttribute(Qt::WA_DeleteOnClose);
 
     BuildDataComboBox();
     connect(ui->btnSave,&QPushButton::clicked,this,&ScheduleBuilderForm::SaveScheudle);
@@ -26,6 +33,19 @@ ScheduleBuilderForm::ScheduleBuilderForm(QWidget *parent)
 
     connect(ui->btnCreateSheudle,&QPushButton::clicked,this,&ScheduleBuilderForm::BuildScheudle);
 
+    connect(ui->btnQuit,&QPushButton::clicked,this,[this]()
+    {
+        ConfrimDialog* dialog = new ConfrimDialog(this);
+        if(dialog->exec() == QDialog::Accepted)
+        {
+            this->backMenu();
+        }
+        else
+        {
+            return;
+        }
+
+    });
 
 
 
@@ -164,6 +184,12 @@ void ScheduleBuilderForm::DeleteItemList(const int item_ROW)
 
     // }
     delete ui->listWidget->takeItem(item_ROW);
+}
+
+void ScheduleBuilderForm::backMenu()
+{
+    this->close();
+    MainMenu->show();
 }
 
 void ScheduleBuilderForm::BuildDataComboBox()

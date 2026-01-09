@@ -41,6 +41,7 @@ public:
     void FillTableAdminInfo(QWidget* p,QTableWidget* t);
 
     static QJsonArray rewriteFile(QFile& file);
+
     static QJsonArray rewriteFileManagGrades(QTableWidget* t,QFile& file);
 
     static QFileInfoList recursiveTravelDirs(const QString& path);

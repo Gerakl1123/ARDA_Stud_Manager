@@ -180,7 +180,7 @@ std::optional<double> LogicOperation::handleAutoTestStudent(QTableWidgetItem* ch
     if (averageScore.isEmpty()) return std::nullopt;
     int sum = 0;
 
-    for(const int c : averageScore) sum+= c;
+    for(const int numBEAR : averageScore) sum+= numBEAR;
 
     double result = static_cast<double>(sum) / averageScore .size();
 
@@ -385,6 +385,8 @@ QJsonArray LogicOperation::rewriteFile(QFile &file)
 
     return arr;
 }
+
+
 
 QFileInfoList LogicOperation::recursiveTravelDirs(const QString &path)
 {

@@ -7,6 +7,8 @@
 #include"schedulejsonparser.h"
 #include<QJsonArray>
 
+class Add_Lesson_Schedule_Dialog;
+
 namespace Ui {
 class ScheduleBuilderForm;
 }
@@ -16,7 +18,7 @@ class ScheduleBuilderForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit ScheduleBuilderForm(QWidget *parent = nullptr);
+    explicit ScheduleBuilderForm(Add_Lesson_Schedule_Dialog*ALSD, QWidget *parent = nullptr);
     ~ScheduleBuilderForm();
 public slots:
     void BuildScheudle();
@@ -55,11 +57,14 @@ public slots:
         //scheudle->datePair.insert(datePair);
     }
 private:
+    void backMenu();
+
     Ui::ScheduleBuilderForm *ui;
     std::unique_ptr<DataSchedule> scheudle;
     std::unique_ptr<ScheduleDataService> scheudleDataService;
     std::unique_ptr<ScheduleJsonParser> parseScheudle;
     QJsonArray mainArr;
+    Add_Lesson_Schedule_Dialog* MainMenu;
     void BuildDataComboBox();
 };
 

@@ -167,6 +167,7 @@ void MainWindow::setupConnections()
     connect(ui->btnTextEditor,      &QPushButton::clicked, this, &MainWindow::openTextEditor);
     connect(ui->btnToDo,            &QPushButton::clicked, this, &MainWindow::openAssigmentPlanner);
     connect(ui->btnEditorData,      &QPushButton::clicked, this, &MainWindow::openEditorData);
+    connect(ui->btnAddLesson,       &QPushButton::clicked, this, &MainWindow::openScheudleWindow);
 
 }
 
@@ -300,4 +301,12 @@ void MainWindow::openEditorData()
     editor->setAttribute(Qt::WA_DeleteOnClose);
     hide();
     editor->show();
+}
+
+void MainWindow::openScheudleWindow()
+{
+    Add_Lesson_Schedule_Dialog* scheudle = new Add_Lesson_Schedule_Dialog(this);
+    scheudle->setAttribute(Qt::WA_DeleteOnClose);
+    hide();
+    scheudle->show();
 }

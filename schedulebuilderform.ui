@@ -2,13 +2,32 @@
 <ui version="4.0">
  <class>ScheduleBuilderForm</class>
  <widget class="QWidget" name="ScheduleBuilderForm">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>509</height>
+    <height>562</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <bold>false</bold>
+    <kerning>true</kerning>
+    <hintingpreference>PreferDefaultHinting</hintingpreference>
+   </font>
+  </property>
+  <property name="cursor">
+   <cursorShape>CrossCursor</cursorShape>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::FocusPolicy::NoFocus</enum>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -19,7 +38,7 @@
      <x>20</x>
      <y>10</y>
      <width>601</width>
-     <height>485</height>
+     <height>521</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -30,52 +49,8 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Тип пары</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="btnRemove">
-      <property name="text">
-       <string>Удалить</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="1">
-     <widget class="QComboBox" name="comboBoxLessonName"/>
-    </item>
-    <item row="8" column="1">
-     <widget class="QComboBox" name="comboBoxCabinet"/>
-    </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="text">
-       <string>К прочьтению</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Пара</string>
-      </property>
-     </widget>
-    </item>
     <item row="6" column="1">
      <widget class="QComboBox" name="comboBoxLessonTime"/>
-    </item>
-    <item row="14" column="1">
-     <widget class="QPushButton" name="btnCreateSheudle">
-      <property name="text">
-       <string>Сконструировать</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QComboBox" name="comboBoxTeacher"/>
     </item>
     <item row="12" column="1">
      <widget class="QDateEdit" name="dateEditPair"/>
@@ -87,18 +62,22 @@
       </property>
      </widget>
     </item>
-    <item row="9" column="1">
-     <widget class="QLabel" name="label_5">
+    <item row="10" column="1">
+     <widget class="QComboBox" name="comboBoxLessonName"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="btnRemove">
       <property name="text">
-       <string>Название пары</string>
+       <string>Удалить</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="1">
-     <widget class="QComboBox" name="comboBoxTypeLesson"/>
-    </item>
-    <item row="2" column="0" rowspan="13">
-     <widget class="QListWidget" name="listWidget"/>
+    <item row="5" column="1">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Пара</string>
+      </property>
+     </widget>
     </item>
     <item row="0" column="1" rowspan="2">
      <widget class="QLabel" name="label">
@@ -107,10 +86,57 @@
       </property>
      </widget>
     </item>
+    <item row="2" column="0" rowspan="13">
+     <widget class="QListWidget" name="listWidget"/>
+    </item>
     <item row="11" column="1">
      <widget class="QLabel" name="label_6">
       <property name="text">
        <string>Дата</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Тип пары</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="text">
+       <string>К прочьтению</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QComboBox" name="comboBoxTypeLesson"/>
+    </item>
+    <item row="8" column="1">
+     <widget class="QComboBox" name="comboBoxCabinet"/>
+    </item>
+    <item row="2" column="1">
+     <widget class="QComboBox" name="comboBoxTeacher"/>
+    </item>
+    <item row="14" column="1">
+     <widget class="QPushButton" name="btnCreateSheudle">
+      <property name="text">
+       <string>Сконструировать</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Название пары</string>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="0">
+     <widget class="QPushButton" name="btnQuit">
+      <property name="text">
+       <string>Выйти</string>
       </property>
      </widget>
     </item>

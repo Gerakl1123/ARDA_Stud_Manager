@@ -2,16 +2,18 @@
 #include<QFile>
 #include"LogicOperation.h"
 #include"FileChooicer.h"
+#include"LogicOperation.h"
+
 ScheduleJsonParser::ScheduleJsonParser() {}
 
 bool ScheduleJsonParser::setDataLessonTime(const QString& filename,const QMap<int, QPair<QTime, QTime> > &data)
 {
     QFile file(filename);
 
-    LogicOperation::ValidFile(file,ModeValidator::DeleteWrite);
+    QJsonArray arr = getArrayFromJsonFile(file);
 
+    LogicOperation::ValidFile(file,ModeValidator::WriteFile);
 
-    QJsonArray arr;
 
     for(const auto&[key,value] : data.toStdMap())
     {
@@ -21,11 +23,16 @@ bool ScheduleJsonParser::setDataLessonTime(const QString& filename,const QMap<in
         obj["Начало"] = value.first.toString("HH:mm");
         obj["Конец"] = value.second.toString("HH:mm");
         arr.append(obj);
+
     }
+    QJsonObject MainObj;
+
 
     if(arr.isEmpty()) return false;
-    QJsonObject MainObj;
+
+
     MainObj["Пары"] = arr;
+
 
     QJsonDocument doc(MainObj);
 
@@ -38,33 +45,34 @@ bool ScheduleJsonParser::setDataCabinets(const QString &filename, const QSet<QSt
 {
     QFile file(filename);
 
-    LogicOperation::ValidFile(file,ModeValidator::DeleteWrite);
+    QJsonArray arr = getArrayFromJsonFile(file);
 
-    QJsonArray arr;
-    QJsonObject mainObj;
+    LogicOperation::ValidFile(file,ModeValidator::WriteFile);
+
     for(const auto& c : data)
     {
         QJsonObject obj;
         obj["Кабинет"] = c;
         arr.append(obj);
     }
+    QJsonObject MainObj;
+
+
     if(arr.isEmpty()) return false;
 
-    mainObj["Кабинеты"]=arr;
+    MainObj["Кабинеты"]=arr;
 
-    QJsonDocument doc(mainObj);
+    QJsonDocument doc(MainObj);
     file.write(doc.toJson());
     return true;
 }
-
 bool ScheduleJsonParser::setDataTeachers(const QString &filename, const QSet<Teacher> &data)
 {
     QFile file(filename);
 
-    LogicOperation::ValidFile(file,ModeValidator::DeleteWrite);
+    QJsonArray arr = getArrayFromJsonFile(file);
 
-    QJsonArray arr;
-    QJsonObject mainObj;
+    LogicOperation::ValidFile(file,ModeValidator::WriteFile);
 
     for(const auto& teacher : data)
     {
@@ -74,14 +82,14 @@ bool ScheduleJsonParser::setDataTeachers(const QString &filename, const QSet<Tea
         obj["Отчество"] = teacher.lastName;
         arr.append(obj);
     }
+    QJsonObject MainObj;
 
     if(arr.isEmpty()) return false;
 
-    mainObj["Учителя"] = arr;
+    MainObj["Учителя"]=arr;
 
-    QJsonDocument doc(mainObj);
+    QJsonDocument doc(MainObj);
     file.write(doc.toJson());
-
     return true;
 }
 
@@ -89,10 +97,9 @@ bool ScheduleJsonParser::setLessonNameCabinets(const QString &filename, const QS
 {
     QFile file(filename);
 
-    LogicOperation::ValidFile(file,ModeValidator::DeleteWrite);
+    QJsonArray arr = getArrayFromJsonFile(file);
 
-    QJsonArray arr;
-    QJsonObject mainObj;
+    LogicOperation::ValidFile(file,ModeValidator::WriteFile);
 
     for(const auto& lesson : data)
     {
@@ -101,19 +108,16 @@ bool ScheduleJsonParser::setLessonNameCabinets(const QString &filename, const QS
         arr.append(obj);
     }
 
+    QJsonObject MainObj;
+
     if(arr.isEmpty()) return false;
 
-    mainObj["Название пар"] = arr;
+    MainObj["Название пар"]=arr;
 
-    QJsonDocument doc(mainObj);
+    QJsonDocument doc(MainObj);
     file.write(doc.toJson());
-
-
     return true;
-
-
 }
-
 QJsonObject ScheduleJsonParser::parseScheudleToJson(const DataSchedule *scheudle)
 {
 
@@ -128,8 +132,47 @@ QJsonObject ScheduleJsonParser::parseScheudleToJson(const DataSchedule *scheudle
     obj["Кабинет"] = scheudle->currentCabinet;
     obj["Дата"] = scheudle->currentDate.toString("dd.MM.yyyy");
 
-
-
     return obj;
+
+}
+
+QJsonArray ScheduleJsonParser::getArrayFromJsonFile(QFile &file)
+{
+    if(!file.exists()) return QJsonArray();
+
+    LogicOperation::ValidFile(file,ModeValidator::ReadFile);
+
+    QByteArray bArr = file.readAll();
+    QJsonParseError error;
+    file.close();
+    QJsonDocument doc = QJsonDocument::fromJson(bArr,&error);
+
+    if (error.error != QJsonParseError::NoError) {
+        qDebug() << error.errorString();
+        return QJsonArray();
+    }
+
+    if(!doc.isObject())  return QJsonArray();
+
+    QJsonObject mainObject = doc.object();
+    QJsonArray array;
+
+    auto it = std::find_if(mainObject.constBegin(),mainObject.constEnd(),[](const QJsonValue& v){
+        return v.isArray();
+    });
+
+
+    if (it != mainObject.constEnd()) {
+         array = it->toArray();
+    }
+    else
+    {
+        return QJsonArray();
+    }
+
+    LogicOperation::ValidFile(file,ModeValidator::DeleteWrite);
+    file.close();
+
+    return array;
 
 }

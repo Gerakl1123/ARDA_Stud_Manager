@@ -23,6 +23,8 @@
 #include"FileManagerCore/filemanagerdialog.h"
 #include"NotificationCORE/assignmentplanner.h"
 #include"dataeditor.h"
+#include"add_lesson_schedule_dialog.h"
+
 class academicrecordwindow;
 
 QT_BEGIN_NAMESPACE
@@ -31,15 +33,8 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
-
-
 #include <QMainWindow>
-#include <QPointer>
-#include <QPalette>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
 
 
 class MainWindow : public QMainWindow
@@ -66,6 +61,11 @@ private:
 
     void showAboutDialog();
 
+/*
+*Все созданные локально классы в методах ниже передаеться this как MainWindow чтоб вернуться назад
+*конструктор
+*WindowClass(MainWindow* backMain, Qwidget* widget = nullptr)
+*/
     void openLessons();
     void openManagerStud();
     void openContestWindow();
@@ -75,7 +75,8 @@ private:
     void openDoc();
     void openAssigmentPlanner();
     void openEditorData();
-
+    void openScheudleWindow();
+    // и все
 private slots:
     void onUpdateAvailable(const QString &ver);
     void onNoUpdate();
