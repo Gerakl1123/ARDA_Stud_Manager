@@ -18,11 +18,7 @@ ScheduleBuilderForm::ScheduleBuilderForm(Add_Lesson_Schedule_Dialog *ALSD, QWidg
     ui->setupUi(this);
     this->setLayout(ui->gridLayout);
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint);
-    // Или для более точного контроля:
-    setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
-    setWindowFlags(windowFlags() & ~Qt::WindowCloseButtonHint);
-    setAttribute(Qt::WA_DeleteOnClose);
-
+    
     BuildDataComboBox();
     connect(ui->btnSave,&QPushButton::clicked,this,&ScheduleBuilderForm::SaveScheudle);
     connect(ui->btnRemove,&QPushButton::clicked,this,[this](){
@@ -214,3 +210,4 @@ void ScheduleBuilderForm::BuildDataComboBox()
 
 
 }
+
