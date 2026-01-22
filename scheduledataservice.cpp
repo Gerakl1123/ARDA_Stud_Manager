@@ -124,3 +124,4 @@ QSet<Teacher> ScheduleDataService::GetTeacherNameJson()
 
     return schedule->Teachers;
 }
+

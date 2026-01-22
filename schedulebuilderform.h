@@ -6,6 +6,7 @@
 #include"scheduledataservice.h"
 #include"schedulejsonparser.h"
 #include<QJsonArray>
+#include"scheduleioservice.h"
 
 class Add_Lesson_Schedule_Dialog;
 
@@ -17,13 +18,22 @@ class ScheduleBuilderForm : public QWidget
 {
     Q_OBJECT
 
+
+signals:
+    void saveSucces();
+
 public:
-    explicit ScheduleBuilderForm(Add_Lesson_Schedule_Dialog*ALSD, QWidget *parent = nullptr);
+    explicit ScheduleBuilderForm(Add_Lesson_Schedule_Dialog *ALSD, QWidget *parent = nullptr);
     ~ScheduleBuilderForm();
+
 public slots:
+
     void BuildScheudle();
     void SaveScheudle();
     void DeleteItemList(const int item_ROW);
+    void DeleteInfoFromStruct(const int index);
+
+public:
 
     void SetCabinets(const QString& cabinet)
     {
@@ -63,6 +73,8 @@ private:
     std::unique_ptr<DataSchedule> scheudle;
     std::unique_ptr<ScheduleDataService> scheudleDataService;
     std::unique_ptr<ScheduleJsonParser> parseScheudle;
+    std::unique_ptr<ScheduleIOService> ioService;
+
     QJsonArray mainArr;
     Add_Lesson_Schedule_Dialog* MainMenu;
     void BuildDataComboBox();

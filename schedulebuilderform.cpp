@@ -7,23 +7,34 @@
 #include<QTextStream>
 #include"add_lesson_schedule_dialog.h"
 #include"confrimdialog.h"
+#include"parserjson.h"
+#include <QLocale>
+#include<QCalendarWidget>
+
 ScheduleBuilderForm::ScheduleBuilderForm(Add_Lesson_Schedule_Dialog *ALSD, QWidget *parent)
     : QWidget(parent)
     , MainMenu(ALSD)
     , scheudle(std::make_unique<DataSchedule>())
     , scheudleDataService(std::make_unique<ScheduleDataService>())
     , parseScheudle(std::make_unique<ScheduleJsonParser>())
+    , ioService(std::make_unique<ScheduleIOService>())
     , ui(new Ui::ScheduleBuilderForm)
 {
     ui->setupUi(this);
     this->setLayout(ui->gridLayout);
+
+
     setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint);
-    
+
+
+
     BuildDataComboBox();
     connect(ui->btnSave,&QPushButton::clicked,this,&ScheduleBuilderForm::SaveScheudle);
+
     connect(ui->btnRemove,&QPushButton::clicked,this,[this](){
-        int row = QInputDialog::getInt(this,"Введите ключ расписания","Ввод");
+        int row = QInputDialog::getInt(this,"Введите UNIQUE ключ расписания","Ввод");
         DeleteItemList(row);
+        DeleteInfoFromStruct(row);
 
     });
 
@@ -42,8 +53,27 @@ ScheduleBuilderForm::ScheduleBuilderForm(Add_Lesson_Schedule_Dialog *ALSD, QWidg
         }
 
     });
+    connect(ui->btnPrintPDF,&QPushButton::clicked,this,[this](){
+        ioService->exportToPDF(mainArr);
+    });
 
-
+    connect(ui->btnHelp,&QPushButton::clicked,this,[this](){
+        QMessageBox::information(
+            this,
+            "Информация",
+            "<html><body>"
+            "<b>Меню 'Конструирование' создано для создания расписаний.</b><br><br>"
+            "<b>Печать доступна в:</b><br>"
+            "• PDF<br>"
+            "• JSON<br><br>"
+            "<b>Рекомендации:</b><br>"
+            "• Конструируйте данные не больше чем на месяц<br>"
+            "• Делайте оба сохранения: PDF и JSON<br>"
+            "• PDF - для печати и просмотра<br>"
+            "• JSON - для хранения и дальнейшего редактирования"
+            "</body></html>"
+            );
+    });
 
 }
 
@@ -79,24 +109,28 @@ void ScheduleBuilderForm::SaveScheudle()
         QLabel *labelTeacher = new QLabel("👨‍🏫 Преподаватель: " + ui->comboBoxTeacher->currentText(), frame);
         labelTeacher->setStyleSheet("font-size: 14px; font-weight: bold; color: #2c3e50;");
         mainLayout->addWidget(labelTeacher);
+
     }
 
     if (!ui->comboBoxCabinet->currentText().isEmpty()) {
         QLabel *labelCabinet = new QLabel("🏫 Кабинет: " + ui->comboBoxCabinet->currentText(), frame);
         labelCabinet->setStyleSheet("font-size: 14px; color: #27ae60;");
         mainLayout->addWidget(labelCabinet);
+
     }
 
     if (!ui->comboBoxLessonName->currentText().isEmpty()) {
         QLabel *labelLessonName = new QLabel("📚 Название: " + ui->comboBoxLessonName->currentText(), frame);
         labelLessonName->setStyleSheet("font-size: 14px; color: #2980b9;");
         mainLayout->addWidget(labelLessonName);
+
     }
 
     if (!ui->comboBoxTypeLesson->currentText().isEmpty()) {
         QLabel *labelTypeLesson = new QLabel("📝 Тип: " + ui->comboBoxTypeLesson->currentText(), frame);
         labelTypeLesson->setStyleSheet("font-size: 14px; color: #8e44ad;");
         mainLayout->addWidget(labelTypeLesson);
+
     }
 
     if (!ui->comboBoxLessonTime->currentText().isEmpty()) {
@@ -105,8 +139,8 @@ void ScheduleBuilderForm::SaveScheudle()
         mainLayout->addWidget(labelLessonTime);
     }
 
-    if (ui->dateEditPair->date() > QDate::currentDate()) {
-        QLabel *labelLessonTime = new QLabel("📅 Дата: " + ui->dateEditPair->date().toString("dd.MM.yyyy"), frame);
+    if (ui->calendarWidget->selectedDate() > QDate::currentDate()) {
+        QLabel *labelLessonTime = new QLabel("📅 Дата: " + ui->calendarWidget->selectedDate().toString("dd.MM.yyyy"), frame);
         labelLessonTime->setStyleSheet("font-size: 14px; color: #e74c3c;");
         mainLayout->addWidget(labelLessonTime);
     }
@@ -131,7 +165,9 @@ void ScheduleBuilderForm::SaveScheudle()
         "  border: 2px solid #3498db;"
         "  border-radius: 10px;"
         "}"
-        );
+    );
+
+
 
     QListWidgetItem* item = new QListWidgetItem();
 
@@ -155,6 +191,7 @@ void ScheduleBuilderForm::SaveScheudle()
         QPair<QTime,QTime> times = qMakePair(time1, time2);
         SetLessonTime(pair,times);
     }
+
     SetCabinets(ui->comboBoxCabinet->currentText());
 
     QTextStream stream(&ui->comboBoxTeacher->currentText());
@@ -164,22 +201,24 @@ void ScheduleBuilderForm::SaveScheudle()
     stream >> firstName >> middleName >> LastName;
 
     SetTeachers({firstName,middleName,LastName});
-    SetDatePair(ui->dateEditPair->date());
+    SetDatePair(ui->calendarWidget->selectedDate());
 
 
     mainArr.append(parseScheudle->parseScheudleToJson(scheudle.get()));
 
+    emit saveSucces();
 }
 
 void ScheduleBuilderForm::DeleteItemList(const int item_ROW)
 {
-    // QListWidgetItem* item =  ui->listWidget->item(item_ROW);
-    // if(item != nullptr){
-    //     ui->listWidget->removeItemWidget(item);
-    //     delete item;
-
-    // }
     delete ui->listWidget->takeItem(item_ROW);
+}
+
+void ScheduleBuilderForm::DeleteInfoFromStruct(const int index)
+{
+    ParserJson j;
+    mainArr = j.deleteObject(mainArr,index);
+
 }
 
 void ScheduleBuilderForm::backMenu()
@@ -188,8 +227,11 @@ void ScheduleBuilderForm::backMenu()
     MainMenu->show();
 }
 
+
 void ScheduleBuilderForm::BuildDataComboBox()
 {
+
+
     ui->comboBoxCabinet->addItems({scheudleDataService->GetCabinetsJson().values()});
     ui->comboBoxLessonName->addItems({scheudleDataService->GetLessonNameJson().values()});
 
@@ -198,7 +240,7 @@ void ScheduleBuilderForm::BuildDataComboBox()
 
     for(const auto& [pair,times] : scheudleDataService->GetLessonTimeJson().toStdMap())
     {
-        QPair<QTime,QTime> t = std::move(times);
+        const QPair<QTime,QTime> &t = times;
         ui->comboBoxLessonTime->addItem(QString::number(pair) + " " +t.first.toString("HH:mm") +" - " + t.second.toString("HH:mm"));
     }
 
@@ -209,5 +251,5 @@ void ScheduleBuilderForm::BuildDataComboBox()
     }
 
 
-}
 
+}

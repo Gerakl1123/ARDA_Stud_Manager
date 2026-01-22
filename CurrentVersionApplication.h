@@ -2,8 +2,9 @@
 #define CURRENTVERSIONAPPLICATION_H
 #include<QString>
 //Не трогать
+
 namespace Version {
-inline const QString CURRENT_VERSION = "5.5";
+inline const QString CURRENT_VERSION = "6.0";
 
 }
 

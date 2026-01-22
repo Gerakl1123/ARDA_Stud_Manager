@@ -28,6 +28,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
 set(PROJECT_SOURCES
     main.cpp
@@ -277,6 +278,8 @@ qt_add_executable(ARDA
     Delete.png
     dataeditor.h dataeditor.cpp dataeditor.ui
     dynamiccreateformeditordatajson.h dynamiccreateformeditordatajson.cpp
+
+    #Scheudle start
     add_lesson_schedule_dialog.h add_lesson_schedule_dialog.cpp add_lesson_schedule_dialog.ui
 
     dataschedule.h dataschedule.cpp
@@ -288,7 +291,9 @@ qt_add_executable(ARDA
     addlessonnameform.h addlessonnameform.cpp addlessonnameform.ui
     scheduledataservice.h scheduledataservice.cpp
     schedulejsonparser.h schedulejsonparser.cpp
+    #end scheudle
     passportdatajsonparser.h passportdatajsonparser.cpp
+    scheduleioservice.h scheduleioservice.cpp
 
 
 
@@ -310,6 +315,7 @@ target_link_libraries(ARDA
 
 qt_import_plugins(ARDA)
 
+target_link_libraries(ARDA PRIVATE Qt6::Core)
 target_link_libraries(ARDA PRIVATE Qt6::Core)
 target_link_libraries(ARDA PRIVATE Qt6::Core)
 target_link_libraries(ARDA PRIVATE Qt6::Core)

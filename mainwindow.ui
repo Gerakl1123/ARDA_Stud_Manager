@@ -245,10 +245,36 @@ QMenu::separator {
       <x>20</x>
       <y>20</y>
       <width>871</width>
-      <height>451</height>
+      <height>562</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="ButtonStudent">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/icons/Manag.png);</string>
+       </property>
+       <property name="text">
+        <string>Менеджр Студентов</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QLabel" name="labelVersion">
+       <property name="styleSheet">
+        <string notr="true">font: 10pt &quot;Segoe UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>версия</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="1">
       <widget class="QPushButton" name="ButtonContest">
        <property name="sizePolicy">
@@ -281,8 +307,8 @@ QMenu::separator {
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QPushButton" name="ButtonStudent">
+     <item row="2" column="2">
+      <widget class="QPushButton" name="ButtonFileManag">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -290,36 +316,30 @@ QMenu::separator {
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">image: url(:/icons/Manag.png);</string>
+        <string notr="true">image: url(:/icons/FS.png);</string>
        </property>
        <property name="text">
-        <string>Менеджр Студентов</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QPushButton" name="btnEditorData">
-       <property name="styleSheet">
-        <string notr="true">image: url(:/icons/Edit.png);</string>
-       </property>
-       <property name="text">
-        <string>Редактирование и 
-сохранение 
-данных JSON</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QPushButton" name="btnAddLesson">
-       <property name="styleSheet">
-        <string notr="true">image: url(:/icons/Raspisanie.png);</string>
-       </property>
-       <property name="text">
-        <string>Добавление Расписания</string>
+        <string>Файловый Менеджр</string>
        </property>
       </widget>
      </item>
      <item row="0" column="2">
+      <widget class="QPushButton" name="ButtonADMINPANEL">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/icons/Admin.png);</string>
+       </property>
+       <property name="text">
+        <string>АДМИН-ПАНЕЛЬ</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
       <widget class="QPushButton" name="ButtoLessons">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -336,6 +356,29 @@ QMenu::separator {
       </widget>
      </item>
      <item row="1" column="1">
+      <widget class="QPushButton" name="btnAddLesson">
+       <property name="styleSheet">
+        <string notr="true">image: url(:/icons/Raspisanie.png);</string>
+       </property>
+       <property name="text">
+        <string>Добавление Расписания</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="btnEditorData">
+       <property name="styleSheet">
+        <string notr="true">image: url(:/icons/Edit.png);</string>
+       </property>
+       <property name="text">
+        <string>Редактирование и 
+ сохранение 
+представление
+данных JSON</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
       <widget class="QPushButton" name="btnTextEditor">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -348,45 +391,6 @@ QMenu::separator {
        </property>
        <property name="text">
         <string>Текстовый Редактор</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QPushButton" name="ButtonFileManag">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">image: url(:/icons/FS.png);</string>
-       </property>
-       <property name="text">
-        <string>Файловый Менеджр</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QPushButton" name="ButtonADMINPANEL">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">image: url(:/icons/Admin.png);</string>
-       </property>
-       <property name="text">
-        <string>АДМИН-ПАНЕЛЬ</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QLabel" name="labelVersion">
-       <property name="text">
-        <string>версия</string>
        </property>
       </widget>
      </item>

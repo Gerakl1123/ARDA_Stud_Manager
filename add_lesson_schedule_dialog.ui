@@ -72,6 +72,13 @@ QPushButton:disabled {
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="1">
+     <widget class="QPushButton" name="btnQuit">
+      <property name="text">
+       <string>Выйти в Главное Меню</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="1">
      <widget class="QPushButton" name="btnInstanceData">
       <property name="text">
@@ -87,9 +94,9 @@ QPushButton:disabled {
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QPushButton" name="btnQuit">
+     <widget class="QPushButton" name="btnViewScheudle">
       <property name="text">
-       <string>Выйти в Главное Меню</string>
+       <string>Просмотр Раснисаний JSON формат</string>
       </property>
      </widget>
     </item>
